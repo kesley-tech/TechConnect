@@ -52,7 +52,7 @@ namespace TechConnect
             ItemMenu imHomePage = new ItemMenu() { LabelText = "Página Inicial", PictureImage = Image64.Base64ToImage(Image64.MenuHomePage) };
             imHomePage.EventClick += ImHomePage_EventClick;
 
-            ItemMenu imDashboard = new ItemMenu() { LabelText = "Dashboard", PictureImage = Image64.Base64ToImage(Image64.MenuDashboard) };
+            ItemMenu imDashboard = new ItemMenu() { LabelText = "Relatórios", PictureImage = Image64.Base64ToImage(Image64.MenuDashboard) };
             imDashboard.EventClick += ImDashboard_EventClick;
 
             ItemMenu imStatusCatraca = new ItemMenu() { LabelText = "Status Catraca", PictureImage = Image64.Base64ToImage(Image64.MenuStatusCatraca) };

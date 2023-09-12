@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace TechConnect
 {
-    public partial class UcWorkout : UserControl
+    public partial class UcWorkoutRow : UserControl
     {
         private bool _selectedRow;
 
-        public UcWorkout(WorkoutDataClass workoutData)
+        public UcWorkoutRow(WorkoutDataClass workoutData)
         {
             InitializeComponent();
 

@@ -215,11 +215,10 @@ namespace TechConnect
             this.btnPageNext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(40)))), ((int)(((byte)(115)))));
             this.btnPageNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPageNext.Dock = System.Windows.Forms.DockStyle.Fill;
-            //this.btnPageNext.Enabled = false;
             this.btnPageNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPageNext.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.btnPageNext.ForeColor = System.Drawing.Color.White;
-            this.btnPageNext.Image = ((System.Drawing.Image)(resources.GetObject("btnPageNext.Image")));
+            this.btnPageNext.Image = Image64.Base64ToImage(Image64.Next);
             this.btnPageNext.Location = new System.Drawing.Point(821, 0);
             this.btnPageNext.Margin = new System.Windows.Forms.Padding(0);
             this.btnPageNext.Name = "btnPageNext";
@@ -236,11 +235,10 @@ namespace TechConnect
             this.btnPagePrevious.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(40)))), ((int)(((byte)(115)))));
             this.btnPagePrevious.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPagePrevious.Dock = System.Windows.Forms.DockStyle.Fill;
-            //this.btnPagePrevious.Enabled = false;
             this.btnPagePrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPagePrevious.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.btnPagePrevious.ForeColor = System.Drawing.Color.White;
-            this.btnPagePrevious.Image = ((System.Drawing.Image)(resources.GetObject("btnPagePrevious.Image")));
+            this.btnPagePrevious.Image = Image64.Base64ToImage(Image64.Previous);
             this.btnPagePrevious.Location = new System.Drawing.Point(0, 0);
             this.btnPagePrevious.Margin = new System.Windows.Forms.Padding(0);
             this.btnPagePrevious.Name = "btnPagePrevious";

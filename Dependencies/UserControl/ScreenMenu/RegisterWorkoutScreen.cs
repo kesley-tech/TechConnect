@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace TechConnect
@@ -28,11 +21,10 @@ namespace TechConnect
 
         private List<UserControl> CreateListWorkout()
         {
-            //FakeData
-
             List<WorkoutDataClass> dataClassList = new List<WorkoutDataClass>();
             List<UserControl> listUc = new List<UserControl>();
 
+            #region FakeData
             dataClassList.Add(new WorkoutDataClass()
             {
                 Code = "PT001",
@@ -96,10 +88,11 @@ namespace TechConnect
                 FreeWorkout = true,
                 GrupoMuscular = WorkoutDataClass.MUSCLE_GROUP_TYPE.Costas
             });
+            #endregion
 
             foreach (WorkoutDataClass data in dataClassList)
             {
-                UcWorkout item = new UcWorkout(data) { Dock = DockStyle.Fill, Margin = new Padding(0) };
+                UcWorkoutRow item = new UcWorkoutRow(data) { Dock = DockStyle.Fill, Margin = new Padding(0) };
 
                 listUc.Add(item);
             }

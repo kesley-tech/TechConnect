@@ -115,6 +115,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
@@ -173,11 +174,23 @@
     <Compile Include="Dependencies\UserControl\Dependencies\UcListPaginatedHorizontal.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dependencies\UserControl\Dependencies\UcWorkout.cs">
+    <Compile Include="Dependencies\UserControl\Dependencies\UcHeaderPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dependencies\UserControl\Dependencies\UcWorkout.Designer.cs">
-      <DependentUpon>UcWorkout.cs</DependentUpon>
+    <Compile Include="Dependencies\UserControl\Dependencies\UcHeaderPage.Designer.cs">
+      <DependentUpon>UcHeaderPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\Dependencies\Workout\UcWorkoutHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\Dependencies\Workout\UcWorkoutHeader.Designer.cs">
+      <DependentUpon>UcWorkoutHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\Dependencies\Workout\UcWorkoutRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\Dependencies\Workout\UcWorkoutRow.Designer.cs">
+      <DependentUpon>UcWorkoutRow.cs</DependentUpon>
     </Compile>
     <Compile Include="Dependencies\UserControl\ItemMenu.cs">
       <SubType>UserControl</SubType>
@@ -244,8 +257,14 @@
     <EmbeddedResource Include="Dependencies\UserControl\Dependencies\UcListPaginatedHorizontal.resx">
       <DependentUpon>UcListPaginatedHorizontal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dependencies\UserControl\Dependencies\UcWorkout.resx">
-      <DependentUpon>UcWorkout.cs</DependentUpon>
+    <EmbeddedResource Include="Dependencies\UserControl\Dependencies\UcHeaderPage.resx">
+      <DependentUpon>UcHeaderPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\Dependencies\Workout\UcWorkoutHeader.resx">
+      <DependentUpon>UcWorkoutHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\Dependencies\Workout\UcWorkoutRow.resx">
+      <DependentUpon>UcWorkoutRow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dependencies\UserControl\ItemMenu.resx">
       <DependentUpon>ItemMenu.cs</DependentUpon>
