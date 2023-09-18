@@ -177,6 +177,7 @@ namespace TechConnect
             // 
             // tableLayoutOrganizer
             // 
+            this.tableLayoutOrganizer.AutoScroll = true;
             this.tableLayoutOrganizer.ColumnCount = 1;
             this.tableLayoutOrganizer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutOrganizer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -218,7 +219,7 @@ namespace TechConnect
             this.btnPageNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPageNext.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.btnPageNext.ForeColor = System.Drawing.Color.White;
-            this.btnPageNext.Image = Image64.Base64ToImage(Image64.Next);
+            this.btnPageNext.Image = ((System.Drawing.Image)(resources.GetObject("btnPageNext.Image")));
             this.btnPageNext.Location = new System.Drawing.Point(821, 0);
             this.btnPageNext.Margin = new System.Windows.Forms.Padding(0);
             this.btnPageNext.Name = "btnPageNext";
@@ -238,7 +239,7 @@ namespace TechConnect
             this.btnPagePrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPagePrevious.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.btnPagePrevious.ForeColor = System.Drawing.Color.White;
-            this.btnPagePrevious.Image = Image64.Base64ToImage(Image64.Previous);
+            this.btnPagePrevious.Image = ((System.Drawing.Image)(resources.GetObject("btnPagePrevious.Image")));
             this.btnPagePrevious.Location = new System.Drawing.Point(0, 0);
             this.btnPagePrevious.Margin = new System.Windows.Forms.Padding(0);
             this.btnPagePrevious.Name = "btnPagePrevious";

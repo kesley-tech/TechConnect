@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
-using TechConnect.Properties;
 
 namespace TechConnect
 {
@@ -52,9 +44,6 @@ namespace TechConnect
             ItemMenu imHomePage = new ItemMenu() { LabelText = "Página Inicial", PictureImage = Image64.Base64ToImage(Image64.MenuHomePage) };
             imHomePage.EventClick += ImHomePage_EventClick;
 
-            ItemMenu imDashboard = new ItemMenu() { LabelText = "Relatórios", PictureImage = Image64.Base64ToImage(Image64.MenuDashboard) };
-            imDashboard.EventClick += ImDashboard_EventClick;
-
             ItemMenu imStatusCatraca = new ItemMenu() { LabelText = "Status Catraca", PictureImage = Image64.Base64ToImage(Image64.MenuStatusCatraca) };
             imStatusCatraca.EventClick += ImStatusCatraca_EventClick;
 
@@ -73,7 +62,6 @@ namespace TechConnect
             flwMainMenuBody.Controls.Add(imHomePage);
             flwMainMenuBody.Controls.Add(imRegisterList);
             flwMainMenuBody.Controls.Add(flwSubRegisterList);
-            flwMainMenuBody.Controls.Add(imDashboard);
             flwMainMenuBody.Controls.Add(imStatusCatraca);
             flwMainMenuBody.Controls.Add(imBuildWorkout);
             flwMainMenuBody.Controls.Add(imConfiguration);
@@ -161,7 +149,7 @@ namespace TechConnect
                 Width = flwMain.Width
             };
 
-            ItemMenu rigisterWorkout =  CreateSubItem("Treinos");
+            ItemMenu rigisterWorkout = CreateSubItem("Treinos");
             rigisterWorkout.EventClick += RigisterWorkout_EventClick;
 
             ItemMenu registerUser = CreateSubItem("Usuários");
@@ -191,6 +179,7 @@ namespace TechConnect
 
             Core.LoginDisplay.BringToFront();
             Core.LoginDisplay.Visible = true;
+            Core.LoginDisplay.ResetText();
         }
 
         private void HideMainDisplay()

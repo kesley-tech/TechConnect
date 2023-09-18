@@ -50,7 +50,7 @@ namespace TechConnect
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 172F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(896, 563);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1214, 717);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // ucListPaginatedHorizontal
@@ -59,7 +59,7 @@ namespace TechConnect
             this.ucListPaginatedHorizontal.Location = new System.Drawing.Point(4, 266);
             this.ucListPaginatedHorizontal.Margin = new System.Windows.Forms.Padding(4);
             this.ucListPaginatedHorizontal.Name = "ucListPaginatedHorizontal";
-            this.ucListPaginatedHorizontal.Size = new System.Drawing.Size(888, 293);
+            this.ucListPaginatedHorizontal.Size = new System.Drawing.Size(1206, 447);
             this.ucListPaginatedHorizontal.TabIndex = 0;
             // 
             // ucWorkoutHeader1
@@ -68,7 +68,7 @@ namespace TechConnect
             this.ucWorkoutHeader1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucWorkoutHeader1.Location = new System.Drawing.Point(3, 175);
             this.ucWorkoutHeader1.Name = "ucWorkoutHeader1";
-            this.ucWorkoutHeader1.Size = new System.Drawing.Size(890, 84);
+            this.ucWorkoutHeader1.Size = new System.Drawing.Size(1208, 84);
             this.ucWorkoutHeader1.TabIndex = 1;
             // 
             // ucHeaderPage1
@@ -77,8 +77,10 @@ namespace TechConnect
             this.ucHeaderPage1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucHeaderPage1.Location = new System.Drawing.Point(3, 3);
             this.ucHeaderPage1.Name = "ucHeaderPage1";
-            this.ucHeaderPage1.Size = new System.Drawing.Size(890, 166);
+            this.ucHeaderPage1.Size = new System.Drawing.Size(1208, 166);
+            this.ucHeaderPage1.SubTitle = "SubTitulo";
             this.ucHeaderPage1.TabIndex = 2;
+            this.ucHeaderPage1.Title = "Titulo";
             // 
             // RegisterWorkoutScreen
             // 
@@ -86,7 +88,7 @@ namespace TechConnect
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "RegisterWorkoutScreen";
-            this.Size = new System.Drawing.Size(896, 563);
+            this.Size = new System.Drawing.Size(1214, 717);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

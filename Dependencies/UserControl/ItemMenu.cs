@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TechConnect
@@ -19,8 +12,8 @@ namespace TechConnect
         public string LabelText
         {
             get { return this.lblText.Text; }
-            set 
-            { 
+            set
+            {
                 this.lblText.Text = value;
                 this.lblText.Tag = Regex.Replace(value.Trim(), "[^a-zA-Z0-9]", "");
             }

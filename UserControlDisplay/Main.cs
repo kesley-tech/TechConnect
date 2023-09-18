@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TechConnect
@@ -75,9 +68,13 @@ namespace TechConnect
         private void picShowSideBar_Click(object sender, EventArgs e)
         {
             if (SideBar.Visible)
+            {
                 SideBar.Visible = false;
+            }
             else
+            {
                 SideBar.Visible = true;
+            }
         }
     }
 }

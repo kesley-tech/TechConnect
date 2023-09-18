@@ -31,20 +31,20 @@ namespace TechConnect
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UcHeaderPage));
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tbFilter = new TechConnect.CustomTextBox();
+            this.lblSubTitle = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnInsert = new System.Windows.Forms.Button();
-            this.customTextBox1 = new TechConnect.CustomTextBox();
             this.pnlMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMain
             // 
             this.pnlMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.pnlMain.Controls.Add(this.customTextBox1);
-            this.pnlMain.Controls.Add(this.label1);
+            this.pnlMain.Controls.Add(this.tbFilter);
+            this.pnlMain.Controls.Add(this.lblSubTitle);
             this.pnlMain.Controls.Add(this.lblTitle);
             this.pnlMain.Controls.Add(this.btnFilter);
             this.pnlMain.Controls.Add(this.btnRemove);
@@ -57,28 +57,45 @@ namespace TechConnect
             this.pnlMain.Size = new System.Drawing.Size(1178, 187);
             this.pnlMain.TabIndex = 0;
             // 
-            // label1
+            // tbFilter
             // 
-            this.label1.AutoSize = true;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(46, 88);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(162, 39);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "SubTitulo";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbFilter.BackColor = System.Drawing.Color.Transparent;
+            this.tbFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.tbFilter.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
+            this.tbFilter.BorderSize = 5;
+            this.tbFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbFilter.Location = new System.Drawing.Point(315, 66);
+            this.tbFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.tbFilter.Name = "tbFilter";
+            this.tbFilter.Padding = new System.Windows.Forms.Padding(7);
+            this.tbFilter.PlaceHolderText = "";
+            this.tbFilter.Size = new System.Drawing.Size(411, 54);
+            this.tbFilter.TabIndex = 5;
+            this.tbFilter.UnderlinedStyle = true;
+            // 
+            // lblSubTitle
+            // 
+            this.lblSubTitle.AutoSize = true;
+            this.lblSubTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblSubTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubTitle.Location = new System.Drawing.Point(46, 88);
+            this.lblSubTitle.Margin = new System.Windows.Forms.Padding(0);
+            this.lblSubTitle.Name = "lblSubTitle";
+            this.lblSubTitle.Size = new System.Drawing.Size(143, 36);
+            this.lblSubTitle.TabIndex = 4;
+            this.lblSubTitle.Text = "SubTitulo";
+            this.lblSubTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(43, 30);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(154, 58);
+            this.lblTitle.Size = new System.Drawing.Size(130, 48);
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "Titulo";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -122,23 +139,6 @@ namespace TechConnect
             this.btnInsert.TabIndex = 0;
             this.btnInsert.UseVisualStyleBackColor = false;
             // 
-            // customTextBox1
-            // 
-            this.customTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.customTextBox1.BackColor = System.Drawing.Color.Transparent;
-            this.customTextBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.customTextBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
-            this.customTextBox1.BorderSize = 5;
-            this.customTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customTextBox1.Location = new System.Drawing.Point(315, 66);
-            this.customTextBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.customTextBox1.Name = "customTextBox1";
-            this.customTextBox1.Padding = new System.Windows.Forms.Padding(7);
-            this.customTextBox1.PlaceHolderText = "";
-            this.customTextBox1.Size = new System.Drawing.Size(411, 54);
-            this.customTextBox1.TabIndex = 5;
-            this.customTextBox1.UnderlinedStyle = true;
-            // 
             // UcHeaderPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -160,7 +160,7 @@ namespace TechConnect
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label label1;
-        private CustomTextBox customTextBox1;
+        private System.Windows.Forms.Label lblSubTitle;
+        private CustomTextBox tbFilter;
     }
 }

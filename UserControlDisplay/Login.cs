@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TechConnect
@@ -28,12 +21,11 @@ namespace TechConnect
             //if (txtUsuario.TextBox.Text.Trim() == "admin"
             //    && txtSenha.TextBox.Text.Trim() == "1234")
             //{
-                lblHidden.Visible = false;
-                return true;
+            lblHidden.Visible = false;
+            return true;
             //}
 
-            txtUsuario.ResetTextBox();
-            txtSenha.ResetTextBox();
+            
 
             lblHidden.Visible = true;
             return false;
@@ -49,10 +41,15 @@ namespace TechConnect
 
         private void HideThisDisplay()
         {
-            this.SendToBack();
             this.Visible = false;
+            this.SendToBack();
         }
 
+        public override void ResetText()
+        {
+            txtUsuario.ResetTextBox();
+            txtSenha.ResetTextBox();
+        }
 
         #region Events
 
@@ -65,10 +62,20 @@ namespace TechConnect
                 txtSenha.TextBox.PasswordChar = '\0';
         }
 
+        private void TextBoxUser_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                txtSenha.Focus();
+
+            e.Handled = e.SuppressKeyPress = true;
+        }
+
         private void TextBoxPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 btnEnter_Click(null, null);
+
+            e.Handled = e.SuppressKeyPress = true;
         }
 
         private void btnEnter_Click(object sender, EventArgs e)

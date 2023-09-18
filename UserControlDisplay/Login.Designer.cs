@@ -138,6 +138,7 @@ namespace TechConnect
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.PlaceHolderText = "Digite a matricula ou cpf";
             this.txtUsuario.UnderlinedStyle = true;
+            this.txtUsuario.TextBox.KeyDown += TextBoxUser_KeyDown;
             // 
             // txtSenha
             // 

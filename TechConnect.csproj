@@ -164,6 +164,7 @@
     </Compile>
     <Compile Include="Dependencies\Chart\ChartGenerator.cs" />
     <Compile Include="Dependencies\Image64.cs" />
+    <Compile Include="Dependencies\Model\UserDataClass.cs" />
     <Compile Include="Dependencies\Model\WorkoutDataClass.cs" />
     <Compile Include="Dependencies\UserControl\CustomTextBox.cs">
       <SubType>UserControl</SubType>
@@ -180,16 +181,28 @@
     <Compile Include="Dependencies\UserControl\Dependencies\UcHeaderPage.Designer.cs">
       <DependentUpon>UcHeaderPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dependencies\UserControl\Dependencies\Workout\UcWorkoutHeader.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\User\UcUserHeader.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dependencies\UserControl\Dependencies\Workout\UcWorkoutHeader.Designer.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\User\UcUserHeader.Designer.cs">
+      <DependentUpon>UcUserHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\User\UcUserRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\User\UcUserRow.Designer.cs">
+      <DependentUpon>UcUserRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\Workout\UcWorkoutHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\Workout\UcWorkoutHeader.Designer.cs">
       <DependentUpon>UcWorkoutHeader.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dependencies\UserControl\Dependencies\Workout\UcWorkoutRow.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\Workout\UcWorkoutRow.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dependencies\UserControl\Dependencies\Workout\UcWorkoutRow.Designer.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\Workout\UcWorkoutRow.Designer.cs">
       <DependentUpon>UcWorkoutRow.cs</DependentUpon>
     </Compile>
     <Compile Include="Dependencies\UserControl\ItemMenu.cs">
@@ -210,16 +223,16 @@
     <Compile Include="Dependencies\UserControl\ScreenMenu\RegisterCalendarScreen.Designer.cs">
       <DependentUpon>RegisterCalendarScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dependencies\UserControl\ScreenMenu\RegisterUserScreen.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\User\RegisterUserScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dependencies\UserControl\ScreenMenu\RegisterUserScreen.Designer.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\User\RegisterUserScreen.Designer.cs">
       <DependentUpon>RegisterUserScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dependencies\UserControl\ScreenMenu\RegisterWorkoutScreen.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\Workout\RegisterWorkoutScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dependencies\UserControl\ScreenMenu\RegisterWorkoutScreen.Designer.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\Workout\RegisterWorkoutScreen.Designer.cs">
       <DependentUpon>RegisterWorkoutScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Dependencies\UserControl\UserCard.cs">
@@ -260,10 +273,16 @@
     <EmbeddedResource Include="Dependencies\UserControl\Dependencies\UcHeaderPage.resx">
       <DependentUpon>UcHeaderPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dependencies\UserControl\Dependencies\Workout\UcWorkoutHeader.resx">
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\User\UcUserHeader.resx">
+      <DependentUpon>UcUserHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\User\UcUserRow.resx">
+      <DependentUpon>UcUserRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\Workout\UcWorkoutHeader.resx">
       <DependentUpon>UcWorkoutHeader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dependencies\UserControl\Dependencies\Workout\UcWorkoutRow.resx">
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\Workout\UcWorkoutRow.resx">
       <DependentUpon>UcWorkoutRow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dependencies\UserControl\ItemMenu.resx">
@@ -275,10 +294,10 @@
     <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\RegisterCalendarScreen.resx">
       <DependentUpon>RegisterCalendarScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\RegisterUserScreen.resx">
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\User\RegisterUserScreen.resx">
       <DependentUpon>RegisterUserScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\RegisterWorkoutScreen.resx">
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\Workout\RegisterWorkoutScreen.resx">
       <DependentUpon>RegisterWorkoutScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dependencies\UserControl\UserCard.resx">

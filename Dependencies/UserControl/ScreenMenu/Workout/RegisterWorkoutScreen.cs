@@ -5,16 +5,51 @@ namespace TechConnect
 {
     public partial class RegisterWorkoutScreen : UserControl
     {
+        private List<UserControl> listUcData = new List<UserControl>();
+
         public RegisterWorkoutScreen()
         {
             InitializeComponent();
 
+            UpdateDataHeader();
+
             RefreshData();
+        }
+
+        private void UpdateDataHeader()
+        {
+            ucHeaderPage1.Title = "CADASTRO";
+            ucHeaderPage1.SubTitle = "EXERCICÍOS";
+            ucHeaderPage1.TextBoxFilter.TextBox.TextChanged += TextBox_TextChanged;
+        }
+
+        private void TextBox_TextChanged(object sender, System.EventArgs e)
+        {
+            var controlSender = (Control)sender;
+
+            var textSender = controlSender.Text.Trim();
+
+            if (!string.IsNullOrEmpty(textSender))
+            {
+                List<UserControl> filterData = new List<UserControl>();
+
+                foreach (var item in listUcData)
+                {
+                    if (item.Controls[0].Controls[1].Text.ToUpper().Contains(textSender.ToUpper()))
+                        filterData.Add(item);
+                }
+
+                if (filterData.Count > 0)
+                    ucListPaginatedHorizontal.SetList(filterData);
+            }
+            else
+                ucListPaginatedHorizontal.SetList(listUcData);
         }
 
         private void RefreshData()
         {
             List<UserControl> listUc = CreateListWorkout();
+            listUcData = listUc;
 
             ucListPaginatedHorizontal.SetList(listUc);
         }

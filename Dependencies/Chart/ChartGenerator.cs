@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TechConnect
 {
-    class ChartGenerator 
+    class ChartGenerator
     {
         public List<Color> GetColors(string legend)
         {
@@ -33,7 +30,7 @@ namespace TechConnect
             Random rm = new Random();
 
             for (int hour = 0; hour < 23; hour++)
-                returnList.Add(rm.Next(50,100));
+                returnList.Add(rm.Next(50, 100));
 
             return returnList;
         }

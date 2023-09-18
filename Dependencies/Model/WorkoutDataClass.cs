@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TechConnect
+﻿namespace TechConnect
 {
     public class WorkoutDataClass
     {
@@ -17,13 +10,13 @@ namespace TechConnect
         public enum MUSCLE_GROUP_TYPE
         {
             Torax
-            ,Ombro
-            ,Trceps
-            ,Biceps
-            ,Costas
-            ,Perna
-            ,Gluteo
-            ,Panturrilha
+            , Ombro
+            , Trceps
+            , Biceps
+            , Costas
+            , Perna
+            , Gluteo
+            , Panturrilha
         }
     }
 }

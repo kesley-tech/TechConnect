@@ -117,29 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnPageNext.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB8AAAApCAYAAADNjfKJAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EgAACxIB0t1+/AAAAWVJREFUWEftmOFtwjAQhTMCIzACIzACG7QblA1gA9ig3aAjMEJH6AiMkH4vHFIU
-        YcWWH7Uo/aT3B+J3l/hyPuim9H2/QJ9oFx/9DgRcom905YAW8fX9IMganRVxgpJZxmV+MH8bwqRRAqu4
-        3AemerS5bGOZBwxXaLzPc3gLEcNpoc3xhbx1gOFxsM7DX4gY7gfrPPR2vMZSDxhu0EPVgbqiryHJLExz
-        aV4HSmAdSz1guEW32m+K5nVwiKUeMFQCajK5/DckYT+YNAeU1MHfa0hKoORVPMXSOjAqvfMTqr9zTFKz
-        X4p9LK0Do7nZb4zv+MWoZPbTltQPoJi06XCYlA6bx1haB0YvqKSwPN0Mo93FLwslWH+eY6JJRu9kLtoS
-        y/62aZmYPFHjwET7+y7HTJo1DhXhAzcOgVnJKOQdgwSmcwnoyXh/CIyReQSZ4h99b6EgaJzAB7r/v1FX
-        FAypW3kaR5Ku+wG5CWXPgb7BLAAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btnPagePrevious.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB8AAAApCAYAAADNjfKJAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EgAACxIB0t1+/AAAAWRJREFUWEftl9FNwzAURTMCIzBCR2AENqAb0A3aDdoNYANGYARGYISOEM5NXyUL
-        teQZ38iV4Ejvp42P3ebl2hmWZhzHLfVG3cVHy6PJqBfqzCd1H18vhyahPjTjN7SAh7jMj+QxyU9s43If
-        SJ9P7hS7GNYOsv3JmUL/zCqG/h4kur/vMiZRL7Q3HpIVNXd/S16p9kcOyRN1lDHJJoa2gUjBkUULbH+8
-        kCg4lFZZPMEiSciyqAkt91fBUXN/Pc8woprg0ALXMbQNRN2C49LGcI1uwXGIoW0g+nvBUbMxeIJDIKqZ
-        WL/YdxRC1icySxDuJnUOLcB7FkO4mdR5vGcxhLUbyD6GekDYJ+FKEB4mdY7ujahH0ZN6ZxBmXgRKujei
-        9+VQspBm6d4HWsBjDPWAcE3VbL//gXQTfdB+2CxBWLMxec5+JUgzB1BvCpYgv9aInrPfHEyiQCo3Jn+j
-        zcGEasQLUTsMX26LZc5lz1/YAAAAAElFTkSuQmCC
-</value>
-  </data>
 </root>

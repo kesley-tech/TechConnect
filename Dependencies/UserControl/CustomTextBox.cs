@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TechConnect
@@ -143,7 +137,7 @@ namespace TechConnect
         {
             if (TextBox.Text.Trim() == string.Concat("", PlaceHolderText))
             {
-                CustomTextBox_Load(null,null);
+                CustomTextBox_Load(null, null);
             }
 
             if (TextBox.Focused)
@@ -164,7 +158,7 @@ namespace TechConnect
                 || TextBox.Text.Trim() == string.Empty)
             {
                 TextBox.Text = string.Concat("   ");
-                CustomTextBox_Load(null,null);
+                CustomTextBox_Load(null, null);
             }
             else
                 TextBox.ForeColor = ForeColor;
@@ -183,7 +177,7 @@ namespace TechConnect
         public void ResetTextBox()
         {
             TextBox.Text = string.Empty;
-            TextBox_Leave(null,null);
+            TextBox_Leave(null, null);
         }
     }
 }
