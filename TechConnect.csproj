@@ -165,6 +165,7 @@
     <Compile Include="Dependencies\Chart\ChartGenerator.cs" />
     <Compile Include="Dependencies\Image64.cs" />
     <Compile Include="Dependencies\Model\UserDataClass.cs" />
+    <Compile Include="Dependencies\Model\BuildingWorkoutUsersDataClass.cs" />
     <Compile Include="Dependencies\Model\WorkoutDataClass.cs" />
     <Compile Include="Dependencies\UserControl\CustomTextBox.cs">
       <SubType>UserControl</SubType>
@@ -180,6 +181,30 @@
     </Compile>
     <Compile Include="Dependencies\UserControl\Dependencies\UcHeaderPage.Designer.cs">
       <DependentUpon>UcHeaderPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\UcBuildingWorkoutUsersHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\UcBuildingWorkoutUsersHeader.Designer.cs">
+      <DependentUpon>UcBuildingWorkoutUsersHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\UcBuildingWorkoutUsersRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\UcBuildingWorkoutUsersRow.Designer.cs">
+      <DependentUpon>UcBuildingWorkoutUsersRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\Calendar\UcDayCalendar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\Calendar\UcDayCalendar.Designer.cs">
+      <DependentUpon>UcDayCalendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\CatracaStatusScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\CatracaStatusScreen.Designer.cs">
+      <DependentUpon>CatracaStatusScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Dependencies\UserControl\ScreenMenu\User\UcUserHeader.cs">
       <SubType>UserControl</SubType>
@@ -217,10 +242,10 @@
     <Compile Include="Dependencies\UserControl\ScreenMenu\HomePageScreen.Designer.cs">
       <DependentUpon>HomePageScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dependencies\UserControl\ScreenMenu\RegisterCalendarScreen.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\Calendar\RegisterCalendarScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dependencies\UserControl\ScreenMenu\RegisterCalendarScreen.Designer.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\Calendar\RegisterCalendarScreen.Designer.cs">
       <DependentUpon>RegisterCalendarScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Dependencies\UserControl\ScreenMenu\User\RegisterUserScreen.cs">
@@ -234,6 +259,18 @@
     </Compile>
     <Compile Include="Dependencies\UserControl\ScreenMenu\Workout\RegisterWorkoutScreen.Designer.cs">
       <DependentUpon>RegisterWorkoutScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\UserStatusMainCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\UserStatusMainCard.Designer.cs">
+      <DependentUpon>UserStatusMainCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\UserStatusCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\UserStatusCard.Designer.cs">
+      <DependentUpon>UserStatusCard.cs</DependentUpon>
     </Compile>
     <Compile Include="Dependencies\UserControl\UserCard.cs">
       <SubType>UserControl</SubType>
@@ -273,6 +310,18 @@
     <EmbeddedResource Include="Dependencies\UserControl\Dependencies\UcHeaderPage.resx">
       <DependentUpon>UcHeaderPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\UcBuildingWorkoutUsersHeader.resx">
+      <DependentUpon>UcBuildingWorkoutUsersHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\UcBuildingWorkoutUsersRow.resx">
+      <DependentUpon>UcBuildingWorkoutUsersRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\Calendar\UcDayCalendar.resx">
+      <DependentUpon>UcDayCalendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\CatracaStatusScreen.resx">
+      <DependentUpon>CatracaStatusScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\User\UcUserHeader.resx">
       <DependentUpon>UcUserHeader.cs</DependentUpon>
     </EmbeddedResource>
@@ -291,7 +340,7 @@
     <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\HomePageScreen.resx">
       <DependentUpon>HomePageScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\RegisterCalendarScreen.resx">
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\Calendar\RegisterCalendarScreen.resx">
       <DependentUpon>RegisterCalendarScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\User\RegisterUserScreen.resx">
@@ -299,6 +348,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\Workout\RegisterWorkoutScreen.resx">
       <DependentUpon>RegisterWorkoutScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\UserStatusMainCard.resx">
+      <DependentUpon>UserStatusMainCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\UserStatusCard.resx">
+      <DependentUpon>UserStatusCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dependencies\UserControl\UserCard.resx">
       <DependentUpon>UserCard.cs</DependentUpon>

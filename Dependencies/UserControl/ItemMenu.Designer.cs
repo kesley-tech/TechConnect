@@ -39,7 +39,7 @@ namespace TechConnect
             // tblMain
             // 
             this.tblMain.ColumnCount = 2;
-            this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblMain.Controls.Add(this.picImage, 0, 0);
             this.tblMain.Controls.Add(this.lblText, 1, 0);
@@ -49,43 +49,51 @@ namespace TechConnect
             this.tblMain.Name = "tblMain";
             this.tblMain.RowCount = 1;
             this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblMain.Size = new System.Drawing.Size(455, 76);
+            this.tblMain.Size = new System.Drawing.Size(341, 62);
             this.tblMain.TabIndex = 0;
+            this.tblMain.Click += Action_Click;
+            this.tblMain.MouseLeave += Action_MouseLeave;
+            this.tblMain.MouseEnter += Action_MouseHover;
             // 
             // picImage
             // 
             this.picImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picImage.Location = new System.Drawing.Point(20, 20);
-            this.picImage.Margin = new System.Windows.Forms.Padding(20);
+            this.picImage.Location = new System.Drawing.Point(15, 16);
+            this.picImage.Margin = new System.Windows.Forms.Padding(15, 16, 15, 16);
             this.picImage.Name = "picImage";
-            this.picImage.Size = new System.Drawing.Size(60, 36);
+            this.picImage.Size = new System.Drawing.Size(45, 30);
             this.picImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picImage.TabIndex = 0;
             this.picImage.TabStop = false;
-            this.picImage.Click += PicImage_Click;
+            this.picImage.Click += Action_Click;
+            this.picImage.MouseLeave += Action_MouseLeave;
+            this.picImage.MouseEnter += Action_MouseHover;
             // 
             // lblText
             // 
             this.lblText.AutoSize = true;
             this.lblText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblText.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblText.Location = new System.Drawing.Point(100, 0);
+            this.lblText.Location = new System.Drawing.Point(75, 0);
             this.lblText.Margin = new System.Windows.Forms.Padding(0);
             this.lblText.Name = "lblText";
-            this.lblText.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.lblText.Size = new System.Drawing.Size(355, 76);
+            this.lblText.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.lblText.Size = new System.Drawing.Size(266, 62);
             this.lblText.TabIndex = 1;
             this.lblText.Text = "Pagina Inicial";
             this.lblText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblText.Click += LblText_Click;
+            this.lblText.Click += Action_Click;
+            this.lblText.MouseLeave += Action_MouseLeave;
+            this.lblText.MouseEnter += Action_MouseHover; //new System.EventHandler(this.Action_MouseHover);
             // 
             // ItemMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tblMain);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ItemMenu";
-            this.Size = new System.Drawing.Size(455, 76);
+            this.Size = new System.Drawing.Size(341, 62);
             this.tblMain.ResumeLayout(false);
             this.tblMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImage)).EndInit();
@@ -93,17 +101,6 @@ namespace TechConnect
 
         }
 
-        private void PicImage_Click(object sender, System.EventArgs e)
-        {
-            if (EventClick != null)
-                EventClick.Invoke(sender);
-        }
-
-        private void LblText_Click(object sender, System.EventArgs e)
-        {
-            if (EventClick != null)
-                EventClick.Invoke(sender);
-        }
 
         #endregion
 

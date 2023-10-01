@@ -48,7 +48,7 @@ namespace TechConnect
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
             this.tableLayoutPanel1.Controls.Add(this.lblCode, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblDescription, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblMuscleGroup, 2, 0);
@@ -84,7 +84,7 @@ namespace TechConnect
             this.lblDescription.Location = new System.Drawing.Point(118, 0);
             this.lblDescription.Margin = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(191, 97);
+            this.lblDescription.Size = new System.Drawing.Size(190, 97);
             this.lblDescription.TabIndex = 1;
             this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblDescription.Click += UcWorkout_Click;
@@ -94,7 +94,7 @@ namespace TechConnect
             this.lblMuscleGroup.AutoSize = true;
             this.lblMuscleGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMuscleGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMuscleGroup.Location = new System.Drawing.Point(309, 0);
+            this.lblMuscleGroup.Location = new System.Drawing.Point(308, 0);
             this.lblMuscleGroup.Margin = new System.Windows.Forms.Padding(0);
             this.lblMuscleGroup.Name = "lblMuscleGroup";
             this.lblMuscleGroup.Size = new System.Drawing.Size(132, 97);
@@ -105,10 +105,10 @@ namespace TechConnect
             // picFreeWorkout
             // 
             this.picFreeWorkout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picFreeWorkout.Location = new System.Drawing.Point(471, 30);
-            this.picFreeWorkout.Margin = new System.Windows.Forms.Padding(30);
+            this.picFreeWorkout.Location = new System.Drawing.Point(480, 40);
+            this.picFreeWorkout.Margin = new System.Windows.Forms.Padding(40);
             this.picFreeWorkout.Name = "picFreeWorkout";
-            this.picFreeWorkout.Size = new System.Drawing.Size(60, 37);
+            this.picFreeWorkout.Size = new System.Drawing.Size(40, 17);
             this.picFreeWorkout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picFreeWorkout.TabIndex = 3;
             this.picFreeWorkout.TabStop = false;
@@ -117,10 +117,10 @@ namespace TechConnect
             // 
             this.picEditItem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picEditItem.Image = ((System.Drawing.Image)(resources.GetObject("picEditItem.Image")));
-            this.picEditItem.Location = new System.Drawing.Point(591, 30);
-            this.picEditItem.Margin = new System.Windows.Forms.Padding(30);
+            this.picEditItem.Location = new System.Drawing.Point(600, 40);
+            this.picEditItem.Margin = new System.Windows.Forms.Padding(40);
             this.picEditItem.Name = "picEditItem";
-            this.picEditItem.Size = new System.Drawing.Size(101, 37);
+            this.picEditItem.Size = new System.Drawing.Size(82, 17);
             this.picEditItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picEditItem.TabIndex = 4;
             this.picEditItem.TabStop = false;

@@ -43,12 +43,19 @@ namespace TechConnect
                 Visible = false
             };
 
+            CatracaStatusScreen statusCatraca = new CatracaStatusScreen()
+            {
+                Dock = DockStyle.Fill,
+                Visible = false
+            };
+
             ActualScreen = homePage;
 
             this.pnlMain.Controls.Add(homePage);
             this.pnlMain.Controls.Add(registerCalendar);
             this.pnlMain.Controls.Add(registerUser);
             this.pnlMain.Controls.Add(registerWorkout);
+            this.pnlMain.Controls.Add(statusCatraca);
         }
 
         private void CreateLeftSideBar(Core core)

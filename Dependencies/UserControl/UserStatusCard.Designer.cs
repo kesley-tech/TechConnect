@@ -1,7 +1,7 @@
 ﻿
 namespace TechConnect
 {
-    partial class UserCard
+    partial class UserStatusCard
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,32 +29,35 @@ namespace TechConnect
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserCard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserStatusCard));
             this.tblMain = new System.Windows.Forms.TableLayoutPanel();
             this.picProfiePhoto = new System.Windows.Forms.PictureBox();
             this.tblNames = new System.Windows.Forms.TableLayoutPanel();
             this.lblCode = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
+            this.picPadlock = new System.Windows.Forms.PictureBox();
             this.tblMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProfiePhoto)).BeginInit();
             this.tblNames.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPadlock)).BeginInit();
             this.SuspendLayout();
             // 
             // tblMain
             // 
             this.tblMain.BackColor = System.Drawing.Color.Transparent;
-            this.tblMain.ColumnCount = 2;
+            this.tblMain.ColumnCount = 3;
             this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 164F));
             this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tblMain.Controls.Add(this.picProfiePhoto, 0, 0);
             this.tblMain.Controls.Add(this.tblNames, 1, 0);
+            this.tblMain.Controls.Add(this.picPadlock, 2, 0);
             this.tblMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblMain.Location = new System.Drawing.Point(0, 0);
             this.tblMain.Name = "tblMain";
             this.tblMain.RowCount = 1;
             this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblMain.Size = new System.Drawing.Size(477, 177);
+            this.tblMain.Size = new System.Drawing.Size(747, 177);
             this.tblMain.TabIndex = 0;
             // 
             // picProfiePhoto
@@ -83,7 +86,7 @@ namespace TechConnect
             this.tblNames.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblNames.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblNames.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblNames.Size = new System.Drawing.Size(313, 177);
+            this.tblNames.Size = new System.Drawing.Size(463, 177);
             this.tblNames.TabIndex = 1;
             // 
             // lblCode
@@ -95,7 +98,7 @@ namespace TechConnect
             this.lblCode.Margin = new System.Windows.Forms.Padding(0);
             this.lblCode.Name = "lblCode";
             this.lblCode.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.lblCode.Size = new System.Drawing.Size(313, 88);
+            this.lblCode.Size = new System.Drawing.Size(463, 88);
             this.lblCode.TabIndex = 0;
             this.lblCode.Text = "Administrador Tech";
             this.lblCode.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -109,21 +112,34 @@ namespace TechConnect
             this.lblDescription.Margin = new System.Windows.Forms.Padding(0);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.lblDescription.Size = new System.Drawing.Size(313, 89);
+            this.lblDescription.Size = new System.Drawing.Size(463, 89);
             this.lblDescription.TabIndex = 1;
             this.lblDescription.Text = "Tecnologia";
             // 
-            // UserCard
+            // picPadlock
+            // 
+            this.picPadlock.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.picPadlock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picPadlock.Location = new System.Drawing.Point(657, 30);
+            this.picPadlock.Margin = new System.Windows.Forms.Padding(30);
+            this.picPadlock.Name = "picPadlock";
+            this.picPadlock.Size = new System.Drawing.Size(60, 117);
+            this.picPadlock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picPadlock.TabIndex = 2;
+            this.picPadlock.TabStop = false;
+            // 
+            // UserStatusCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tblMain);
-            this.Name = "UserCard";
-            this.Size = new System.Drawing.Size(477, 177);
+            this.Name = "UserStatusCard";
+            this.Size = new System.Drawing.Size(747, 177);
             this.tblMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picProfiePhoto)).EndInit();
             this.tblNames.ResumeLayout(false);
             this.tblNames.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPadlock)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -135,5 +151,6 @@ namespace TechConnect
         private System.Windows.Forms.TableLayoutPanel tblNames;
         private System.Windows.Forms.Label lblCode;
         private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.PictureBox picPadlock;
     }
 }

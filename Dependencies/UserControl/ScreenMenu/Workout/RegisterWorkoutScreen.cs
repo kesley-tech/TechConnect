@@ -20,6 +20,7 @@ namespace TechConnect
         {
             ucHeaderPage1.Title = "CADASTRO";
             ucHeaderPage1.SubTitle = "EXERCICÍOS";
+            ucHeaderPage1.btnFilter.Visible = false;
             ucHeaderPage1.TextBoxFilter.TextBox.TextChanged += TextBox_TextChanged;
         }
 

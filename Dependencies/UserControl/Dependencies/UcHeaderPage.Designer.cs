@@ -102,6 +102,9 @@ namespace TechConnect
             // 
             // btnFilter
             // 
+            this.btnFilter.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
+            this.btnFilter.AllowDrop = true;
+            this.btnFilter.AutoSize = true;
             this.btnFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(101)))), ((int)(((byte)(191)))));
             this.btnFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFilter.Dock = System.Windows.Forms.DockStyle.Right;
@@ -115,6 +118,9 @@ namespace TechConnect
             // 
             // btnRemove
             // 
+            this.btnRemove.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
+            this.btnRemove.AllowDrop = true;
+            this.btnRemove.AutoSize = true;
             this.btnRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(76)))), ((int)(((byte)(138)))));
             this.btnRemove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRemove.Dock = System.Windows.Forms.DockStyle.Right;
@@ -128,6 +134,9 @@ namespace TechConnect
             // 
             // btnInsert
             // 
+            this.btnInsert.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
+            this.btnInsert.AllowDrop = true;
+            this.btnInsert.AutoSize = true;
             this.btnInsert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(22)))), ((int)(((byte)(64)))));
             this.btnInsert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnInsert.Dock = System.Windows.Forms.DockStyle.Right;
@@ -156,11 +165,11 @@ namespace TechConnect
         #endregion
 
         private System.Windows.Forms.Panel pnlMain;
-        private System.Windows.Forms.Button btnFilter;
-        private System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblSubTitle;
-        private CustomTextBox tbFilter;
+        public CustomTextBox tbFilter;
+        public System.Windows.Forms.Button btnFilter;
+        public System.Windows.Forms.Button btnRemove;
+        public System.Windows.Forms.Button btnInsert;
     }
 }

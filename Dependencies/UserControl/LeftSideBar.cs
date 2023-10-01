@@ -12,7 +12,8 @@ namespace TechConnect
             HomePageScreen,
             RegisterWorkoutScreen,
             RegisterUserScreen,
-            RegisterCalendarScreen
+            RegisterCalendarScreen,
+            CatracaStatusScreen
         }
 
         public LeftSideBar(Core core)
@@ -26,36 +27,42 @@ namespace TechConnect
 
         private void AccordeonMenu()
         {
+            int widthTotal = Core.Width;
+
             FlowLayoutPanel flwMainMenuBody = new FlowLayoutPanel()
             {
+                AutoSize = true,
                 BackColor = Color.Transparent,
                 BorderStyle = BorderStyle.None,
                 FlowDirection = FlowDirection.TopDown,
-                Dock = DockStyle.Fill
+                Dock = DockStyle.Fill,
+                Width = widthTotal
             };
+
+            Label initalSpace = new Label() { Height = 20 };
 
             FlowLayoutPanel flwSubRegisterList = CreateSubRegisterList(flwMainMenuBody);
 
             ItemMenu imRegisterList = new ItemMenu() { LabelText = "Cadastros", PictureImage = Image64.Base64ToImage(Image64.MenuRegister) };
             imRegisterList.EventClick += (object sender) => { flwSubRegisterList.Visible = !flwSubRegisterList.Visible; };
-
-            Label initalSpace = new Label() { Height = 20 };
+            imRegisterList.Width = widthTotal;
 
             ItemMenu imHomePage = new ItemMenu() { LabelText = "Página Inicial", PictureImage = Image64.Base64ToImage(Image64.MenuHomePage) };
             imHomePage.EventClick += ImHomePage_EventClick;
+            imHomePage.Width = widthTotal;
 
             ItemMenu imStatusCatraca = new ItemMenu() { LabelText = "Status Catraca", PictureImage = Image64.Base64ToImage(Image64.MenuStatusCatraca) };
             imStatusCatraca.EventClick += ImStatusCatraca_EventClick;
+            imStatusCatraca.Width = widthTotal;
 
             ItemMenu imBuildWorkout = new ItemMenu() { LabelText = "Montar Treino", PictureImage = Image64.Base64ToImage(Image64.MenuBuildWorkout) };
             imBuildWorkout.EventClick += ImBuildWorkout_EventClick;
-
-            ItemMenu imConfiguration = new ItemMenu() { LabelText = "Configuração", PictureImage = Image64.Base64ToImage(Image64.MenuConfiguration) };
-            imConfiguration.EventClick += ImConfiguration_EventClick;
+            imBuildWorkout.Width = widthTotal;
 
             ItemMenu imExit = new ItemMenu() { LabelText = "Sair", PictureImage = Image64.Base64ToImage(Image64.MenuExit) };
             imExit.EventClick += (object sender) => { ShowLoginDisplay(); };
             imExit.Dock = DockStyle.Bottom;
+            imExit.Width = widthTotal;
 
             this.pnlSelection.Controls.Add(flwMainMenuBody);
             flwMainMenuBody.Controls.Add(initalSpace);
@@ -64,12 +71,14 @@ namespace TechConnect
             flwMainMenuBody.Controls.Add(flwSubRegisterList);
             flwMainMenuBody.Controls.Add(imStatusCatraca);
             flwMainMenuBody.Controls.Add(imBuildWorkout);
-            flwMainMenuBody.Controls.Add(imConfiguration);
+            //flwMainMenuBody.Controls.Add(imConfiguration);
             this.pnlSelection.Controls.Add(imExit);
         }
 
         private void HideActualScreen()
         {
+            this.Visible = false;
+
             if (Core.MainDisplay.ActualScreen != null)
             {
                 Core.MainDisplay.ActualScreen.Visible = false;
@@ -77,11 +86,6 @@ namespace TechConnect
             }
         }
 
-
-        private void ImConfiguration_EventClick(object sender)
-        {
-            HideActualScreen();
-        }
 
         private void ImBuildWorkout_EventClick(object sender)
         {
@@ -92,11 +96,8 @@ namespace TechConnect
         private void ImStatusCatraca_EventClick(object sender)
         {
             HideActualScreen();
-        }
 
-        private void ImDashboard_EventClick(object sender)
-        {
-            HideActualScreen();
+            ShowNewScreen(nameof(SCREEN.CatracaStatusScreen));
         }
 
         private void ImHomePage_EventClick(object sender)
@@ -113,7 +114,7 @@ namespace TechConnect
             ShowNewScreen(nameof(SCREEN.RegisterCalendarScreen));
         }
 
-        private void RigisterWorkout_EventClick(object sender)
+        private void RegisterWorkout_EventClick(object sender)
         {
             HideActualScreen();
 
@@ -131,9 +132,11 @@ namespace TechConnect
         {
             if (Core.MainDisplay != null)
             {
+                Core.MainDisplay.SuspendLayout();
                 Core.MainDisplay.ActualScreen = Core.MainDisplay.pnlMain.Controls[screenName];
-                Core.MainDisplay.ActualScreen.BringToFront();
                 Core.MainDisplay.ActualScreen.Visible = true;
+                Core.MainDisplay.ActualScreen.BringToFront();
+                Core.MainDisplay.ResumeLayout();
             }
         }
 
@@ -150,13 +153,16 @@ namespace TechConnect
             };
 
             ItemMenu rigisterWorkout = CreateSubItem("Treinos");
-            rigisterWorkout.EventClick += RigisterWorkout_EventClick;
+            rigisterWorkout.EventClick += RegisterWorkout_EventClick;
+            rigisterWorkout.Width = flwMain.Width;
 
             ItemMenu registerUser = CreateSubItem("Usuários");
             registerUser.EventClick += RegisterUser_EventClick;
+            registerUser.Width = flwMain.Width;
 
             ItemMenu registerCalendar = CreateSubItem("Calendário");
             registerCalendar.EventClick += RegisterCalendar_EventClick;
+            registerCalendar.Width = flwMain.Width;
 
             flwSubRegisterList.Controls.Add(rigisterWorkout);
             flwSubRegisterList.Controls.Add(registerUser);

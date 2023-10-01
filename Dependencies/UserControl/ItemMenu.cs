@@ -29,5 +29,21 @@ namespace TechConnect
         {
             InitializeComponent();
         }
+
+        private void Action_MouseHover(object sender, System.EventArgs e)
+        {
+            this.BackColor = Color.LightGray;
+        }
+
+        private void Action_MouseLeave(object sender, System.EventArgs e)
+        {
+            this.BackColor = Color.White;
+        }
+
+        private void Action_Click(object sender, System.EventArgs e)
+        {
+            if (EventClick != null)
+                EventClick.Invoke(sender);
+        }
     }
 }

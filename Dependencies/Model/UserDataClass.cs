@@ -4,6 +4,7 @@
     {
         public string User { get; set; }
         public string Name { get; set; }
+        public byte[] Photo { get; set; }
         public USER_TYPE Type { get; set; }
         public string PhoneNumber { get; set; }
         public string CEP { get; set; }

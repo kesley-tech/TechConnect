@@ -104,7 +104,7 @@ namespace TechConnect
             this.Size = new System.Drawing.Size(497, 1080);
             this.tblMenu.ResumeLayout(false);
             this.tblMenu.PerformLayout();
-            this.ResumeLayout(false);
+            this.ResumeLayout(true);
 
         }
 

@@ -65,17 +65,21 @@ namespace TechConnect
         private void TextBoxUser_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = e.SuppressKeyPress = true;
                 txtSenha.Focus();
+            }
 
-            e.Handled = e.SuppressKeyPress = true;
         }
 
         private void TextBoxPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = e.SuppressKeyPress = true;
                 btnEnter_Click(null, null);
+            }
 
-            e.Handled = e.SuppressKeyPress = true;
         }
 
         private void btnEnter_Click(object sender, EventArgs e)

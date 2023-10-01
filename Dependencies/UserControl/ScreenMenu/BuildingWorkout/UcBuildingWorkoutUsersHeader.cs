@@ -2,9 +2,9 @@
 
 namespace TechConnect
 {
-    public partial class RegisterCalendarScreen : UserControl
+    public partial class UcBuildingWorkoutUsersHeader : UserControl
     {
-        public RegisterCalendarScreen()
+        public UcBuildingWorkoutUsersHeader()
         {
             InitializeComponent();
         }
