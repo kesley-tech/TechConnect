@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Dependencies/UserControl/ScreenMenu/User/RegisterUserScreen.cs
+/Dependencies/UserControl/ScreenMenu/User/RegisterUserScreen.Designer.cs
+/Dependencies/UserControl/ScreenMenu/User/RegisterUserScreen.resx
