@@ -24,31 +24,31 @@ namespace TechConnect
                 Dock = DockStyle.Fill,
                 Visible = true
             };
-
             RegisterCalendarScreen registerCalendar = new RegisterCalendarScreen()
             {
                 Dock = DockStyle.Fill,
                 Visible = false
             };
-
             RegisterUserScreen registerUser = new RegisterUserScreen()
             {
                 Dock = DockStyle.Fill,
                 Visible = false
             };
-
             RegisterWorkoutScreen registerWorkout = new RegisterWorkoutScreen()
             {
                 Dock = DockStyle.Fill,
                 Visible = false
             };
-
             CatracaStatusScreen statusCatraca = new CatracaStatusScreen()
             {
                 Dock = DockStyle.Fill,
                 Visible = false
             };
-
+            BuildingWorkoutUsers buildingWorkoutUsers = new BuildingWorkoutUsers()
+            {
+                Dock = DockStyle.Fill,
+                Visible = false
+            };
             ActualScreen = homePage;
 
             this.pnlMain.Controls.Add(homePage);
@@ -56,6 +56,7 @@ namespace TechConnect
             this.pnlMain.Controls.Add(registerUser);
             this.pnlMain.Controls.Add(registerWorkout);
             this.pnlMain.Controls.Add(statusCatraca);
+            this.pnlMain.Controls.Add(buildingWorkoutUsers);
         }
 
         private void CreateLeftSideBar(Core core)

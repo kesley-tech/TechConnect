@@ -6,14 +6,14 @@ namespace TechConnect
     {
         private bool _selectedRow;
 
-        public UcWorkoutRow(WorkoutDataClass workoutData)
+        public UcWorkoutRow(WorkoutDTO workoutData)
         {
             InitializeComponent();
 
             SetData(workoutData);
         }
 
-        private void SetData(WorkoutDataClass workoutData)
+        private void SetData(WorkoutDTO workoutData)
         {
             lblCode.Text = workoutData.Code;
             lblDescription.Text = workoutData.Description;

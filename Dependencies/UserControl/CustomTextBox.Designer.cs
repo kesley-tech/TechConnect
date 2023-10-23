@@ -39,7 +39,7 @@ namespace TechConnect
             this.TextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TextBox.Location = new System.Drawing.Point(7, 7);
             this.TextBox.Name = "TextBox";
-            this.TextBox.Size = new System.Drawing.Size(236, 15);
+            this.TextBox.Size = new System.Drawing.Size(236, 18);
             this.TextBox.TabIndex = 0;
             this.TextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.TextBox.Enter += new System.EventHandler(this.TextBox_Enter);

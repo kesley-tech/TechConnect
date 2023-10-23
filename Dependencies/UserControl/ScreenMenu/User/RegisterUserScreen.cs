@@ -57,64 +57,64 @@ namespace TechConnect
 
         private List<UserControl> CreateListData()
         {
-            List<UserDataClass> dataClassList = new List<UserDataClass>();
+            List<UserDTO> dataClassList = new List<UserDTO>();
             List<UserControl> listUc = new List<UserControl>();
 
             #region FakeData
-            dataClassList.Add(new UserDataClass()
+            dataClassList.Add(new UserDTO()
             {
                 User = "900500",
                 Name = "STEPHANY VIERA",
-                Type = UserDataClass.USER_TYPE.Administrador,
+                Type = UserDTO.USER_TYPE.Administrador,
                 PhoneNumber = "19 92312-4813",
                 CEP = "13914-942",
-                HouseNumber = "114",
+                HouseNumber = 114,
                 AddressMoreInfo = "-",
                 Enable = true,
-                Sexuality = UserDataClass.SEXUALITY_TYPE.M
+                Sexuality = UserDTO.SEXUALITY_TYPE.M
             });
 
-            dataClassList.Add(new UserDataClass
+            dataClassList.Add(new UserDTO
             {
                 User = "123456",
                 Name = "João Silva",
-                Type = UserDataClass.USER_TYPE.Recepção,
+                Type = UserDTO.USER_TYPE.Recepção,
                 PhoneNumber = "55 98765-4321",
                 CEP = "12345-678",
-                HouseNumber = "789",
+                HouseNumber = 789,
                 AddressMoreInfo = "Apto 12B",
                 Enable = false,
-                Sexuality = UserDataClass.SEXUALITY_TYPE.F
+                Sexuality = UserDTO.SEXUALITY_TYPE.F
             });
 
-            dataClassList.Add(new UserDataClass
+            dataClassList.Add(new UserDTO
             {
                 User = "789012",
                 Name = "Maria Souza",
-                Type = UserDataClass.USER_TYPE.Administrador,
+                Type = UserDTO.USER_TYPE.Administrador,
                 PhoneNumber = "55 99999-9999",
                 CEP = "54321-876",
-                HouseNumber = "101",
+                HouseNumber = 101,
                 AddressMoreInfo = "Casa Verde",
                 Enable = true,
-                Sexuality = UserDataClass.SEXUALITY_TYPE.F
+                Sexuality = UserDTO.SEXUALITY_TYPE.F
             });
 
-            dataClassList.Add(new UserDataClass
+            dataClassList.Add(new UserDTO
             {
                 User = "456789",
                 Name = "Carlos Pereira",
-                Type = UserDataClass.USER_TYPE.Aluno,
+                Type = UserDTO.USER_TYPE.Aluno,
                 PhoneNumber = "55 98765-1234",
                 CEP = "98765-432",
-                HouseNumber = "55",
+                HouseNumber = 55,
                 AddressMoreInfo = "Bloco 7",
                 Enable = true,
-                Sexuality = UserDataClass.SEXUALITY_TYPE.M
+                Sexuality = UserDTO.SEXUALITY_TYPE.M
             });
             #endregion
 
-            foreach (UserDataClass data in dataClassList)
+            foreach (UserDTO data in dataClassList)
             {
                 UcUserRow item = new UcUserRow(data) { Dock = DockStyle.Fill, Margin = new Padding(0) };
 

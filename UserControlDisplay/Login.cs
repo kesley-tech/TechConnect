@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace TechConnect
@@ -16,18 +17,16 @@ namespace TechConnect
 
         private bool ValidateLogin()
         {
-            //TODO - chamar rota api
+            var user = DataBaseRequest.GetUser(txtUsuario.TextBox.Text.Trim()).FirstOrDefault();
 
-            //if (txtUsuario.TextBox.Text.Trim() == "admin"
-            //    && txtSenha.TextBox.Text.Trim() == "1234")
-            //{
-            lblHidden.Visible = false;
-            return true;
-            //}
-
-            
+            if (user != null && EncryptionHelper.Decrypt(user.Password, user.User) == txtSenha.TextBox.Text.Trim())
+            {
+                lblHidden.Visible = false;
+                return true;
+            }
 
             lblHidden.Visible = true;
+            ResetText();
             return false;
         }
 
@@ -89,5 +88,18 @@ namespace TechConnect
         }
 
         #endregion
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.tableLayoutPanel3.Visible = false;
+
+            ucChangePassword uc = new ucChangePassword(tableLayoutPanel3)
+            {
+                Visible = true,
+                Dock = DockStyle.Fill
+            };
+
+            this.tblMain.Controls.Add(uc, 1, 0);
+        }
     }
 }

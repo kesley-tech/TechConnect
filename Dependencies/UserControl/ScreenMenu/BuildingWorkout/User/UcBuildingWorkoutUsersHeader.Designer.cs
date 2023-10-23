@@ -32,19 +32,20 @@ namespace TechConnect
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblCode = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
-            this.lblMuscleGroup = new System.Windows.Forms.Label();
+            this.lblQuantityVencimento = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 132F));
             this.tableLayoutPanel1.Controls.Add(this.lblCode, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblDescription, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblMuscleGroup, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblQuantityVencimento, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -62,7 +63,7 @@ namespace TechConnect
             this.lblCode.Location = new System.Drawing.Point(0, 0);
             this.lblCode.Margin = new System.Windows.Forms.Padding(0);
             this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(272, 79);
+            this.lblCode.Size = new System.Drawing.Size(200, 79);
             this.lblCode.TabIndex = 0;
             this.lblCode.Text = "Matrícula";
             this.lblCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -72,26 +73,26 @@ namespace TechConnect
             this.lblDescription.AutoSize = true;
             this.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.Location = new System.Drawing.Point(272, 0);
-            this.lblDescription.Margin = new System.Windows.Forms.Padding(0);
+            this.lblDescription.Location = new System.Drawing.Point(300, 0);
+            this.lblDescription.Margin = new System.Windows.Forms.Padding(100, 0, 0, 0);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(272, 79);
+            this.lblDescription.Size = new System.Drawing.Size(48, 79);
             this.lblDescription.TabIndex = 1;
             this.lblDescription.Text = "Nome";
-            this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblMuscleGroup
+            // lblQuantityVencimento
             // 
-            this.lblMuscleGroup.AutoSize = true;
-            this.lblMuscleGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMuscleGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMuscleGroup.Location = new System.Drawing.Point(544, 0);
-            this.lblMuscleGroup.Margin = new System.Windows.Forms.Padding(0);
-            this.lblMuscleGroup.Name = "lblMuscleGroup";
-            this.lblMuscleGroup.Size = new System.Drawing.Size(136, 79);
-            this.lblMuscleGroup.TabIndex = 2;
-            this.lblMuscleGroup.Text = "Tempo para vencimento de treino";
-            this.lblMuscleGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblQuantityVencimento.AutoSize = true;
+            this.lblQuantityVencimento.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblQuantityVencimento.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuantityVencimento.Location = new System.Drawing.Point(348, 0);
+            this.lblQuantityVencimento.Margin = new System.Windows.Forms.Padding(0);
+            this.lblQuantityVencimento.Name = "lblQuantityVencimento";
+            this.lblQuantityVencimento.Size = new System.Drawing.Size(200, 79);
+            this.lblQuantityVencimento.TabIndex = 2;
+            this.lblQuantityVencimento.Text = "Vencimento de treino (dias)";
+            this.lblQuantityVencimento.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // UcBuildingWorkoutUsersHeader
             // 
@@ -99,7 +100,7 @@ namespace TechConnect
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "UcBuildingWorkoutUsersHeader";
             this.Size = new System.Drawing.Size(680, 79);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -113,6 +114,6 @@ namespace TechConnect
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label lblCode;
         private System.Windows.Forms.Label lblDescription;
-        private System.Windows.Forms.Label lblMuscleGroup;
+        private System.Windows.Forms.Label lblQuantityVencimento;
     }
 }

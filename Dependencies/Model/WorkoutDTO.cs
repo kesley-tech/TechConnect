@@ -1,6 +1,6 @@
 ﻿namespace TechConnect
 {
-    public class WorkoutDataClass
+    public class WorkoutDTO
     {
         public string Code { get; set; }
         public string Description { get; set; }

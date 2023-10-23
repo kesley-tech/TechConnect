@@ -138,7 +138,6 @@ namespace TechConnect
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.PlaceHolderText = "Digite a matricula ou cpf";
             this.txtUsuario.UnderlinedStyle = true;
-            this.txtUsuario.TextBox.KeyDown += TextBoxUser_KeyDown;
             // 
             // txtSenha
             // 
@@ -149,8 +148,6 @@ namespace TechConnect
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PlaceHolderText = "Digite a senha";
             this.txtSenha.UnderlinedStyle = true;
-            this.txtSenha.TextBox.TextChanged += TextBoxPassword_TextChanged;
-            this.txtSenha.TextBox.KeyDown += TextBoxPassword_KeyDown;
             // 
             // linkLabel1
             // 
@@ -160,6 +157,7 @@ namespace TechConnect
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.TabStop = true;
             this.linkLabel1.UseCompatibleTextRendering = true;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // btnEnter
             // 

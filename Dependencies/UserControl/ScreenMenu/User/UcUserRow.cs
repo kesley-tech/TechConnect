@@ -6,14 +6,14 @@ namespace TechConnect
     {
         private bool _selectedRow;
 
-        public UcUserRow(UserDataClass data)
+        public UcUserRow(UserDTO data)
         {
             InitializeComponent();
 
             SetData(data);
         }
 
-        private void SetData(UserDataClass data)
+        private void SetData(UserDTO data)
         {
             lblCode.Text = data.User;
             lblDescription.Text = data.Name;
@@ -21,7 +21,7 @@ namespace TechConnect
             lblCEP.Text = data.CEP;
             lblMoreInforAddress.Text = data.AddressMoreInfo;
             lblPhoneNumber.Text = data.PhoneNumber;
-            lblPhoneHouse.Text = data.HouseNumber;
+            lblPhoneHouse.Text = data.HouseNumber.ToString();
             lblSexo.Text = data.Sexuality.ToString();
             picEnable.Image = data.Enable ? Image64.Base64ToImage(Image64.Ok) : Image64.Base64ToImage(Image64.Ng);
         }

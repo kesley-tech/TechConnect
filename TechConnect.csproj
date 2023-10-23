@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>TechConnect</RootNamespace>
     <AssemblyName>TechConnect</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -82,6 +83,7 @@
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>packages\Oracle.ManagedDataAccess.19.13.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="ServiceStack.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
       <HintPath>packages\ServiceStack.Common.6.0.2\lib\net472\ServiceStack.Common.dll</HintPath>
     </Reference>
@@ -121,6 +123,9 @@
       <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -162,11 +167,14 @@
     <Compile Include="Core.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DataBase\DataBaseRequest.cs" />
+    <Compile Include="DataBase\Persistence\UserPersistence.cs" />
     <Compile Include="Dependencies\Chart\ChartGenerator.cs" />
     <Compile Include="Dependencies\Image64.cs" />
-    <Compile Include="Dependencies\Model\UserDataClass.cs" />
-    <Compile Include="Dependencies\Model\BuildingWorkoutUsersDataClass.cs" />
-    <Compile Include="Dependencies\Model\WorkoutDataClass.cs" />
+    <Compile Include="Dependencies\Model\BuildingWorkoutUserDTO.cs" />
+    <Compile Include="Dependencies\Model\UserDTO.cs" />
+    <Compile Include="Dependencies\Model\WorkoutDTO.cs" />
+    <Compile Include="Dependencies\Tool\SendEmail.cs" />
     <Compile Include="Dependencies\UserControl\CustomTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -182,16 +190,22 @@
     <Compile Include="Dependencies\UserControl\Dependencies\UcHeaderPage.Designer.cs">
       <DependentUpon>UcHeaderPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\UcBuildingWorkoutUsersHeader.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\User\BuildingWorkoutUsers.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\UcBuildingWorkoutUsersHeader.Designer.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\User\BuildingWorkoutUsers.Designer.cs">
+      <DependentUpon>BuildingWorkoutUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\User\UcBuildingWorkoutUsersHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\User\UcBuildingWorkoutUsersHeader.Designer.cs">
       <DependentUpon>UcBuildingWorkoutUsersHeader.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\UcBuildingWorkoutUsersRow.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\User\UcBuildingWorkoutUsersRow.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\UcBuildingWorkoutUsersRow.Designer.cs">
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\User\UcBuildingWorkoutUsersRow.Designer.cs">
       <DependentUpon>UcBuildingWorkoutUsersRow.cs</DependentUpon>
     </Compile>
     <Compile Include="Dependencies\UserControl\ScreenMenu\Calendar\UcDayCalendar.cs">
@@ -260,6 +274,12 @@
     <Compile Include="Dependencies\UserControl\ScreenMenu\Workout\RegisterWorkoutScreen.Designer.cs">
       <DependentUpon>RegisterWorkoutScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dependencies\UserControl\ucChangePassword.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ucChangePassword.Designer.cs">
+      <DependentUpon>ucChangePassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dependencies\UserControl\UserStatusMainCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -278,6 +298,7 @@
     <Compile Include="Dependencies\UserControl\UserCard.Designer.cs">
       <DependentUpon>UserCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dependencies\Tool\Helper\EncryptionHelper.cs" />
     <Compile Include="UserControlDisplay\Login.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -310,10 +331,13 @@
     <EmbeddedResource Include="Dependencies\UserControl\Dependencies\UcHeaderPage.resx">
       <DependentUpon>UcHeaderPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\UcBuildingWorkoutUsersHeader.resx">
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\User\BuildingWorkoutUsers.resx">
+      <DependentUpon>BuildingWorkoutUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\User\UcBuildingWorkoutUsersHeader.resx">
       <DependentUpon>UcBuildingWorkoutUsersHeader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\UcBuildingWorkoutUsersRow.resx">
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\User\UcBuildingWorkoutUsersRow.resx">
       <DependentUpon>UcBuildingWorkoutUsersRow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\Calendar\UcDayCalendar.resx">
@@ -349,6 +373,9 @@
     <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\Workout\RegisterWorkoutScreen.resx">
       <DependentUpon>RegisterWorkoutScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ucChangePassword.resx">
+      <DependentUpon>ucChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dependencies\UserControl\UserStatusMainCard.resx">
       <DependentUpon>UserStatusMainCard.cs</DependentUpon>
     </EmbeddedResource>
@@ -370,6 +397,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Dependencies\UserControl\LeftSideBar.resx">
       <DependentUpon>LeftSideBar.cs</DependentUpon>
@@ -391,6 +419,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

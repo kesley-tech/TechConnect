@@ -13,7 +13,8 @@ namespace TechConnect
             RegisterWorkoutScreen,
             RegisterUserScreen,
             RegisterCalendarScreen,
-            CatracaStatusScreen
+            CatracaStatusScreen,
+            BuildingWorkoutUsers
         }
 
         public LeftSideBar(Core core)
@@ -91,6 +92,7 @@ namespace TechConnect
         {
             HideActualScreen();
 
+            ShowNewScreen(nameof(SCREEN.BuildingWorkoutUsers));
         }
 
         private void ImStatusCatraca_EventClick(object sender)
