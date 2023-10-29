@@ -138,9 +138,9 @@ namespace TechConnect
             this.txtUsuario.BorderSize = 2;
             resources.ApplyResources(this.txtUsuario, "txtUsuario");
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.PlaceHolderText = "Digite a matricula ou cpf";
+            this.txtUsuario.PlaceHolderText = "Digite sua matrícula";
             this.txtUsuario.UnderlinedStyle = true;
-            this.txtUsuario.KeyDown += TextBoxUser_KeyDown;
+            this.txtUsuario.TextBox.KeyDown += TextBoxUser_KeyDown;
             // 
             // txtSenha
             // 
@@ -152,7 +152,7 @@ namespace TechConnect
             this.txtSenha.PlaceHolderText = "Digite a senha";
             this.txtSenha.UnderlinedStyle = true;
             this.txtSenha.TextBox.TextChanged += TextBoxPassword_TextChanged;
-            this.txtSenha.KeyDown += TextBoxPassword_KeyDown;
+            this.txtSenha.TextBox.KeyDown += TextBoxPassword_KeyDown;
             // 
             // linkLabel1
             // 
