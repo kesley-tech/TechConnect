@@ -22,5 +22,36 @@ namespace TechConnect.Properties {
                 return defaultInstance;
             }
         }
+
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int TilesSizePage
+        {
+            get
+            {
+                return ((int)(this["TilesSizePage"]));
+            }
+            set
+            {
+                this["TilesSizePage"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int ListItensPage
+        {
+            get
+            {
+                return ((int)(this["ListItensPage"]));
+            }
+            set
+            {
+                this["ListItensPage"] = value;
+            }
+        }
     }
 }

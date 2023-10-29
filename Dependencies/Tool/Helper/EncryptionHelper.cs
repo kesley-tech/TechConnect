@@ -1,58 +1,30 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using BCrypt.Net;
 
 namespace TechConnect
 {
     public class EncryptionHelper
     {
-        public static string Encrypt(string text, string key)
+        public static string Encrypt(string password)
         {
-            using (Aes aesAlg = Aes.Create())
-            {
-                aesAlg.Key = Encoding.UTF8.GetBytes(key);
-                aesAlg.IV = new byte[16]; // Vetor de inicialização (IV)
-
-                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
-
-                byte[] textBytes = Encoding.UTF8.GetBytes(text);
-
-                using (MemoryStream msEncrypt = new MemoryStream())
-                {
-                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                    {
-                        csEncrypt.Write(textBytes, 0, textBytes.Length);
-                        csEncrypt.FlushFinalBlock();
-                    }
-
-                    return Convert.ToBase64String(msEncrypt.ToArray());
-                }
-            }
+            string salt = BCrypt.Net.BCrypt.GenerateSalt(12);
+            return BCrypt.Net.BCrypt.HashPassword(password, salt);
         }
 
-        public static string Decrypt(string encryptedText, string key)
+        public static bool Decrypt(string user, string password)
         {
-            using (Aes aesAlg = Aes.Create())
+            UserDTO objectUser = DataBaseRequest.GetUser(user).FirstOrDefault();
+            if (objectUser != null)
             {
-                aesAlg.Key = Encoding.UTF8.GetBytes(key);
-                aesAlg.IV = new byte[16];
-
-                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
-
-                byte[] encryptedBytes = Convert.FromBase64String(encryptedText);
-
-                using (MemoryStream msDecrypt = new MemoryStream(encryptedBytes))
-                {
-                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
-                    {
-                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
-                        {
-                            return srDecrypt.ReadToEnd();
-                        }
-                    }
-                }
+                string senhaCriptografada = objectUser.Password; //buscar no banco
+                return BCrypt.Net.BCrypt.Verify(password, senhaCriptografada);
             }
+            else
+                return false;
         }
     }
 }

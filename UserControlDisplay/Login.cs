@@ -17,9 +17,7 @@ namespace TechConnect
 
         private bool ValidateLogin()
         {
-            var user = DataBaseRequest.GetUser(txtUsuario.TextBox.Text.Trim()).FirstOrDefault();
-
-            if (user != null && EncryptionHelper.Decrypt(user.Password, user.User) == txtSenha.TextBox.Text.Trim())
+            if (EncryptionHelper.Decrypt(txtUsuario.TextBox.Text.Trim(), txtSenha.TextBox.Text.Trim()))
             {
                 lblHidden.Visible = false;
                 return true;

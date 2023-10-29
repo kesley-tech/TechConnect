@@ -63,7 +63,7 @@ namespace TechConnect
             #region FakeData
             dataClassList.Add(new UserDTO()
             {
-                User = "900500",
+                User = 900500,
                 Name = "STEPHANY VIERA",
                 Type = UserDTO.USER_TYPE.Administrador,
                 PhoneNumber = "19 92312-4813",
@@ -76,7 +76,7 @@ namespace TechConnect
 
             dataClassList.Add(new UserDTO
             {
-                User = "123456",
+                User = 123456,
                 Name = "João Silva",
                 Type = UserDTO.USER_TYPE.Recepção,
                 PhoneNumber = "55 98765-4321",
@@ -89,7 +89,7 @@ namespace TechConnect
 
             dataClassList.Add(new UserDTO
             {
-                User = "789012",
+                User = 789012,
                 Name = "Maria Souza",
                 Type = UserDTO.USER_TYPE.Administrador,
                 PhoneNumber = "55 99999-9999",
@@ -102,7 +102,7 @@ namespace TechConnect
 
             dataClassList.Add(new UserDTO
             {
-                User = "456789",
+                User = 456789,
                 Name = "Carlos Pereira",
                 Type = UserDTO.USER_TYPE.Aluno,
                 PhoneNumber = "55 98765-1234",

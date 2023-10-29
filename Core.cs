@@ -6,6 +6,7 @@ namespace TechConnect
     public partial class Core : Form
     {
         public Login LoginDisplay;
+        public NotifyIcon notifyIcon;
         public Main MainDisplay;
 
         public Core()
@@ -40,8 +41,15 @@ namespace TechConnect
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Core));
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
+            // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Text = "Notificação";
+            this.notifyIcon.Visible = true;
             // 
             // Core
             // 

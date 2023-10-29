@@ -15,7 +15,7 @@ namespace TechConnect
 
         private void SetData(UserDTO data)
         {
-            lblCode.Text = data.User;
+            lblCode.Text = data.User.ToString();
             lblDescription.Text = data.Name;
             lblType.Text = data.Type.ToString();
             lblCEP.Text = data.CEP;

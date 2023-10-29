@@ -34,6 +34,7 @@ namespace TechConnect
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.tblMain = new System.Windows.Forms.TableLayoutPanel();
             this.tblLeft = new System.Windows.Forms.TableLayoutPanel();
@@ -50,6 +51,7 @@ namespace TechConnect
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.btnEnter = new System.Windows.Forms.Button();
             this.lblHidden = new System.Windows.Forms.Label();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.tblMain.SuspendLayout();
             this.tblLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCorredores)).BeginInit();
@@ -138,6 +140,7 @@ namespace TechConnect
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.PlaceHolderText = "Digite a matricula ou cpf";
             this.txtUsuario.UnderlinedStyle = true;
+            this.txtUsuario.KeyDown += TextBoxUser_KeyDown;
             // 
             // txtSenha
             // 
@@ -148,6 +151,8 @@ namespace TechConnect
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PlaceHolderText = "Digite a senha";
             this.txtSenha.UnderlinedStyle = true;
+            this.txtSenha.TextBox.TextChanged += TextBoxPassword_TextChanged;
+            this.txtSenha.KeyDown += TextBoxPassword_KeyDown;
             // 
             // linkLabel1
             // 
@@ -173,6 +178,10 @@ namespace TechConnect
             resources.ApplyResources(this.lblHidden, "lblHidden");
             this.lblHidden.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(40)))), ((int)(((byte)(115)))));
             this.lblHidden.Name = "lblHidden";
+            // 
+            // notifyIcon
+            // 
+            resources.ApplyResources(this.notifyIcon, "notifyIcon");
             // 
             // Login
             // 
@@ -211,5 +220,6 @@ namespace TechConnect
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button btnEnter;
         private System.Windows.Forms.Label lblHidden;
+        public NotifyIcon notifyIcon;
     }
 }

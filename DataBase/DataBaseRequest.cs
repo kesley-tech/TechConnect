@@ -10,13 +10,14 @@ namespace TechConnect
     {
         private const string connectionString = "Password=sequor;Persist Security Info=True;User ID=sequor;Initial Catalog=dbTechDeveloper;Data Source=SQO-111\\MSSQL16";
 
+        #region User
         public static List<UserDTO> GetUser(string matricula)
         {
             List<UserDTO> result = new List<UserDTO>();
             List<UserPersistence> userList = new List<UserPersistence>();
 
             string query = QueryGetUser();
-            query += $@"Where Usr.[Matricula] = {matricula}";
+            query += $@" Where Usr.[Matricula] = {matricula}";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -33,29 +34,29 @@ namespace TechConnect
                                 UserPersistence persistence = new UserPersistence()
                                 {
                                     Id = (int)reader["Id"],
-                                    Matricula = (string)reader["Matricula"],
-                                    Nome = (string)reader["Nome"],
-                                    Senha = (string)reader["Senha"],
-                                    Celular = (string)reader["Celular"],
-                                    Photo = (byte[])reader["Photo"],
+                                    Matricula = (int)reader["Matricula"],
+                                    Nome = reader["Nome"] is DBNull ? null : (string)reader["Nome"],
+                                    Senha = reader["Senha"] is DBNull ? null : (string)reader["Senha"],
+                                    Celular = reader["Celular"] is DBNull ? null : (string)reader["Celular"],
+                                    Photo = reader["Photo"] is DBNull ? null : (byte[])reader["Photo"],
                                     DataNascimento = (DateTime)reader["DataNascimento"],
-                                    Email = (string)reader["Email"],
+                                    Email = reader["Email"] is DBNull ? null : (string)reader["Email"],
                                     IdTipo = (int)reader["IdTipo"],
-                                    Tipo = (string)reader["Tipo"],
+                                    Tipo = reader["Tipo"] is DBNull ? null : (string)reader["Tipo"],
                                     IdGenero = (int)reader["IdGenero"],
-                                    CodigoGenero = (string)reader["CodigoGenero"],
-                                    Genero = (string)reader["Genero"],
+                                    CodigoGenero = reader["CodigoGenero"] is DBNull ? null : (string)reader["CodigoGenero"],
+                                    Genero = reader["Genero"] is DBNull ? null : (string)reader["Genero"],
                                     IdSituacao = (int)reader["IdSituacao"],
-                                    Situacao = (string)reader["Situacao"],
-                                    IdEndereco = (string)reader["IdEndereco"],
-                                    CEP = (string)reader["CEP"],
-                                    SiglaEstado = (string)reader["SiglaEstado"],
-                                    Estado = (string)reader["Estado"],
-                                    Cidade = (string)reader["Cidade"],
-                                    Bairro = (string)reader["Bairro"],
-                                    Rua = (string)reader["Rua"],
-                                    NumCasa = (int)reader["NumCasa"],
-                                    DataRemocao = (DateTime)reader["DataRemocao"]
+                                    Situacao = reader["Situacao"] is DBNull ? null : (string)reader["Situacao"],
+                                    IdEndereco = reader["IdEndereco"] is DBNull ? null : (int?)reader["IdEndereco"],
+                                    CEP = reader["CEP"] is DBNull ? null : (string)reader["CEP"],
+                                    SiglaEstado = reader["SiglaEstado"] is DBNull ? null : (string)reader["SiglaEstado"],
+                                    Estado = reader["Estado"] is DBNull ? null : (string)reader["Estado"],
+                                    Cidade = reader["Cidade"] is DBNull ? null : (string)reader["Cidade"],
+                                    Bairro = reader["Bairro"] is DBNull ? null : (string)reader["Bairro"],
+                                    Rua = reader["Rua"] is DBNull ? null : (string)reader["Rua"],
+                                    NumCasa = reader["NumCasa"] is DBNull ? null : (int?)reader["NumCasa"],
+                                    DataRemocao = reader["DataRemocao"] is DBNull ? null : (DateTime?)reader["DataRemocao"]
                                 };
 
                                 userList.Add(persistence);
@@ -66,6 +67,10 @@ namespace TechConnect
                 catch (Exception ex)
                 {
                     Console.WriteLine("Erro: " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
                 }
             }
 
@@ -90,7 +95,6 @@ namespace TechConnect
 
             return result;
         }
-
         public static List<UserDTO> GetAllUser()
         {
             List<UserDTO> result = new List<UserDTO>();
@@ -110,33 +114,34 @@ namespace TechConnect
                         {
                             while (reader.Read())
                             {
-                                UserPersistence persistence = new UserPersistence()
-                                {
-                                    Id = (int)reader["Id"],
-                                    Matricula = (string)reader["Matricula"],
-                                    Nome = (string)reader["Nome"],
-                                    Senha = (string)reader["Senha"],
-                                    Celular = (string)reader["Celular"],
-                                    Photo = (byte[])reader["Photo"],
-                                    DataNascimento = (DateTime)reader["DataNascimento"],
-                                    Email = (string)reader["Email"],
-                                    IdTipo = (int)reader["IdTipo"],
-                                    Tipo = (string)reader["Tipo"],
-                                    IdGenero = (int)reader["IdGenero"],
-                                    CodigoGenero = (string)reader["CodigoGenero"],
-                                    Genero = (string)reader["Genero"],
-                                    IdSituacao = (int)reader["IdSituacao"],
-                                    Situacao = (string)reader["Situacao"],
-                                    IdEndereco = (string)reader["IdEndereco"],
-                                    CEP = (string)reader["CEP"],
-                                    SiglaEstado = (string)reader["SiglaEstado"],
-                                    Estado = (string)reader["Estado"],
-                                    Cidade = (string)reader["Cidade"],
-                                    Bairro = (string)reader["Bairro"],
-                                    Rua = (string)reader["Rua"],
-                                    NumCasa = (int)reader["NumCasa"],
-                                    DataRemocao = (DateTime)reader["DataRemocao"]
-                                };
+                                UserPersistence persistence = new UserPersistence();
+
+                                persistence.Id = (int)reader["Id"];
+                                persistence.Matricula = (int)reader["Matricula"];
+                                persistence.Nome = reader["Nome"] is DBNull ? null : (string)reader["Nome"];
+                                persistence.Senha = reader["Senha"] is DBNull ? null : (string)reader["Senha"];
+                                persistence.Celular = reader["Celular"] is DBNull ? null : (string)reader["Celular"];
+                                persistence.Photo = reader["Photo"] is DBNull ? null : (byte[])reader["Photo"];
+                                persistence.DataNascimento = (DateTime)reader["DataNascimento"];
+                                persistence.Email = reader["Email"] is DBNull ? null : (string)reader["Email"];
+                                persistence.Token = (int)reader["TokenValidacao"];
+                                persistence.IdTipo = (int)reader["IdTipo"];
+                                persistence.Tipo = reader["Tipo"] is DBNull ? null : (string)reader["Tipo"];
+                                persistence.IdGenero = (int)reader["IdGenero"];
+                                persistence.CodigoGenero = reader["CodigoGenero"] is DBNull ? null : (string)reader["CodigoGenero"];
+                                persistence.Genero = reader["Genero"] is DBNull ? null : (string)reader["Genero"];
+                                persistence.IdSituacao = (int)reader["IdSituacao"];
+                                persistence.Situacao = reader["Situacao"] is DBNull ? null : (string)reader["Situacao"];
+                                persistence.IdEndereco = reader["IdEndereco"] is DBNull ? null : (int?)reader["IdEndereco"];
+                                persistence.CEP = reader["CEP"] is DBNull ? null : (string)reader["CEP"];
+                                persistence.SiglaEstado = reader["SiglaEstado"] is DBNull ? null : (string)reader["SiglaEstado"];
+                                persistence.Estado = reader["Estado"] is DBNull ? null : (string)reader["Estado"];
+                                persistence.Cidade = reader["Cidade"] is DBNull ? null : (string)reader["Cidade"];
+                                persistence.Bairro = reader["Bairro"] is DBNull ? null : (string)reader["Bairro"];
+                                persistence.Rua = reader["Rua"] is DBNull ? null : (string)reader["Rua"];
+                                persistence.NumCasa = reader["NumCasa"] is DBNull ? null : (int?)reader["NumCasa"];
+                                persistence.DataRemocao = reader["DataRemocao"] is DBNull ? null : (DateTime?)reader["DataRemocao"];
+
 
                                 userList.Add(persistence);
                             }
@@ -146,6 +151,10 @@ namespace TechConnect
                 catch (Exception ex)
                 {
                     Console.WriteLine("Erro: " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
                 }
             }
 
@@ -164,13 +173,13 @@ namespace TechConnect
                     Photo = user.Photo,
                     Type = (UserDTO.USER_TYPE)user.IdTipo,
                     Sexuality = (UserDTO.SEXUALITY_TYPE)user.IdGenero,
+                    Token = user.Token,
                     Enable = user.DataRemocao != null && user.DataRemocao > DateTime.MinValue,
                 });
             }
 
             return result;
         }
-
         private static string QueryGetUser()
         {
             return @"Select
@@ -182,6 +191,7 @@ namespace TechConnect
 	                    ,Usr.[Photo]
 						,Usr.[DataNascimento]
 						,Usr.[Email]
+						,Usr.[TokenValidacao]
 						,Tipo.[Id] as IdTipo
 						,Tipo.[Descricao] as Tipo
 						,Genero.[Id] as IdGenero
@@ -218,5 +228,54 @@ namespace TechConnect
 						Endereco.[Id] = Usr.[IdEndereco]
 						And Endereco.DataRemocao is Null";
         }
+
+        public static void UpdatePassword(string email, string senha)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    string passEncript = EncryptionHelper.Encrypt(senha);
+
+                    string updateQuery = "UPDATE [dbo].[Usuario] SET [Senha] = @novo_valor WHERE [Matricula] = @condicao";
+
+                    connection.Open();
+
+                    using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
+                    {
+                        updateCommand.Parameters.AddWithValue("@novo_valor", passEncript);
+                        updateCommand.Parameters.AddWithValue("@condicao", email);
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Erro: " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+        public static void UpdateUserData()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    // Código de acesso ao banco de dados
+                }
+                catch (Exception ex)
+                {
+                    // Lidar com erros
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+        #endregion
     }
 }
