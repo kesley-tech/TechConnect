@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ServiceStack.Messaging;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TechConnect
@@ -13,6 +15,8 @@ namespace TechConnect
 
             UpdateDataHeader();
 
+
+
             RefreshData();
         }
 
@@ -20,8 +24,29 @@ namespace TechConnect
         {
             ucHeaderPage1.Title = "CADASTRO";
             ucHeaderPage1.SubTitle = "USUÁRIOS";
-            ucHeaderPage1.btnFilter.Visible = false;
             ucHeaderPage1.TextBoxFilter.TextBox.TextChanged += TextBox_TextChanged;
+            ucHeaderPage1.btnInsert.Click += BtnInsert_Click;
+            ucHeaderPage1.btnRemove.Click += BtnRemove_Click;
+        }
+
+        private void BtnRemove_Click(object sender, System.EventArgs e)
+        {
+            
+        }
+
+        private void BtnInsert_Click(object sender, System.EventArgs e)
+        {
+            UcRegisterUserForm uc = new UcRegisterUserForm()
+            {
+                Dock = DockStyle.Fill,
+                Visible = true
+            };
+
+            Flyout.ShowFlyoutDialog("Cadastro de Usuário",
+                                    Color.Black,
+                                    uc,
+                                    Flyout.CreateFlyoutCommand("OK", DialogResult.OK),
+                                    Flyout.CreateFlyoutCommand("CANCELAR", DialogResult.Cancel));
         }
 
         private void TextBox_TextChanged(object sender, System.EventArgs e)

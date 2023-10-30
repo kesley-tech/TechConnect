@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace TechConnect
 {
@@ -277,5 +278,126 @@ namespace TechConnect
             }
         }
         #endregion
+
+        public static string GetCurrentAccess()
+        {
+            int returnData = 0;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    string query = "Select COUNT(*) From CatracaWIP";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.CommandText = query;
+                        returnData = Convert.ToInt32(command.ExecuteScalar());
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Erro: " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return returnData.ToString();
+        }
+
+        public static string GetTrainingToLost()
+        {
+            int returnData = 0;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    string query = @"Select COUNT(*)
+                                     From ExercicioTreinoMontado With(nolock)
+                                     Where DataVencimento > DATEADD(WEEK, 1, GETDATE())";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.CommandText = query;
+                        returnData = Convert.ToInt32(command.ExecuteScalar());
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Erro: " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return returnData.ToString();
+        }
+
+        public static string GetMonthFrequencePercent()
+        {
+            double returnData = 0;
+            int qtdUsuarioCadastrado = 0;
+            int qtdUsuarioCatraca = 0;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    string query = @"Select COUNT(*) as UsuarioCadastrado
+                                     From Usuario With(nolock)
+                                     Where DataRemocao IS NOT NULL";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.CommandText = query;
+                        qtdUsuarioCadastrado = Convert.ToInt32(command.ExecuteScalar());
+                    }
+
+                    query = @"Select
+	                                Count(*) as UsuarioCatraca
+                                From
+                                (
+	                                Select IdUsuario
+	                                From CatracaOcorrencia With(nolock)
+	                                Where MONTH(DataOcorrencia) = MONTH(GETDATE()) 
+		                                 AND YEAR(DataOcorrencia) = YEAR(GETDATE())
+	                                Group by IdUsuario
+                                ) base";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.CommandText = query;
+                        qtdUsuarioCatraca = Convert.ToInt32(command.ExecuteScalar());
+                    }
+
+                    returnData = ((qtdUsuarioCatraca * 100) / qtdUsuarioCadastrado) * 100;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Erro: " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            
+            return Math.Round(returnData, 1).ToString();
+        }
     }
 }

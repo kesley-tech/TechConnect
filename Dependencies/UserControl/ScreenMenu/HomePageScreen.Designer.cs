@@ -36,15 +36,15 @@ namespace TechConnect
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlDashTrainingToLost = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.QtdTrainingToLost = new System.Windows.Forms.Label();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.pnlDashMonthFrequence = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.PercentMonthFrequence = new System.Windows.Forms.Label();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.pnlDashCurrentAccess = new System.Windows.Forms.Panel();
             this.lblCurrentAccess = new System.Windows.Forms.Label();
-            this.lblQuantyCurrentAccess = new System.Windows.Forms.Label();
+            this.QtdCurrentAccess = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.pnlShowDashboard = new System.Windows.Forms.Panel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -97,7 +97,7 @@ namespace TechConnect
             // 
             this.pnlDashTrainingToLost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(199)))), ((int)(((byte)(242)))));
             this.pnlDashTrainingToLost.Controls.Add(this.label3);
-            this.pnlDashTrainingToLost.Controls.Add(this.label4);
+            this.pnlDashTrainingToLost.Controls.Add(this.QtdTrainingToLost);
             this.pnlDashTrainingToLost.Controls.Add(this.linkLabel3);
             this.pnlDashTrainingToLost.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDashTrainingToLost.Location = new System.Drawing.Point(716, 0);
@@ -115,21 +115,21 @@ namespace TechConnect
             this.label3.Location = new System.Drawing.Point(32, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(193, 29);
-            this.label3.TabIndex = 2;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Treinos à vencer";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label4
+            // QtdTrainingToLost
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(18, 26);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 67);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "02";
+            this.QtdTrainingToLost.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.QtdTrainingToLost.AutoSize = true;
+            this.QtdTrainingToLost.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QtdTrainingToLost.ForeColor = System.Drawing.Color.White;
+            this.QtdTrainingToLost.Location = new System.Drawing.Point(18, 26);
+            this.QtdTrainingToLost.Name = "QtdTrainingToLost";
+            this.QtdTrainingToLost.Size = new System.Drawing.Size(62, 67);
+            this.QtdTrainingToLost.TabIndex = 1;
+            this.QtdTrainingToLost.Text = "0";
             // 
             // linkLabel3
             // 
@@ -151,7 +151,7 @@ namespace TechConnect
             // 
             this.pnlDashMonthFrequence.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(99)))));
             this.pnlDashMonthFrequence.Controls.Add(this.label1);
-            this.pnlDashMonthFrequence.Controls.Add(this.label2);
+            this.pnlDashMonthFrequence.Controls.Add(this.PercentMonthFrequence);
             this.pnlDashMonthFrequence.Controls.Add(this.linkLabel2);
             this.pnlDashMonthFrequence.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDashMonthFrequence.Location = new System.Drawing.Point(358, 0);
@@ -173,17 +173,17 @@ namespace TechConnect
             this.label1.Text = "Frequência mensal";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label2
+            // PercentMonthFrequence
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(19, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(196, 67);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "75.4%";
+            this.PercentMonthFrequence.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.PercentMonthFrequence.AutoSize = true;
+            this.PercentMonthFrequence.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PercentMonthFrequence.ForeColor = System.Drawing.Color.White;
+            this.PercentMonthFrequence.Location = new System.Drawing.Point(19, 26);
+            this.PercentMonthFrequence.Name = "PercentMonthFrequence";
+            this.PercentMonthFrequence.Size = new System.Drawing.Size(114, 67);
+            this.PercentMonthFrequence.TabIndex = 1;
+            this.PercentMonthFrequence.Text = "0%";
             // 
             // linkLabel2
             // 
@@ -205,7 +205,7 @@ namespace TechConnect
             // 
             this.pnlDashCurrentAccess.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(94)))), ((int)(((byte)(122)))));
             this.pnlDashCurrentAccess.Controls.Add(this.lblCurrentAccess);
-            this.pnlDashCurrentAccess.Controls.Add(this.lblQuantyCurrentAccess);
+            this.pnlDashCurrentAccess.Controls.Add(this.QtdCurrentAccess);
             this.pnlDashCurrentAccess.Controls.Add(this.linkLabel1);
             this.pnlDashCurrentAccess.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDashCurrentAccess.Location = new System.Drawing.Point(0, 0);
@@ -227,17 +227,17 @@ namespace TechConnect
             this.lblCurrentAccess.Text = "Acessos correntes";
             this.lblCurrentAccess.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // lblQuantyCurrentAccess
+            // QtdCurrentAccess
             // 
-            this.lblQuantyCurrentAccess.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblQuantyCurrentAccess.AutoSize = true;
-            this.lblQuantyCurrentAccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuantyCurrentAccess.ForeColor = System.Drawing.Color.White;
-            this.lblQuantyCurrentAccess.Location = new System.Drawing.Point(19, 26);
-            this.lblQuantyCurrentAccess.Name = "lblQuantyCurrentAccess";
-            this.lblQuantyCurrentAccess.Size = new System.Drawing.Size(95, 67);
-            this.lblQuantyCurrentAccess.TabIndex = 1;
-            this.lblQuantyCurrentAccess.Text = "34";
+            this.QtdCurrentAccess.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.QtdCurrentAccess.AutoSize = true;
+            this.QtdCurrentAccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QtdCurrentAccess.ForeColor = System.Drawing.Color.White;
+            this.QtdCurrentAccess.Location = new System.Drawing.Point(19, 26);
+            this.QtdCurrentAccess.Name = "QtdCurrentAccess";
+            this.QtdCurrentAccess.Size = new System.Drawing.Size(62, 67);
+            this.QtdCurrentAccess.TabIndex = 1;
+            this.QtdCurrentAccess.Text = "0";
             // 
             // linkLabel1
             // 
@@ -311,15 +311,15 @@ namespace TechConnect
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel pnlDashTrainingToLost;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label QtdTrainingToLost;
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.Panel pnlDashMonthFrequence;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label PercentMonthFrequence;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Panel pnlDashCurrentAccess;
         private System.Windows.Forms.Label lblCurrentAccess;
-        private System.Windows.Forms.Label lblQuantyCurrentAccess;
+        private System.Windows.Forms.Label QtdCurrentAccess;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Panel pnlShowDashboard;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;

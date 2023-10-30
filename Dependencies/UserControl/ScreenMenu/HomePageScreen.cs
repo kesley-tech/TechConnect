@@ -10,20 +10,18 @@ namespace TechConnect
         {
             InitializeComponent();
 
-            //// Criar uma série de dados de exemplo
-            //Series series = new Series("Dados de Exemplo");
-            //series.ChartType = SeriesChartType.Line;
-            //chart1.Series.Add(series);
+            LoadCardsValue();
 
-            //// Adicionar alguns pontos de dados de exemplo
-            //series.Points.AddXY(1, 5);
-            //series.Points.AddXY(2, 10);
-            //series.Points.AddXY(3, 8);
+            
 
-            //// Definir o intervalo fixo no eixo X
-            //chart1.ChartAreas[0].AxisX.Minimum = 1; // Valor mínimo
-            //chart1.ChartAreas[0].AxisX.Maximum = 4; // Valor máximo
             BuildChartAccessByHour();
+        }
+
+        private void LoadCardsValue()
+        {
+            QtdCurrentAccess.Text = DataBaseRequest.GetCurrentAccess();
+            QtdTrainingToLost.Text = DataBaseRequest.GetTrainingToLost();
+            PercentMonthFrequence.Text = DataBaseRequest.GetMonthFrequencePercent();
         }
 
         private void BuildChartAccessByHour()

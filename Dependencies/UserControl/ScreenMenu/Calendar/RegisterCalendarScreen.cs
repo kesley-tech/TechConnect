@@ -15,7 +15,6 @@ namespace TechConnect
         {
             ucHeaderPage1.Title = "CADASTRO";
             ucHeaderPage1.SubTitle = "CALENDÁRIO";
-            ucHeaderPage1.btnFilter.Visible = false;
             ucHeaderPage1.btnInsert.Visible = true;
             ucHeaderPage1.btnRemove.Visible = false;
             ucHeaderPage1.tbFilter.Visible = false;

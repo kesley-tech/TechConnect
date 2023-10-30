@@ -34,7 +34,6 @@ namespace TechConnect
             this.tbFilter = new TechConnect.CustomTextBox();
             this.lblSubTitle = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnFilter = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnInsert = new System.Windows.Forms.Button();
             this.pnlMain.SuspendLayout();
@@ -46,7 +45,6 @@ namespace TechConnect
             this.pnlMain.Controls.Add(this.tbFilter);
             this.pnlMain.Controls.Add(this.lblSubTitle);
             this.pnlMain.Controls.Add(this.lblTitle);
-            this.pnlMain.Controls.Add(this.btnFilter);
             this.pnlMain.Controls.Add(this.btnRemove);
             this.pnlMain.Controls.Add(this.btnInsert);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -65,7 +63,7 @@ namespace TechConnect
             this.tbFilter.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
             this.tbFilter.BorderSize = 5;
             this.tbFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbFilter.Location = new System.Drawing.Point(315, 66);
+            this.tbFilter.Location = new System.Drawing.Point(360, 66);
             this.tbFilter.Margin = new System.Windows.Forms.Padding(4);
             this.tbFilter.Name = "tbFilter";
             this.tbFilter.Padding = new System.Windows.Forms.Padding(7);
@@ -99,22 +97,6 @@ namespace TechConnect
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "Titulo";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
-            this.btnFilter.AllowDrop = true;
-            this.btnFilter.AutoSize = true;
-            this.btnFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(101)))), ((int)(((byte)(191)))));
-            this.btnFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnFilter.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnFilter.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.Image")));
-            this.btnFilter.Location = new System.Drawing.Point(758, 30);
-            this.btnFilter.Margin = new System.Windows.Forms.Padding(0, 0, 50, 0);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(130, 127);
-            this.btnFilter.TabIndex = 2;
-            this.btnFilter.UseVisualStyleBackColor = false;
             // 
             // btnRemove
             // 
@@ -168,7 +150,6 @@ namespace TechConnect
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblSubTitle;
         public CustomTextBox tbFilter;
-        public System.Windows.Forms.Button btnFilter;
         public System.Windows.Forms.Button btnRemove;
         public System.Windows.Forms.Button btnInsert;
     }

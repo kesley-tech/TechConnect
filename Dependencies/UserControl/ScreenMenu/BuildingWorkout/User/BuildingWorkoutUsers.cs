@@ -21,7 +21,6 @@ namespace TechConnect
         {
             ucHeaderPage1.Title = "ELABORAÇÃO DE TREINOS";
             ucHeaderPage1.SubTitle = "Lista de alunos";
-            ucHeaderPage1.btnFilter.Visible = false;
             ucHeaderPage1.btnInsert.Visible = false;
             ucHeaderPage1.btnRemove.Visible = false;
             ucHeaderPage1.TextBoxFilter.TextBox.TextChanged += TextBox_TextChanged;
