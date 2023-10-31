@@ -57,8 +57,8 @@ namespace TechConnect
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 132F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 184F));
             this.tableLayoutPanel1.Controls.Add(this.lblCEP, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblPhoneHouse, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblMoreInforAddress, 0, 0);
@@ -75,7 +75,7 @@ namespace TechConnect
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(780, 79);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1040, 97);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblCEP
@@ -83,10 +83,10 @@ namespace TechConnect
             this.lblCEP.AutoSize = true;
             this.lblCEP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCEP.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCEP.Location = new System.Drawing.Point(276, 0);
+            this.lblCEP.Location = new System.Drawing.Point(368, 0);
             this.lblCEP.Margin = new System.Windows.Forms.Padding(0);
             this.lblCEP.Name = "lblCEP";
-            this.lblCEP.Size = new System.Drawing.Size(69, 79);
+            this.lblCEP.Size = new System.Drawing.Size(92, 97);
             this.lblCEP.TabIndex = 11;
             this.lblCEP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -95,10 +95,10 @@ namespace TechConnect
             this.lblPhoneHouse.AutoSize = true;
             this.lblPhoneHouse.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPhoneHouse.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhoneHouse.Location = new System.Drawing.Point(345, 0);
+            this.lblPhoneHouse.Location = new System.Drawing.Point(460, 0);
             this.lblPhoneHouse.Margin = new System.Windows.Forms.Padding(0);
             this.lblPhoneHouse.Name = "lblPhoneHouse";
-            this.lblPhoneHouse.Size = new System.Drawing.Size(69, 79);
+            this.lblPhoneHouse.Size = new System.Drawing.Size(92, 97);
             this.lblPhoneHouse.TabIndex = 10;
             this.lblPhoneHouse.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -107,10 +107,10 @@ namespace TechConnect
             this.lblMoreInforAddress.AutoSize = true;
             this.lblMoreInforAddress.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMoreInforAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoreInforAddress.Location = new System.Drawing.Point(414, 0);
+            this.lblMoreInforAddress.Location = new System.Drawing.Point(552, 0);
             this.lblMoreInforAddress.Margin = new System.Windows.Forms.Padding(0);
             this.lblMoreInforAddress.Name = "lblMoreInforAddress";
-            this.lblMoreInforAddress.Size = new System.Drawing.Size(69, 79);
+            this.lblMoreInforAddress.Size = new System.Drawing.Size(92, 97);
             this.lblMoreInforAddress.TabIndex = 9;
             this.lblMoreInforAddress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -119,10 +119,10 @@ namespace TechConnect
             this.lblPhoneNumber.AutoSize = true;
             this.lblPhoneNumber.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhoneNumber.Location = new System.Drawing.Point(207, 0);
+            this.lblPhoneNumber.Location = new System.Drawing.Point(276, 0);
             this.lblPhoneNumber.Margin = new System.Windows.Forms.Padding(0);
             this.lblPhoneNumber.Name = "lblPhoneNumber";
-            this.lblPhoneNumber.Size = new System.Drawing.Size(69, 79);
+            this.lblPhoneNumber.Size = new System.Drawing.Size(92, 97);
             this.lblPhoneNumber.TabIndex = 8;
             this.lblPhoneNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -134,7 +134,7 @@ namespace TechConnect
             this.lblCode.Location = new System.Drawing.Point(0, 0);
             this.lblCode.Margin = new System.Windows.Forms.Padding(0);
             this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(69, 79);
+            this.lblCode.Size = new System.Drawing.Size(92, 97);
             this.lblCode.TabIndex = 7;
             this.lblCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -143,10 +143,10 @@ namespace TechConnect
             this.lblDescription.AutoSize = true;
             this.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.Location = new System.Drawing.Point(69, 0);
+            this.lblDescription.Location = new System.Drawing.Point(92, 0);
             this.lblDescription.Margin = new System.Windows.Forms.Padding(0);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(69, 79);
+            this.lblDescription.Size = new System.Drawing.Size(92, 97);
             this.lblDescription.TabIndex = 6;
             this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -155,10 +155,10 @@ namespace TechConnect
             this.lblType.AutoSize = true;
             this.lblType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblType.Location = new System.Drawing.Point(138, 0);
+            this.lblType.Location = new System.Drawing.Point(184, 0);
             this.lblType.Margin = new System.Windows.Forms.Padding(0);
             this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(69, 79);
+            this.lblType.Size = new System.Drawing.Size(92, 97);
             this.lblType.TabIndex = 5;
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -167,44 +167,45 @@ namespace TechConnect
             this.lblSexo.AutoSize = true;
             this.lblSexo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSexo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSexo.Location = new System.Drawing.Point(483, 0);
+            this.lblSexo.Location = new System.Drawing.Point(644, 0);
             this.lblSexo.Margin = new System.Windows.Forms.Padding(0);
             this.lblSexo.Name = "lblSexo";
-            this.lblSexo.Size = new System.Drawing.Size(69, 79);
+            this.lblSexo.Size = new System.Drawing.Size(92, 97);
             this.lblSexo.TabIndex = 2;
             this.lblSexo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // picEnable
             // 
             this.picEnable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picEnable.Location = new System.Drawing.Point(582, 32);
-            this.picEnable.Margin = new System.Windows.Forms.Padding(30, 32, 30, 32);
+            this.picEnable.Location = new System.Drawing.Point(776, 39);
+            this.picEnable.Margin = new System.Windows.Forms.Padding(40, 39, 40, 39);
             this.picEnable.Name = "picEnable";
-            this.picEnable.Size = new System.Drawing.Size(30, 15);
+            this.picEnable.Size = new System.Drawing.Size(40, 19);
             this.picEnable.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picEnable.TabIndex = 3;
             this.picEnable.TabStop = false;
             // 
             // picEditItem
             // 
-            this.picEditItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picEditItem.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picEditItem.Image = ((System.Drawing.Image)(resources.GetObject("picEditItem.Image")));
-            this.picEditItem.Location = new System.Drawing.Point(678, 32);
-            this.picEditItem.Margin = new System.Windows.Forms.Padding(30, 32, 30, 32);
+            this.picEditItem.Location = new System.Drawing.Point(886, 30);
+            this.picEditItem.Margin = new System.Windows.Forms.Padding(30);
             this.picEditItem.Name = "picEditItem";
-            this.picEditItem.Size = new System.Drawing.Size(72, 14);
+            this.picEditItem.Size = new System.Drawing.Size(124, 37);
             this.picEditItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picEditItem.TabIndex = 4;
             this.picEditItem.TabStop = false;
+            this.picEditItem.Click += new System.EventHandler(this.picEditItem_Click);
             // 
             // UcUserRow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UcUserRow";
-            this.Size = new System.Drawing.Size(780, 79);
+            this.Size = new System.Drawing.Size(1040, 97);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picEnable)).EndInit();

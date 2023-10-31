@@ -567,6 +567,11 @@
     </Compile>
     <Compile Include="DataBase\DataBaseRequest.cs" />
     <Compile Include="DataBase\Persistence\UserPersistence.cs" />
+    <Compile Include="dbTechDeveloperDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbTechDeveloperDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Dependencies\Chart\ChartGenerator.cs" />
     <Compile Include="Dependencies\FlyoutControls\Flyout.cs" />
     <Compile Include="Dependencies\Image64.cs" />
@@ -813,6 +818,17 @@
     <EmbeddedResource Include="UserControlDisplay\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="dbTechDeveloperDataSet.xsc">
+      <DependentUpon>dbTechDeveloperDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="dbTechDeveloperDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dbTechDeveloperDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="dbTechDeveloperDataSet.xss">
+      <DependentUpon>dbTechDeveloperDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -39,5 +39,10 @@ namespace TechConnect
                 _selectedRow = true;
             }
         }
+
+        private void picEditItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
