@@ -17,14 +17,12 @@ namespace TechConnect
             InitializeComponent();
         }
 
-        private void pnlMain_Paint(object sender, PaintEventArgs e)
+        private void TextBox_TextChanged(object sender, System.EventArgs e)
         {
-
-        }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-
+            if (!string.IsNullOrEmpty(tbPassword.TextBox.Text.Trim()))
+                tbPassword.TextBox.PasswordChar = '*';
+            else
+                tbPassword.TextBox.PasswordChar = '\0';
         }
     }
 }

@@ -12,8 +12,6 @@ namespace TechConnect
 
             LoadCardsValue();
 
-            
-
             BuildChartAccessByHour();
         }
 
@@ -21,7 +19,7 @@ namespace TechConnect
         {
             QtdCurrentAccess.Text = DataBaseRequest.GetCurrentAccess();
             QtdTrainingToLost.Text = DataBaseRequest.GetTrainingToLost();
-            PercentMonthFrequence.Text = DataBaseRequest.GetMonthFrequencePercent();
+            PercentMonthFrequence.Text = string.Concat(DataBaseRequest.GetMonthFrequencePercent(), "%");
         }
 
         private void BuildChartAccessByHour()
@@ -54,6 +52,11 @@ namespace TechConnect
                 else
                     chart1.Series["AccessByHour"].Points.AddXY(hour, 0);
             }
+        }
+
+        private void timerLoadCards_Tick(object sender, EventArgs e)
+        {
+            LoadCardsValue();
         }
     }
 }

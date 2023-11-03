@@ -1,4 +1,5 @@
 ﻿using ServiceStack.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -8,6 +9,7 @@ namespace TechConnect
     public partial class RegisterUserScreen : UserControl
     {
         private List<UserControl> listUcData = new List<UserControl>();
+        private NotifyIcon notifyIcon;
 
         public RegisterUserScreen()
         {
@@ -15,7 +17,11 @@ namespace TechConnect
 
             UpdateDataHeader();
 
-
+            notifyIcon = new NotifyIcon
+            {
+                Icon = SystemIcons.Information,
+                Visible = true
+            };
 
             RefreshData();
         }
@@ -31,7 +37,15 @@ namespace TechConnect
 
         private void BtnRemove_Click(object sender, System.EventArgs e)
         {
-            
+            ShowMessage(SystemIcons.Information, "Não implementado", " - ", 2000);
+        }
+
+        private void ShowMessage(Icon icon, string title, string content, int milisecShowTime)
+        {
+            notifyIcon.BalloonTipTitle = title;
+            notifyIcon.BalloonTipText = content;
+            notifyIcon.ShowBalloonTip(milisecShowTime);
+            notifyIcon.Icon = icon;
         }
 
         private void BtnInsert_Click(object sender, System.EventArgs e)
@@ -42,11 +56,49 @@ namespace TechConnect
                 Visible = true
             };
 
-            Flyout.ShowFlyoutDialog("Cadastro de Usuário",
+            DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Usuário",
                                     Color.Black,
                                     uc,
                                     Flyout.CreateFlyoutCommand("OK", DialogResult.OK),
                                     Flyout.CreateFlyoutCommand("CANCELAR", DialogResult.Cancel));
+
+            if (result == DialogResult.OK)
+            {
+                if (ValidationData(uc))
+                {
+                    int? idEndereco = DataBaseRequest.GetEnderecoByCEP(uc.tbCEP.TextBox.Text);
+                    idEndereco = idEndereco > 0 ? idEndereco : null;
+                    int.TryParse(uc.tbToken.TextBox.Text.Trim(), out int tokenValidation);
+
+                    DataBaseRequest.InsertUserData(uc.tbCel.TextBox.Text.Trim(),
+                                                    idEndereco,
+                                                    uc.dateTimePicker1.Text,
+                                                    uc.tbEmail.TextBox.Text.Trim(),
+                                                    uc.tbGenero.TextBox.Text.Trim(),
+                                                    uc.tbName.TextBox.Text.Trim(),
+                                                    uc.tbPassword.TextBox.Text.Trim(),
+                                                    uc.tbRegister.TextBox.Text.Trim(),
+                                                    uc.tbTipo.TextBox.Text.Trim(),
+                                                    tokenValidation);
+                }
+                else
+                    ShowMessage(SystemIcons.Warning,
+                                "Falha na Validação de Dados",
+                                "Favor preencher os campos faltantes",
+                                2000);
+
+            }
+        }
+
+        private bool ValidationData(UcRegisterUserForm uc)
+        {
+            return !string.IsNullOrEmpty(uc.dateTimePicker1.Text)
+                   //&& !string.IsNullOrEmpty(uc.tbEmail.TextBox.Text.Trim())
+                   && !string.IsNullOrEmpty(uc.tbGenero.TextBox.Text.Trim())
+                   && !string.IsNullOrEmpty(uc.tbName.TextBox.Text.Trim())
+                   && !string.IsNullOrEmpty(uc.tbPassword.TextBox.Text.Trim())
+                   && !string.IsNullOrEmpty(uc.tbRegister.TextBox.Text.Trim())
+                   && !string.IsNullOrEmpty(uc.tbTipo.TextBox.Text.Trim());
         }
 
         private void TextBox_TextChanged(object sender, System.EventArgs e)

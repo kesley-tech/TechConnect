@@ -3,12 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 using System.Windows.Forms;
+using static DevExpress.CodeParser.CodeStyle.Formatting.Rules;
 
 namespace TechConnect
 {
     public class DataBaseRequest
     {
+        public DataBaseRequest() 
+        { 
+        }
+
         private const string connectionString = "Password=sequor;Persist Security Info=True;User ID=sequor;Initial Catalog=dbTechDeveloper;Data Source=SQO-111\\MSSQL16";
 
         #region User
@@ -228,6 +234,138 @@ namespace TechConnect
 					On
 						Endereco.[Id] = Usr.[IdEndereco]
 						And Endereco.DataRemocao is Null";
+        }
+
+
+        public static int? GetEnderecoByCEP(string cep)
+        {
+            int? returnData = null;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    string query = "SELECT top 1 Id FROM UsuarioEndereco WHERE CEP = @cep";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.CommandText = query;
+                        StringBuilder builder = new StringBuilder(cep);
+                        cep = builder.Insert(cep.Length - 3, "-").ToString();
+                        command.Parameters.AddWithValue("@cep", cep.Trim());
+                        returnData = Convert.ToInt32(command.ExecuteScalar());
+                    }
+
+                    if (returnData <= 0)
+                    {
+                        var cepInformation = ConsultaCEP.GetCEPInformation(Convert.ToInt32(cep)).Result;
+
+                        if (cepInformation != null)
+                        {
+                            query = @"INSERT INTO UsuarioEndereco
+                                            (CEP,
+                                            Rua,
+                                            Bairro,
+                                            Cidade,
+                                            SiglaEstado)
+                                      VALUES
+                                            (@Cep,
+                                             @Rua,
+                                             @Bairro,
+                                             @Cidade,
+                                             @SiglaEstado)";
+
+                            using (SqlCommand command = new SqlCommand(query, connection))
+                            {
+                                command.CommandText = query;
+                                command.Parameters.AddWithValue("@Cep", cepInformation.Cep);
+                                command.Parameters.AddWithValue("@Rua", cepInformation.Logradouro);
+                                command.Parameters.AddWithValue("@Bairro", cepInformation.Bairro);
+                                command.Parameters.AddWithValue("@Cidade", cepInformation.Localidade);
+                                command.Parameters.AddWithValue("@SiglaEstado", cepInformation.Uf);
+                                command.ExecuteNonQuery();
+                            }
+
+                            return GetEnderecoByCEP(cep);
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Erro: " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return returnData;
+        }
+        public static void InsertUserData(string cel, int? idCep, string dataNascimento, string email, string genero, string nome, string senha, string matricula, string tipo, int? token)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    string updateQuery = @"INSERT INTO [dbo].[Usuario]
+                                                   ([Matricula]
+                                                   ,[Nome]
+                                                   ,[Senha]
+                                                   ,[Celular]
+                                                   ,[DataNascimento]
+                                                   ,[Email]
+                                                   ,[IdTipo]
+                                                   ,[IdGenero]
+                                                   ,[IdEndereco]
+                                                   ,[IdSituacao]
+                                                   ,[Photo]
+                                                   ,[DataRemocao]
+                                                   ,[TokenValidacao])
+                                             VALUES
+                                                   (@Matricula
+                                                   ,@Nome
+                                                   ,@Senha
+                                                   ,@Celular
+                                                   ,@DataNascimento
+                                                   ,@Email
+                                                   ,(SELECT TOP 1 Id FROM UsuarioTipo WHERE Descricao = @Tipo)
+                                                   ,(SELECT TOP 1 Id FROM UsuarioGenero WHERE Descricao = @Genero)
+                                                   ,@Endereco
+                                                   ,1
+                                                   ,NULL
+                                                   ,NULL
+                                                   ,@Token)";
+
+                    connection.Open();
+
+                    using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
+                    {
+                        updateCommand.Parameters.AddWithValue("@Matricula", matricula);
+                        updateCommand.Parameters.AddWithValue("@Nome", nome);
+                        updateCommand.Parameters.AddWithValue("@Senha", senha);
+                        updateCommand.Parameters.AddWithValue("@Celular", string.IsNullOrEmpty(cel) ? null : cel);
+                        updateCommand.Parameters.AddWithValue("@DataNascimento", dataNascimento);
+                        updateCommand.Parameters.AddWithValue("@Email", string.IsNullOrEmpty(email) ? null : email);
+                        updateCommand.Parameters.AddWithValue("@Tipo", tipo);
+                        updateCommand.Parameters.AddWithValue("@Genero", genero);
+                        updateCommand.Parameters.AddWithValue("@Token", token);
+                        updateCommand.Parameters.AddWithValue("@Endereco", idCep);
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Erro: " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
         }
 
         public static void UpdatePassword(string email, string senha)

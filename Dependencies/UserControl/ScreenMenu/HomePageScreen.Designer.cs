@@ -29,6 +29,7 @@ namespace TechConnect
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -48,6 +49,7 @@ namespace TechConnect
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.pnlShowDashboard = new System.Windows.Forms.Panel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.timerLoadCards = new System.Windows.Forms.Timer(this.components);
             this.tblMain.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.pnlDashTrainingToLost.SuspendLayout();
@@ -284,6 +286,12 @@ namespace TechConnect
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
+            // timerLoadCards
+            // 
+            this.timerLoadCards.Enabled = true;
+            this.timerLoadCards.Interval = 10000;
+            this.timerLoadCards.Tick += new System.EventHandler(this.timerLoadCards_Tick);
+            // 
             // HomePageScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -323,5 +331,6 @@ namespace TechConnect
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Panel pnlShowDashboard;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Timer timerLoadCards;
     }
 }
