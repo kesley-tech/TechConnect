@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace TechConnect
@@ -37,10 +38,32 @@ namespace TechConnect
 
         private void BtnRemove_Click(object sender, System.EventArgs e)
         {
-            ShowMessage(SystemIcons.Information, "Não implementado", " - ", 2000);
+            try
+            {
+                var ucVisible = this.Controls[0].Controls[1].Controls[0].Controls[1].Controls;
+
+                foreach (UcUserRow item in ucVisible)
+                {
+                    if (item.SelectedRow.Count > 0)
+                    {
+                        foreach (UcUserRow selected in item.SelectedRow)
+                        {
+                            var matricula = selected.lblCode.Text;
+
+                            DataBaseRequest.RemoveUserData(matricula);
+                        }
+                    }
+                }
+
+                RefreshData();
+            }
+            catch
+            {
+            }
+
         }
 
-        private void ShowMessage(Icon icon, string title, string content, int milisecShowTime)
+        private void ShowNotification(Icon icon, string title, string content, int milisecShowTime)
         {
             notifyIcon.BalloonTipTitle = title;
             notifyIcon.BalloonTipText = content;
@@ -50,55 +73,112 @@ namespace TechConnect
 
         private void BtnInsert_Click(object sender, System.EventArgs e)
         {
-            UcRegisterUserForm uc = new UcRegisterUserForm()
+            try
             {
-                Dock = DockStyle.Fill,
-                Visible = true
-            };
-
-            DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Usuário",
-                                    Color.Black,
-                                    uc,
-                                    Flyout.CreateFlyoutCommand("OK", DialogResult.OK),
-                                    Flyout.CreateFlyoutCommand("CANCELAR", DialogResult.Cancel));
-
-            if (result == DialogResult.OK)
-            {
-                if (ValidationData(uc))
+                UcRegisterUserForm uc = new UcRegisterUserForm()
                 {
-                    int? idEndereco = DataBaseRequest.GetEnderecoByCEP(uc.tbCEP.TextBox.Text);
-                    idEndereco = idEndereco > 0 ? idEndereco : null;
-                    int.TryParse(uc.tbToken.TextBox.Text.Trim(), out int tokenValidation);
+                    Dock = DockStyle.Fill,
+                    Visible = true
+                };
 
-                    DataBaseRequest.InsertUserData(uc.tbCel.TextBox.Text.Trim(),
-                                                    idEndereco,
-                                                    uc.dateTimePicker1.Text,
-                                                    uc.tbEmail.TextBox.Text.Trim(),
-                                                    uc.tbGenero.TextBox.Text.Trim(),
-                                                    uc.tbName.TextBox.Text.Trim(),
-                                                    uc.tbPassword.TextBox.Text.Trim(),
-                                                    uc.tbRegister.TextBox.Text.Trim(),
-                                                    uc.tbTipo.TextBox.Text.Trim(),
-                                                    tokenValidation);
+                DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Usuário",
+                                        Color.Black,
+                                        uc,
+                                        Flyout.CreateFlyoutCommand("OK", DialogResult.OK),
+                                        Flyout.CreateFlyoutCommand("CANCELAR", DialogResult.Cancel));
+
+                if (result == DialogResult.OK)
+                {
+                    if (ValidationData(uc))
+                    {
+                        int? idEndereco = DataBaseRequest.GetEnderecoByCEP(uc.tbCEP.TextBox.Text);
+                        idEndereco = idEndereco > 0 ? idEndereco : null;
+                        int.TryParse(uc.tbToken.TextBox.Text.Trim(), out int tokenValidation);
+                        string numeroFormatado = string.Format("({0}) {1}-{2}", uc.tbCel.TextBox.Text.Trim().Substring(0, 2), uc.tbCel.TextBox.Text.Trim().Substring(2, 5), uc.tbCel.TextBox.Text.Trim().Substring(7, 4));
+
+                        string passwordEncrypted = EncryptionHelper.Encrypt(uc.tbPassword.TextBox.Text.Trim());
+
+                        DataBaseRequest.InsertUserData(uc.tbCel.TextBox.Text.Trim(),
+                                                        idEndereco,
+                                                        uc.dateTimePicker1.Text,
+                                                        uc.tbEmail.TextBox.Text.Trim(),
+                                                        uc.tbGenero.TextBox.Text.Trim(),
+                                                        uc.tbName.TextBox.Text.Trim(),
+                                                        passwordEncrypted,
+                                                        uc.tbRegister.TextBox.Text.Trim(),
+                                                        uc.tbTipo.TextBox.Text.Trim(),
+                                                        tokenValidation);
+
+                        RefreshData();
+                    }
+
                 }
-                else
-                    ShowMessage(SystemIcons.Warning,
-                                "Falha na Validação de Dados",
-                                "Favor preencher os campos faltantes",
-                                2000);
-
+            }
+            catch
+            {
             }
         }
 
         private bool ValidationData(UcRegisterUserForm uc)
         {
-            return !string.IsNullOrEmpty(uc.dateTimePicker1.Text)
-                   //&& !string.IsNullOrEmpty(uc.tbEmail.TextBox.Text.Trim())
-                   && !string.IsNullOrEmpty(uc.tbGenero.TextBox.Text.Trim())
-                   && !string.IsNullOrEmpty(uc.tbName.TextBox.Text.Trim())
-                   && !string.IsNullOrEmpty(uc.tbPassword.TextBox.Text.Trim())
-                   && !string.IsNullOrEmpty(uc.tbRegister.TextBox.Text.Trim())
-                   && !string.IsNullOrEmpty(uc.tbTipo.TextBox.Text.Trim());
+            bool error = !string.IsNullOrEmpty(uc.dateTimePicker1.Text)
+                            && !string.IsNullOrEmpty(uc.tbGenero.TextBox.Text.Trim())
+                            && !string.IsNullOrEmpty(uc.tbName.TextBox.Text.Trim())
+                            && !string.IsNullOrEmpty(uc.tbRegister.TextBox.Text.Trim())
+                            && !string.IsNullOrEmpty(uc.tbTipo.TextBox.Text.Trim());
+
+            if (error)
+            {
+                int value = 0;
+
+                int.TryParse(uc.tbRegister.TextBox.Text.Trim(), out value);
+
+                if (value == 0)
+                {
+                    ShowNotification(SystemIcons.Warning,
+                                        "Falha na Validação de Dados",
+                                        "Usuário não pode conter letras ou caracter especial",
+                                        2000);
+
+                    error = false;
+                }
+                else if (!string.IsNullOrEmpty(uc.tbCEP.TextBox.Text.Trim()))
+                {
+                    int.TryParse(uc.tbCEP.TextBox.Text.Trim(), out value);
+
+                    if (value == 0)
+                    {
+                        ShowNotification(SystemIcons.Warning,
+                                            "Falha na Validação de Dados",
+                                            "CEP não pode conter letras ou caracter especial",
+                                            2000);
+
+                        error = false;
+                    }
+                }
+                else if (!string.IsNullOrEmpty(uc.tbCel.TextBox.Text.Trim()))
+                {
+                    if (uc.tbCel.TextBox.Text.Trim().Length != 11)
+                    {
+                        ShowNotification(SystemIcons.Warning,
+                                            "Falha na Validação de Dados",
+                                            "Favor preencher corretamente o número de celular ex: 19989398239",
+                                            2000);
+
+                        error = false;
+                    }
+                }
+            }
+            else
+            {
+                ShowNotification(SystemIcons.Warning,
+                                        "Falha na Validação de Dados",
+                                        "Favor preencher os campos faltantes",
+                                        2000);
+            }
+
+
+            return error;
         }
 
         private void TextBox_TextChanged(object sender, System.EventArgs e)
@@ -124,7 +204,7 @@ namespace TechConnect
                 ucListPaginatedHorizontal1.SetList(listUcData);
         }
 
-        private void RefreshData()
+        public void RefreshData()
         {
             List<UserControl> listUc = CreateListData();
             listUcData = listUc;
@@ -134,11 +214,11 @@ namespace TechConnect
 
         private List<UserControl> CreateListData()
         {
-            List<UserDTO> dataClassList = new List<UserDTO>();
             List<UserControl> listUc = new List<UserControl>();
 
             #region FakeData
-            dataClassList.Add(new UserDTO()
+            List<UserDTO> dataFakeClassList = new List<UserDTO>();
+            dataFakeClassList.Add(new UserDTO()
             {
                 User = 900500,
                 Name = "STEPHANY VIERA",
@@ -151,7 +231,7 @@ namespace TechConnect
                 Sexuality = UserDTO.SEXUALITY_TYPE.M
             });
 
-            dataClassList.Add(new UserDTO
+            dataFakeClassList.Add(new UserDTO
             {
                 User = 123456,
                 Name = "João Silva",
@@ -164,7 +244,7 @@ namespace TechConnect
                 Sexuality = UserDTO.SEXUALITY_TYPE.F
             });
 
-            dataClassList.Add(new UserDTO
+            dataFakeClassList.Add(new UserDTO
             {
                 User = 789012,
                 Name = "Maria Souza",
@@ -177,7 +257,7 @@ namespace TechConnect
                 Sexuality = UserDTO.SEXUALITY_TYPE.F
             });
 
-            dataClassList.Add(new UserDTO
+            dataFakeClassList.Add(new UserDTO
             {
                 User = 456789,
                 Name = "Carlos Pereira",
@@ -191,9 +271,12 @@ namespace TechConnect
             });
             #endregion
 
+            var dataClassList = DataBaseRequest.GetAllUser();
+
             foreach (UserDTO data in dataClassList)
             {
-                UcUserRow item = new UcUserRow(data) { Dock = DockStyle.Fill, Margin = new Padding(0) };
+                data.Enable = true;
+                UcUserRow item = new UcUserRow(data, this) { Dock = DockStyle.Fill, Margin = new Padding(0) };
 
                 listUc.Add(item);
             }

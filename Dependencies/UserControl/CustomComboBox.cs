@@ -10,7 +10,7 @@ namespace TechConnect
         private Color borderColor = Color.MediumSlateBlue;
         private int borderSize = 2;
         private bool underlinedStyle = false;
-        private string placeHolderText = string.Empty;
+        public string placeHolderText = string.Empty;
         private Color foreColor = Color.Black;
 
         public CustomComboBox()

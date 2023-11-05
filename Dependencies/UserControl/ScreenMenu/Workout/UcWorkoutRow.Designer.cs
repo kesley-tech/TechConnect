@@ -48,7 +48,7 @@ namespace TechConnect
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 162F));
             this.tableLayoutPanel1.Controls.Add(this.lblCode, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblDescription, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblMuscleGroup, 2, 0);
@@ -74,7 +74,6 @@ namespace TechConnect
             this.lblCode.Size = new System.Drawing.Size(88, 97);
             this.lblCode.TabIndex = 0;
             this.lblCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblCode.Click += UcWorkout_Click;
             // 
             // lblDescription
             // 
@@ -87,7 +86,6 @@ namespace TechConnect
             this.lblDescription.Size = new System.Drawing.Size(190, 97);
             this.lblDescription.TabIndex = 1;
             this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblDescription.Click += UcWorkout_Click;
             // 
             // lblMuscleGroup
             // 
@@ -100,7 +98,6 @@ namespace TechConnect
             this.lblMuscleGroup.Size = new System.Drawing.Size(132, 97);
             this.lblMuscleGroup.TabIndex = 2;
             this.lblMuscleGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblMuscleGroup.Click += UcWorkout_Click;
             // 
             // picFreeWorkout
             // 
@@ -115,12 +112,13 @@ namespace TechConnect
             // 
             // picEditItem
             // 
-            this.picEditItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picEditItem.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.picEditItem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picEditItem.Image = ((System.Drawing.Image)(resources.GetObject("picEditItem.Image")));
-            this.picEditItem.Location = new System.Drawing.Point(600, 40);
-            this.picEditItem.Margin = new System.Windows.Forms.Padding(40);
+            this.picEditItem.Location = new System.Drawing.Point(590, 30);
+            this.picEditItem.Margin = new System.Windows.Forms.Padding(30);
             this.picEditItem.Name = "picEditItem";
-            this.picEditItem.Size = new System.Drawing.Size(82, 17);
+            this.picEditItem.Size = new System.Drawing.Size(102, 37);
             this.picEditItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picEditItem.TabIndex = 4;
             this.picEditItem.TabStop = false;

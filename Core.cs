@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TechConnect
@@ -12,6 +13,9 @@ namespace TechConnect
         public Core()
         {
             InitializeComponent();
+
+            int navigationBarHeight = SystemInformation.CaptionHeight; // Obtém a altura da barra de navegação
+            //this.MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height - navigationBarHeight);
 
             InitializeUCDependencies();
         }
@@ -57,7 +61,6 @@ namespace TechConnect
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ControlBox = false;
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "Core";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);

@@ -18,12 +18,14 @@
 
         public enum SEXUALITY_TYPE
         {
+            None,
             M,
             F
         }
 
         public enum USER_TYPE
         {
+            None,
             Administrador,
             Recepção,
             Instrutor,

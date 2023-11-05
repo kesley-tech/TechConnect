@@ -10,12 +10,17 @@ namespace TechConnect
         private Color borderColor = Color.MediumSlateBlue;
         private int borderSize = 2;
         private bool underlinedStyle = false;
-        private string placeHolderText = string.Empty;
+        public string placeHolderText = string.Empty;
         private Color foreColor = Color.Black;
 
         public CustomTextBox()
         {
             InitializeComponent();
+        }
+
+        public void SetValue(string value)
+        {
+            this.TextBox.Text = value;
         }
 
         public Color BorderColor

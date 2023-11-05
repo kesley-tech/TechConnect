@@ -226,8 +226,8 @@ namespace TechConnect
             this.tbGenero.Size = new System.Drawing.Size(395, 53);
             this.tbGenero.TabIndex = 21;
             this.tbGenero.UnderlinedStyle = false;
-            this.tbGenero.TextBox.Items.Add("Masculino");
-            this.tbGenero.TextBox.Items.Add("Feminino");
+            this.tbGenero.TextBox.Items.Add("M");
+            this.tbGenero.TextBox.Items.Add("F");
             // 
             // tbTipo
             // 
@@ -398,7 +398,7 @@ namespace TechConnect
         public CustomTextBox tbName;
         private System.Windows.Forms.Label label1;
         public CustomTextBox tbPassword;
-        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.Label label2;
         public CustomTextBox tbDataNascimento;
         private System.Windows.Forms.Label label3;
         public CustomTextBox tbEmail;

@@ -1,8 +1,8 @@
-﻿using Microsoft.SqlServer.Server;
+﻿using DevExpress.CodeParser;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using static DevExpress.CodeParser.CodeStyle.Formatting.Rules;
@@ -11,11 +11,22 @@ namespace TechConnect
 {
     public class DataBaseRequest
     {
-        public DataBaseRequest() 
-        { 
-        }
-
         private const string connectionString = "Password=sequor;Persist Security Info=True;User ID=sequor;Initial Catalog=dbTechDeveloper;Data Source=SQO-111\\MSSQL16";
+
+        private static void ShowNotification(string content, int milisecShowTime)
+        {
+            NotifyIcon notifyIcon = new NotifyIcon()
+            {
+                Icon = SystemIcons.Error,
+                Visible = true
+            };
+
+            notifyIcon.BalloonTipTitle = "Falha na Manipulação de Dados";
+            notifyIcon.BalloonTipText = content;
+            notifyIcon.ShowBalloonTip(milisecShowTime);
+
+            notifyIcon.Dispose();
+        }
 
         #region User
         public static List<UserDTO> GetUser(string matricula)
@@ -24,7 +35,7 @@ namespace TechConnect
             List<UserPersistence> userList = new List<UserPersistence>();
 
             string query = QueryGetUser();
-            query += $@" Where Usr.[Matricula] = {matricula}";
+            query += $@" and Usr.[Matricula] = {matricula}";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -73,7 +84,7 @@ namespace TechConnect
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Erro: " + ex.Message);
+                    ShowNotification(ex.Message, 2000);
                 }
                 finally
                 {
@@ -157,7 +168,7 @@ namespace TechConnect
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Erro: " + ex.Message);
+                    ShowNotification(ex.Message, 2000);
                 }
                 finally
                 {
@@ -174,7 +185,7 @@ namespace TechConnect
                     Password = user.Senha,
                     Email = user.Email,
                     CEP = user.CEP,
-                    AddressMoreInfo = $"{user.Rua}, {user.Bairro} - {user.Cidade}/{user.SiglaEstado}",
+                    AddressMoreInfo = $"{user.Rua}, {user.Bairro} - {user.Cidade}-{user.SiglaEstado}",
                     HouseNumber = user.NumCasa,
                     PhoneNumber = user.Celular,
                     Photo = user.Photo,
@@ -233,7 +244,9 @@ namespace TechConnect
 						[dbo].[UsuarioEndereco] Endereco With(nolock)
 					On
 						Endereco.[Id] = Usr.[IdEndereco]
-						And Endereco.DataRemocao is Null";
+						And Endereco.DataRemocao is Null
+                    Where
+                        Usr.[DataRemocao] is null";
         }
 
 
@@ -253,16 +266,18 @@ namespace TechConnect
                     {
                         command.CommandText = query;
                         StringBuilder builder = new StringBuilder(cep);
-                        cep = builder.Insert(cep.Length - 3, "-").ToString();
+                        if (cep.Length > 3 && !cep.Contains("-"))
+                            cep = builder.Insert(cep.Length - 3, "-").ToString();
                         command.Parameters.AddWithValue("@cep", cep.Trim());
                         returnData = Convert.ToInt32(command.ExecuteScalar());
                     }
 
                     if (returnData <= 0)
                     {
-                        var cepInformation = ConsultaCEP.GetCEPInformation(Convert.ToInt32(cep)).Result;
+                        int.TryParse(cep.Trim().Replace("-", ""), out int cepInt);
+                        var cepInformation = ConsultaCEP.GetCEPInformation(cepInt).Result;
 
-                        if (cepInformation != null)
+                        if (cepInformation != null && cepInformation.Cep != null)
                         {
                             query = @"INSERT INTO UsuarioEndereco
                                             (CEP,
@@ -295,11 +310,12 @@ namespace TechConnect
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Erro: " + ex.Message);
+                    ShowNotification(ex.Message, 2000);
                 }
                 finally
                 {
-                    connection.Close();
+                    if (connection.State == System.Data.ConnectionState.Open)
+                        connection.Close();
                 }
             }
 
@@ -311,55 +327,63 @@ namespace TechConnect
             {
                 try
                 {
-                    string updateQuery = @"INSERT INTO [dbo].[Usuario]
-                                                   ([Matricula]
-                                                   ,[Nome]
-                                                   ,[Senha]
-                                                   ,[Celular]
-                                                   ,[DataNascimento]
-                                                   ,[Email]
-                                                   ,[IdTipo]
-                                                   ,[IdGenero]
-                                                   ,[IdEndereco]
-                                                   ,[IdSituacao]
-                                                   ,[Photo]
-                                                   ,[DataRemocao]
-                                                   ,[TokenValidacao])
-                                             VALUES
-                                                   (@Matricula
-                                                   ,@Nome
-                                                   ,@Senha
-                                                   ,@Celular
-                                                   ,@DataNascimento
-                                                   ,@Email
-                                                   ,(SELECT TOP 1 Id FROM UsuarioTipo WHERE Descricao = @Tipo)
-                                                   ,(SELECT TOP 1 Id FROM UsuarioGenero WHERE Descricao = @Genero)
-                                                   ,@Endereco
-                                                   ,1
-                                                   ,NULL
-                                                   ,NULL
-                                                   ,@Token)";
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("INSERT INTO [dbo].[Usuario]                                               ");
+                    query.AppendLine("        ([Matricula]                                                      ");
+                    query.AppendLine("        ,[Nome]                                                           ");
+                    query.AppendLine("        ,[Senha]                                                          ");
+                    query.AppendLine("        ,[Celular]                                                        ");
+                    query.AppendLine("        ,[DataNascimento]                                                 ");
+                    query.AppendLine("        ,[Email]                                                          ");
+                    query.AppendLine("        ,[IdTipo]                                                         ");
+                    query.AppendLine("        ,[IdGenero]                                                       ");
+                    query.AppendLine("        ,[IdEndereco]                                                     ");
+                    query.AppendLine("        ,[IdSituacao]                                                     ");
+                    query.AppendLine("        ,[Photo]                                                          ");
+                    query.AppendLine("        ,[DataRemocao]                                                    ");
+                    query.AppendLine("        ,[TokenValidacao])                                                ");
+                    query.AppendLine("  VALUES                                                                  ");
+                    query.AppendLine("        (@Matricula                                                       ");
+                    query.AppendLine("        ,@Nome                                                            ");
+                    query.AppendLine("        ,@Senha                                                           ");
+                    if (string.IsNullOrEmpty(cel))
+                        query.AppendLine("    ,NULL                                                             ");
+                    else    
+                        query.AppendLine("    ,@Celular                                                         ");
+                    query.AppendLine("        ,@DataNascimento                                                  ");
+                    if (string.IsNullOrEmpty(email))
+                        query.AppendLine("    ,NULL                                                             ");
+                    else
+                        query.AppendLine("    ,@Email                                                           ");
+                    query.AppendLine("        ,(SELECT TOP 1 Id FROM UsuarioTipo WHERE Descricao = @Tipo)       ");
+                    query.AppendLine("        ,(SELECT TOP 1 Id FROM UsuarioGenero WHERE Codigo = @Genero)   ");
+                    if (idCep is null)
+                        query.AppendLine("    ,NULL                                                             ");
+                    else
+                        query.AppendLine("    ,@Endereco                                                        ");
+                    query.AppendLine("        ,1                                                                ");
+                    query.AppendLine("        ,NULL                                                             ");
+                    query.AppendLine("        ,NULL                                                             ");
+                    query.AppendLine("        ,@Token)                                                          ");
 
                     connection.Open();
 
-                    using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
+                    using (SqlCommand updateCommand = new SqlCommand(query.ToString(), connection))
                     {
-                        updateCommand.Parameters.AddWithValue("@Matricula", matricula);
-                        updateCommand.Parameters.AddWithValue("@Nome", nome);
-                        updateCommand.Parameters.AddWithValue("@Senha", senha);
-                        updateCommand.Parameters.AddWithValue("@Celular", string.IsNullOrEmpty(cel) ? null : cel);
-                        updateCommand.Parameters.AddWithValue("@DataNascimento", dataNascimento);
-                        updateCommand.Parameters.AddWithValue("@Email", string.IsNullOrEmpty(email) ? null : email);
-                        updateCommand.Parameters.AddWithValue("@Tipo", tipo);
-                        updateCommand.Parameters.AddWithValue("@Genero", genero);
-                        updateCommand.Parameters.AddWithValue("@Token", token);
-                        updateCommand.Parameters.AddWithValue("@Endereco", idCep);
+                        updateCommand.Parameters.Add(new SqlParameter("@Matricula", matricula));
+                        updateCommand.Parameters.Add(new SqlParameter("@Nome", nome));
+                        updateCommand.Parameters.Add(new SqlParameter("@Senha", senha));
+                        updateCommand.Parameters.Add(new SqlParameter("@DataNascimento", dataNascimento));
+                        updateCommand.Parameters.Add(new SqlParameter("@Tipo", tipo));
+                        updateCommand.Parameters.Add(new SqlParameter("@Genero", genero));
+                        updateCommand.Parameters.Add(new SqlParameter("@Token", token));
+
                         updateCommand.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Erro: " + ex.Message);
+                    ShowNotification(ex.Message, 2000);
                 }
                 finally
                 {
@@ -389,7 +413,7 @@ namespace TechConnect
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Erro: " + ex.Message);
+                    ShowNotification(ex.Message, 2000);
                 }
                 finally
                 {
@@ -397,17 +421,89 @@ namespace TechConnect
                 }
             }
         }
-        public static void UpdateUserData()
+        public static void UpdateUserData(string cel, int? idCep, string dataNascimento, string email, string genero, string nome, string matricula, string tipo, int? token)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
-                    // Código de acesso ao banco de dados
+                    StringBuilder query = new StringBuilder();
+
+                    query.AppendLine("UPDATE                                                                            ");
+                    query.AppendLine("    [dbo].[Usuario]                                                               ");
+                    query.AppendLine("SET                                                                               ");
+                    query.AppendLine("    [Nome] = @Nome                                                                ");
+                    if (string.IsNullOrEmpty(cel))
+                        query.AppendLine("   ,[Celular] = NULL                                                          ");
+                    else
+                        query.AppendLine($"   ,[Celular] = '{cel}'                                                      ");
+                    query.AppendLine("   ,[DataNascimento] = @DataNascimento                                            ");
+                    if (string.IsNullOrEmpty(email))
+                        query.AppendLine("   ,[Email] = NULL                                                          ");
+                    else
+                        query.AppendLine($"   ,[Email] = '{email}'                                                      ");
+                    query.AppendLine("   ,[IdTipo] = (SELECT TOP 1 Id FROM UsuarioTipo WHERE Descricao = @Tipo)         ");
+                    query.AppendLine("   ,[IdGenero] = (SELECT TOP 1 Id FROM UsuarioGenero WHERE Codigo = @Genero)   ");
+                    if (idCep is null)
+                        query.AppendLine("   ,[IdEndereco] = NULL                                                       ");
+                    else
+                        query.AppendLine($"   ,[IdEndereco] = {idCep}                                                   ");
+                    query.AppendLine("   ,[IdSituacao] = 1                                                              ");
+                    query.AppendLine("   ,[Photo] = NULL                                                                ");
+                    query.AppendLine("   ,[DataRemocao] = NULL                                                          ");
+                    query.AppendLine("   ,[TokenValidacao] = @Token                                                     ");
+                    query.AppendLine("WHERE                                                                             ");
+                    query.AppendLine("    [Matricula] = @Matricula                                                      ");
+
+                    connection.Open();
+
+                    using (SqlCommand updateCommand = new SqlCommand(query.ToString(), connection))
+                    {
+                        updateCommand.Parameters.Add(new SqlParameter("@Matricula", Convert.ToInt32(matricula)));
+                        updateCommand.Parameters.Add(new SqlParameter("@Nome", nome));
+                        updateCommand.Parameters.Add(new SqlParameter("@DataNascimento", Convert.ToDateTime(dataNascimento)));
+                        updateCommand.Parameters.Add(new SqlParameter("@Tipo", tipo));
+                        updateCommand.Parameters.Add(new SqlParameter("@Genero", genero));
+                        updateCommand.Parameters.Add(new SqlParameter("@Token", token));
+
+                        updateCommand.ExecuteNonQuery();
+                    }
                 }
                 catch (Exception ex)
                 {
-                    // Lidar com erros
+                    ShowNotification(ex.Message, 2000);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public static void RemoveUserData(string matricula)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    string updateQuery = @"UPDATE 
+                                                [dbo].[Usuario]
+                                           SET
+                                                [DataRemocao] = GETDATE()
+                                            WHERE
+                                                [Matricula] = @Matricula";
+
+                    connection.Open();
+
+                    using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
+                    {
+                        updateCommand.Parameters.Add(new SqlParameter("@Matricula", matricula));
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowNotification(ex.Message, 2000);
                 }
                 finally
                 {
@@ -438,7 +534,7 @@ namespace TechConnect
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Erro: " + ex.Message);
+                    ShowNotification(ex.Message, 2000);
                 }
                 finally
                 {
@@ -472,7 +568,7 @@ namespace TechConnect
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Erro: " + ex.Message);
+                    ShowNotification(ex.Message, 2000);
                 }
                 finally
                 {
@@ -522,11 +618,13 @@ namespace TechConnect
                         qtdUsuarioCatraca = Convert.ToInt32(command.ExecuteScalar());
                     }
 
-                    returnData = ((qtdUsuarioCatraca * 100) / qtdUsuarioCadastrado) * 100;
+                    if (qtdUsuarioCadastrado > 0)
+                        returnData = ((qtdUsuarioCatraca * 100) / qtdUsuarioCadastrado) * 100;
+
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Erro: " + ex.Message);
+                    ShowNotification(ex.Message, 2000);
                 }
                 finally
                 {
@@ -534,7 +632,7 @@ namespace TechConnect
                 }
             }
 
-            
+
             return Math.Round(returnData, 1).ToString();
         }
     }
