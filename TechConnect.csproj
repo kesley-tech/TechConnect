@@ -570,6 +570,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DataBase\DataBaseRequest.cs" />
+    <Compile Include="DataBase\Persistence\WorkoutPersistence.cs" />
     <Compile Include="DataBase\Persistence\UserPersistence.cs" />
     <Compile Include="dbTechDeveloperDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -652,6 +653,12 @@
     </Compile>
     <Compile Include="Dependencies\UserControl\ScreenMenu\User\UcUserRow.Designer.cs">
       <DependentUpon>UcUserRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\Workout\UcRegisterWorkoutForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\Workout\UcRegisterWorkoutForm.Designer.cs">
+      <DependentUpon>UcRegisterWorkoutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Dependencies\UserControl\ScreenMenu\Workout\UcWorkoutHeader.cs">
       <SubType>UserControl</SubType>
@@ -778,6 +785,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\User\UcUserRow.resx">
       <DependentUpon>UcUserRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\Workout\UcRegisterWorkoutForm.resx">
+      <DependentUpon>UcRegisterWorkoutForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\Workout\UcWorkoutHeader.resx">
       <DependentUpon>UcWorkoutHeader.cs</DependentUpon>

@@ -74,6 +74,7 @@ namespace TechConnect
             this.lblCode.Size = new System.Drawing.Size(88, 97);
             this.lblCode.TabIndex = 0;
             this.lblCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCode.Click += UcWorkout_Click;
             // 
             // lblDescription
             // 
@@ -86,6 +87,7 @@ namespace TechConnect
             this.lblDescription.Size = new System.Drawing.Size(190, 97);
             this.lblDescription.TabIndex = 1;
             this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblDescription.Click += UcWorkout_Click;
             // 
             // lblMuscleGroup
             // 
@@ -98,6 +100,7 @@ namespace TechConnect
             this.lblMuscleGroup.Size = new System.Drawing.Size(132, 97);
             this.lblMuscleGroup.TabIndex = 2;
             this.lblMuscleGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMuscleGroup.Click += UcWorkout_Click;
             // 
             // picFreeWorkout
             // 
@@ -122,6 +125,7 @@ namespace TechConnect
             this.picEditItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picEditItem.TabIndex = 4;
             this.picEditItem.TabStop = false;
+            this.picEditItem.Click += new System.EventHandler(this.picEditItem_Click);
             // 
             // UcWorkoutRow
             // 
@@ -141,7 +145,7 @@ namespace TechConnect
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label lblCode;
+        public System.Windows.Forms.Label lblCode;
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.Label lblMuscleGroup;
         private System.Windows.Forms.PictureBox picFreeWorkout;

@@ -113,6 +113,7 @@ namespace TechConnect
 
             return result;
         }
+
         public static List<UserDTO> GetAllUser()
         {
             List<UserDTO> result = new List<UserDTO>();
@@ -513,6 +514,192 @@ namespace TechConnect
         }
         #endregion
 
+        #region Workout
+        public static List<WorkoutDTO> GetAllWorkout()
+        {
+            List<WorkoutDTO> result = new List<WorkoutDTO>();
+            List<WorkoutPersistence> list = new List<WorkoutPersistence>();
+
+            string query = @"Select 
+	                                exe.Id,
+	                                exe.Codigo,
+	                                exe.Descricao,
+	                                musc.Id as IdGrupoMuscular,
+	                                musc.Descricao as GrupoMuscular,
+	                                exe.TreinoLivre
+                                From 
+	                                Exercicio exe With(nolock)
+                                Inner Join
+	                                ExercicioGrupoMuscular musc With(nolock)
+                                On
+	                                exe.IdGrupoMuscular = musc.Id
+                                Where
+	                                exe.DataRemocao IS NULL";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                WorkoutPersistence persistence = new WorkoutPersistence()
+                                {
+                                    Id = (int)reader["Id"],
+                                    Code = (string)reader["Codigo"],
+                                    Description = (string)reader["Descricao"],
+                                    IdMuscleGroup = (int)reader["IdGrupoMuscular"],
+                                    MuscleGroup = (string)reader["GrupoMuscular"],
+                                    FreeWorkout = (bool)reader["TreinoLivre"]
+                                };
+
+                                list.Add(persistence);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowNotification(ex.Message, 2000);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            foreach (var user in list)
+            {
+                result.Add(new WorkoutDTO()
+                {
+                    Code = user.Code,
+                    Description = user.Description,
+                    GrupoMuscular = (WorkoutDTO.MUSCLE_GROUP_TYPE)user.IdMuscleGroup,
+                    FreeWorkout = user.FreeWorkout
+                });
+            }
+
+            return result;
+        }
+
+        public static void InsertWorkoutData(string code, string description, string muscleGroup, bool freeWorkout)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("INSERT INTO [dbo].[Exercicio]                                                             ");
+                    query.AppendLine("        ([Codigo]                                                                         ");
+                    query.AppendLine("        ,[Descricao]                                                                      ");
+                    query.AppendLine("        ,[IdGrupoMuscular]                                                                ");
+                    query.AppendLine("        ,[TreinoLivre])                                                                   ");
+                    query.AppendLine("  VALUES                                                                                  ");
+                    query.AppendLine("        (@Codigo                                                                          ");
+                    query.AppendLine("        ,@Descricao                                                                       ");
+                    query.AppendLine("        ,(Select top 1 Id From ExercicioGrupoMuscular Where Descricao = @GrupoMuscular)   ");
+                    query.AppendLine("        ,@Livre)                                                                          ");
+
+                    connection.Open();
+
+                    using (SqlCommand updateCommand = new SqlCommand(query.ToString(), connection))
+                    {
+                        updateCommand.Parameters.Add(new SqlParameter("@Codigo", code));
+                        updateCommand.Parameters.Add(new SqlParameter("@Descricao", description));
+                        updateCommand.Parameters.Add(new SqlParameter("@GrupoMuscular", muscleGroup));
+                        updateCommand.Parameters.Add(new SqlParameter("@Livre", freeWorkout));
+
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowNotification(ex.Message, 2000);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public static void UpdateWorkoutData(string code, string description, string muscleGroup, bool freeWorkout)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+
+                    query.AppendLine("UPDATE                          ");
+                    query.AppendLine("    [dbo].[Exercicio]           ");
+                    query.AppendLine("SET                             ");
+                    query.AppendLine("    [Descricao] = @Descricao    ");
+                    query.AppendLine("   ,[IdGrupoMuscular] = (Select top 1 Id From ExercicioGrupoMuscular Where Descricao = @GrupoMuscular) ");
+                    query.AppendLine("   ,[TreinoLivre] = @Livre      ");
+                    query.AppendLine("WHERE                           ");
+                    query.AppendLine("    [Codigo] = @Codigo          ");
+
+                    connection.Open();
+
+                    using (SqlCommand updateCommand = new SqlCommand(query.ToString(), connection))
+                    {
+                        updateCommand.Parameters.Add(new SqlParameter("@Codigo", code));
+                        updateCommand.Parameters.Add(new SqlParameter("@Descricao", description));
+                        updateCommand.Parameters.Add(new SqlParameter("@GrupoMuscular", muscleGroup));
+                        updateCommand.Parameters.Add(new SqlParameter("@Livre", freeWorkout));
+
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowNotification(ex.Message, 2000);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public static void RemoveWorkoutData(string code)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    string updateQuery = @"UPDATE 
+                                                [dbo].[Exercicio]
+                                           SET
+                                                [DataRemocao] = GETDATE()
+                                            WHERE
+                                                [Codigo] = @Codigo";
+
+                    connection.Open();
+
+                    using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
+                    {
+                        updateCommand.Parameters.Add(new SqlParameter("@Codigo", code));
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowNotification(ex.Message, 2000);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+        #endregion
         public static string GetCurrentAccess()
         {
             int returnData = 0;
