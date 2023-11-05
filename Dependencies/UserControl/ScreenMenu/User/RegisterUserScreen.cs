@@ -193,7 +193,9 @@ namespace TechConnect
 
                 foreach (var item in listUcData)
                 {
-                    if (item.Controls[0].Controls[1].Text.ToUpper().Contains(textSender.ToUpper()))
+                    if (item.Controls[0].Controls[5].Text.ToUpper().Contains(textSender.ToUpper()))
+                        filterData.Add(item);
+                    else if (item.Controls[0].Controls[4].Text.ToUpper().Contains(textSender.ToUpper()))
                         filterData.Add(item);
                 }
 

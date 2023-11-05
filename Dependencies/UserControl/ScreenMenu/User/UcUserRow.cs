@@ -142,11 +142,11 @@ namespace TechConnect
                 {
                     int.TryParse(uc.tbCEP.TextBox.Text.Trim(), out value);
 
-                    if (value == 0)
+                    if (value == 0 && !uc.tbCEP.TextBox.Text.Trim().Contains("-"))
                     {
                         ShowNotification(SystemIcons.Warning,
                                             "Falha na Validação de Dados",
-                                            "CEP não pode conter letras ou caracter especial",
+                                            "CEP não pode conter letras",
                                             2000);
 
                         error = false;
