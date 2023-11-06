@@ -168,7 +168,7 @@ namespace TechConnect
 
             flwSubRegisterList.Controls.Add(rigisterWorkout);
             flwSubRegisterList.Controls.Add(registerUser);
-            flwSubRegisterList.Controls.Add(registerCalendar);
+            //flwSubRegisterList.Controls.Add(registerCalendar);
 
             return flwSubRegisterList;
         }

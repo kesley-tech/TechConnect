@@ -100,7 +100,7 @@ namespace TechConnect
             this.lblCode.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lblCode.Size = new System.Drawing.Size(463, 88);
             this.lblCode.TabIndex = 0;
-            this.lblCode.Text = "Administrador Tech";
+            this.lblCode.Text = "---";
             this.lblCode.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // lblDescription
@@ -114,7 +114,7 @@ namespace TechConnect
             this.lblDescription.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lblDescription.Size = new System.Drawing.Size(463, 89);
             this.lblDescription.TabIndex = 1;
-            this.lblDescription.Text = "Tecnologia";
+            this.lblDescription.Text = "---";
             // 
             // picPadlock
             // 

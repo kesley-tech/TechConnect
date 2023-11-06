@@ -570,6 +570,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DataBase\DataBaseRequest.cs" />
+    <Compile Include="DataBase\Persistence\StatusCatracaPersistence.cs" />
     <Compile Include="DataBase\Persistence\WorkoutPersistence.cs" />
     <Compile Include="DataBase\Persistence\UserPersistence.cs" />
     <Compile Include="dbTechDeveloperDataSet.Designer.cs">

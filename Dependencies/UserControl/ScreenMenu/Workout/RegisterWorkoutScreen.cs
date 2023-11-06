@@ -42,7 +42,7 @@ namespace TechConnect
                 Visible = true
             };
 
-            DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Usuário",
+            DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Exercícios",
                                     Color.Black,
                                     uc,
                                     Flyout.CreateFlyoutCommand("OK", DialogResult.OK),

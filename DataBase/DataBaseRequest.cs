@@ -731,7 +731,6 @@ namespace TechConnect
 
             return returnData.ToString();
         }
-
         public static string GetTrainingToLost()
         {
             int returnData = 0;
@@ -765,7 +764,6 @@ namespace TechConnect
 
             return returnData.ToString();
         }
-
         public static string GetMonthFrequencePercent()
         {
             double returnData = 0;
@@ -780,7 +778,7 @@ namespace TechConnect
 
                     string query = @"Select COUNT(*) as UsuarioCadastrado
                                      From Usuario With(nolock)
-                                     Where DataRemocao IS NOT NULL";
+                                     Where DataRemocao IS NULL";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -806,7 +804,7 @@ namespace TechConnect
                     }
 
                     if (qtdUsuarioCadastrado > 0)
-                        returnData = ((qtdUsuarioCatraca * 100) / qtdUsuarioCadastrado) * 100;
+                        returnData = ((qtdUsuarioCatraca * 100) / qtdUsuarioCadastrado);
 
                 }
                 catch (Exception ex)
@@ -821,6 +819,72 @@ namespace TechConnect
 
 
             return Math.Round(returnData, 1).ToString();
+        }
+
+        public static List<StatusCatracaPersistence> GetStatusCatraca()
+        {
+            List<StatusCatracaPersistence> list = new List<StatusCatracaPersistence>();
+
+            string query = @"Select Top 6
+	                                ocorrencia.Id,
+	                                usr.Matricula,
+	                                usr.Nome,
+	                                usr.Photo,
+	                                ocorrencia.DataOcorrencia,
+	                                status.Id as IdStatus,
+	                                status.Descricao as [Status]
+                                From 
+	                                CatracaOcorrencia ocorrencia With(nolock)
+                                Inner Join
+	                                CatracaStatus status With(nolock)
+                                On
+	                                status.Id = ocorrencia.IdStatus
+                                Inner Join
+	                                Usuario	usr With(nolock)
+                                On
+	                                usr.Id = ocorrencia.IdUsuario
+                                Order by
+	                                DataOcorrencia Desc";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                StatusCatracaPersistence persistence = new StatusCatracaPersistence()
+                                {
+                                    Id = (int)reader["Id"],
+                                    Matricula = (int)reader["Matricula"],
+                                    Nome = (string)reader["Nome"],
+                                    IdStatus = (int)reader["IdStatus"],
+                                    Status = (string)reader["Status"],
+                                    DataOcorrencia = (DateTime)reader["DataOcorrencia"],
+                                    //Foto = (byte[]?)reader["Photo"]
+                                };
+
+                                list.Add(persistence);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowNotification(ex.Message, 2000);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return list;
         }
     }
 }

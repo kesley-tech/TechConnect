@@ -1,17 +1,22 @@
-﻿using System;
+﻿using DevExpress.Data.Helpers;
+using DevExpress.XtraScheduler;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace TechConnect
 {
     public partial class CatracaStatusScreen : UserControl
     {
+        private List<StatusCatracaPersistence> _actualPersistenceList = new List<StatusCatracaPersistence>();
+
         public CatracaStatusScreen()
         {
             InitializeComponent();
 
             #region fakeData
-            
+
             var mainCard = new UserStatusMainCard("GABRIEL CAMPOS", "900003", DateTime.Now, null, true)
             {
                 Dock = DockStyle.Fill,
@@ -42,15 +47,12 @@ namespace TechConnect
                 Dock = DockStyle.Fill,
                 Visible = true
             };
-
-            this.tableLayoutPanel3.Controls.Add(firstCard, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(secondCard, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(thirdCard, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(fourthCard, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(fifthCard, 0, 4);
-
-            pnlLastStatus.Controls.Add(mainCard);
             #endregion  
+
+            for (int i = 0; i < 5; i++)
+                this.tableLayoutPanel3.Controls.Add(new UserStatusCard() { Name = $"card{i+1}"}, 0, i);
+
+            pnlLastStatus.Controls.Add(new UserStatusMainCard() { Name = "main" });
 
             UpdateDataHeader();
         }
@@ -62,6 +64,105 @@ namespace TechConnect
             ucHeaderPage1.btnInsert.Visible = false;
             ucHeaderPage1.btnRemove.Visible = false;
             ucHeaderPage1.tbFilter.Visible = false;
+        }
+
+        private void timerStatusCatraca_Tick(object sender, EventArgs e)
+        {
+            List<StatusCatracaPersistence> persistenceList = DataBaseRequest.GetStatusCatraca();
+            
+            bool notExistDifferentData = CheckChangeData(persistenceList);
+
+            if (!notExistDifferentData)
+            {
+                switch (_actualPersistenceList.Count)
+                {
+                    case 1:
+                        {
+                            SetMainData();
+                            break;
+                        }
+                    case 2:
+                        {
+                            SetMainData();
+                            SetCardData(1);
+                            break;
+                        }
+                    case 3:
+                        {
+                            SetMainData();
+                            SetCardData(1);
+                            SetCardData(2);
+                            break;
+                        }
+                    case 4:
+                        {
+                            SetMainData();
+                            SetCardData(1);
+                            SetCardData(2);
+                            SetCardData(3);
+                            break;
+                        }
+                    case 5:
+                        {
+                            SetMainData();
+                            SetCardData(1);
+                            SetCardData(2);
+                            SetCardData(3);
+                            SetCardData(4);
+                            break;
+                        }
+                    case 6:
+                        {
+                            SetMainData();
+                            SetCardData(1);
+                            SetCardData(2);
+                            SetCardData(3);
+                            SetCardData(4);
+                            SetCardData(5);
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void SetMainData()
+        {
+            UserStatusMainCard pnlMain = (UserStatusMainCard)pnlLastStatus.Controls.Find("main", true).FirstOrDefault();
+            StatusCatracaPersistence dataMain = _actualPersistenceList[0];
+            pnlMain.SetData(dataMain.Nome, dataMain.Matricula.ToString(), dataMain.DataOcorrencia, dataMain.Foto, Convert.ToBoolean(dataMain.IdStatus));
+        }
+
+        private void SetCardData(int numCard)
+        {
+            UserStatusCard card = (UserStatusCard)tableLayoutPanel3.Controls.Find($"card{numCard}", true).FirstOrDefault();
+            StatusCatracaPersistence data = _actualPersistenceList[1];
+            card.SetData(data.Nome, data.Matricula.ToString(), data.Foto, Convert.ToBoolean(data.IdStatus));
+        }
+
+        private bool CheckChangeData(List<StatusCatracaPersistence> persistenceList)
+        {
+            bool notExistDifferentData = true;
+
+            if (persistenceList.Count > 0)
+            {
+                foreach (var actual in persistenceList)
+                {
+                    if (_actualPersistenceList.Count == 0)
+                    {
+                        notExistDifferentData = false;
+                        break;
+                    }
+
+                    notExistDifferentData = _actualPersistenceList.Exists(x => x.Id == actual.Id);
+
+                    if (!notExistDifferentData)
+                        break;
+                }
+            }
+
+            _actualPersistenceList = persistenceList;
+
+            return notExistDifferentData;
         }
     }
 }

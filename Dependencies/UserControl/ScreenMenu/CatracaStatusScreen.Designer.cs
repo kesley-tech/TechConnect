@@ -29,11 +29,13 @@ namespace TechConnect
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ucHeaderPage1 = new TechConnect.UcHeaderPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlLastStatus = new System.Windows.Forms.Panel();
+            this.timerStatusCatraca = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -109,6 +111,12 @@ namespace TechConnect
             this.pnlLastStatus.Size = new System.Drawing.Size(428, 326);
             this.pnlLastStatus.TabIndex = 1;
             // 
+            // timerStatusCatraca
+            // 
+            this.timerStatusCatraca.Enabled = true;
+            this.timerStatusCatraca.Interval = 500;
+            this.timerStatusCatraca.Tick += new System.EventHandler(this.timerStatusCatraca_Tick);
+            // 
             // CatracaStatusScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -129,5 +137,6 @@ namespace TechConnect
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Panel pnlLastStatus;
+        private System.Windows.Forms.Timer timerStatusCatraca;
     }
 }
