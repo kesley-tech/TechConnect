@@ -74,7 +74,7 @@ namespace TechConnect
             this.btnConfirm.TabIndex = 7;
             this.btnConfirm.Text = "Confirmar";
             this.btnConfirm.UseVisualStyleBackColor = false;
-            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
+            this.btnConfirm.Click += new System.EventHandler(this.BtnConfirm_Click);
             // 
             // txtPassword
             // 
@@ -93,7 +93,7 @@ namespace TechConnect
             this.txtPassword.UnderlinedStyle = true;
             this.txtPassword.Visible = false;
             this.txtPassword.Leave += TxtPassword_Leave;
-            this.txtPassword.TextBox.TextChanged += txtPassword_TextChanged;
+            this.txtPassword.TextBox.TextChanged += TxtPassword_TextChanged;
             // 
             // txtToken
             // 
@@ -110,7 +110,7 @@ namespace TechConnect
             this.txtToken.Size = new System.Drawing.Size(720, 63);
             this.txtToken.TabIndex = 5;
             this.txtToken.UnderlinedStyle = true;
-            this.txtToken.Leave += new System.EventHandler(this.txtEmailOrToken_Leave);
+            this.txtToken.Leave += new System.EventHandler(this.TxtEmailOrToken_Leave);
             // 
             // txtEmail
             // 
@@ -127,7 +127,7 @@ namespace TechConnect
             this.txtEmail.Size = new System.Drawing.Size(720, 63);
             this.txtEmail.TabIndex = 4;
             this.txtEmail.UnderlinedStyle = true;
-            this.txtEmail.Leave += new System.EventHandler(this.txtEmailOrToken_Leave);
+            this.txtEmail.Leave += new System.EventHandler(this.TxtEmailOrToken_Leave);
             // 
             // btnCancel
             // 
@@ -145,7 +145,7 @@ namespace TechConnect
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // notifyIcon1
             // 

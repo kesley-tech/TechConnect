@@ -125,7 +125,7 @@ namespace TechConnect
             this.picEditItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picEditItem.TabIndex = 4;
             this.picEditItem.TabStop = false;
-            this.picEditItem.Click += new System.EventHandler(this.picEditItem_Click);
+            this.picEditItem.Click += new System.EventHandler(this.PicEditItem_Click);
             // 
             // UcWorkoutRow
             // 

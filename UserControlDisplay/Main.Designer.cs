@@ -97,7 +97,7 @@ namespace TechConnect
             this.picShowSideBar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picShowSideBar.TabIndex = 0;
             this.picShowSideBar.TabStop = false;
-            this.picShowSideBar.Click += new System.EventHandler(this.picShowSideBar_Click);
+            this.picShowSideBar.Click += new System.EventHandler(this.PicShowSideBar_Click);
             // 
             // lblLoggedUser
             // 

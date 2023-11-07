@@ -162,7 +162,7 @@ namespace TechConnect
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.TabStop = true;
             this.linkLabel1.UseCompatibleTextRendering = true;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
             // btnEnter
             // 
@@ -171,7 +171,7 @@ namespace TechConnect
             this.btnEnter.ForeColor = System.Drawing.Color.White;
             this.btnEnter.Name = "btnEnter";
             this.btnEnter.UseVisualStyleBackColor = false;
-            this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
+            this.btnEnter.Click += new System.EventHandler(this.BtnEnter_Click);
             // 
             // lblHidden
             // 

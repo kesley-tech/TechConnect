@@ -76,17 +76,15 @@ namespace TechConnect
             }
         }
 
-        public Color ForeColor
+        public Color GetForeColor()
         {
-            get
-            {
-                return foreColor;
-            }
-            set
-            {
-                foreColor = value;
-                this.Invalidate();
-            }
+            return foreColor;
+        }
+
+        public void SetForeColor(Color value)
+        {
+            foreColor = value;
+            this.Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -153,7 +151,7 @@ namespace TechConnect
                     TextBox.Select(3, 0);
                 }
                 else
-                    TextBox.ForeColor = ForeColor;
+                    TextBox.ForeColor = GetForeColor();
             }
         }
 
@@ -166,7 +164,7 @@ namespace TechConnect
                 CustomTextBox_Load(null, null);
             }
             else
-                TextBox.ForeColor = ForeColor;
+                TextBox.ForeColor = GetForeColor();
 
         }
 

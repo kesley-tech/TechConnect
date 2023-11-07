@@ -1,6 +1,4 @@
-﻿using SendGrid;
-using SendGrid.Helpers.Mail;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -9,8 +7,8 @@ namespace TechConnect
 {
     public class SendEmail
     {
-        public async static Task BuildSendEmail(string body, string subject, string toEmail)
-        {
+        //public async static Task BuildSendEmail(string body, string subject, string toEmail)
+        //{
 
             //string sendGridApiKey = Environment.GetEnvironmentVariable("ngeVfQFYQlKU0ufo8x5d1A");
 
@@ -25,42 +23,42 @@ namespace TechConnect
             //var response = await client.SendEmailAsync(msg);
 
             // Configure as credenciais do remetente
-            string remetenteEmail = "techconnectionnotification@gmail.com";
-            string remetenteSenha = "techconnection23";
+        //    string remetenteEmail = "techconnectionnotification@gmail.com";
+        //    string remetenteSenha = "techconnection23";
 
-            // Configure o servidor SMTP do Gmail
-            SmtpClient client = new SmtpClient("smtp.gmail.com")
-            {
-                Port = 587,
-                Credentials = new NetworkCredential(remetenteEmail, remetenteSenha),
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-            };
+        //    // Configure o servidor SMTP do Gmail
+        //    SmtpClient client = new SmtpClient("smtp.gmail.com")
+        //    {
+        //        Port = 587,
+        //        Credentials = new NetworkCredential(remetenteEmail, remetenteSenha),
+        //        EnableSsl = true,
+        //        DeliveryMethod = SmtpDeliveryMethod.Network,
+        //        UseDefaultCredentials = false,
+        //    };
 
-            // Crie a mensagem de e-mail
-            MailMessage message = new MailMessage
-            {
-                From = new MailAddress(remetenteEmail),
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true,
-            };
+        //    // Crie a mensagem de e-mail
+        //    MailMessage message = new MailMessage
+        //    {
+        //        From = new MailAddress(remetenteEmail),
+        //        Subject = subject,
+        //        Body = body,
+        //        IsBodyHtml = true,
+        //    };
 
-            // Adicione o destinatário
-            message.To.Add(toEmail);
+        //    // Adicione o destinatário
+        //    message.To.Add(toEmail);
 
-            try
-            {
-                // Envie o e-mail
-                client.Send(message);
-                Console.WriteLine("E-mail enviado com sucesso.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Erro ao enviar o e-mail: " + ex.Message);
-            }
-        }
+        //    try
+        //    {
+        //        // Envie o e-mail
+        //        client.Send(message);
+        //        Console.WriteLine("E-mail enviado com sucesso.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Erro ao enviar o e-mail: " + ex.Message);
+        //    }
+        //}
     }
 
     public class BodyDefault

@@ -4,13 +4,12 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
-using Windows.UI.Notifications;
 
 namespace TechConnect
 {
     public partial class ucChangePassword : UserControl
     {
-        private TableLayoutPanel _lastTlp;
+        private readonly TableLayoutPanel _lastTlp;
         private UserDTO _userValidate;
 
         public ucChangePassword(TableLayoutPanel tableLayoutPanel3)
@@ -19,13 +18,13 @@ namespace TechConnect
             InitializeComponent();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             _lastTlp.Visible = true;
             this.Dispose();
         }
 
-        private void txtEmailOrToken_Leave(object sender, EventArgs e)
+        private void TxtEmailOrToken_Leave(object sender, EventArgs e)
         {
             UserDTO thisUser = null;
             try
@@ -55,7 +54,7 @@ namespace TechConnect
 
         }
 
-        private void txtPassword_TextChanged(object sender, EventArgs e)
+        private void TxtPassword_TextChanged(object sender, EventArgs e)
         {
             if (txtPassword.TextBox.Text != "   Digite a nova senha"
                 && txtPassword.TextBox.Text != "   ")
@@ -94,7 +93,7 @@ namespace TechConnect
             return validation;
         }
 
-        private void btnConfirm_Click(object sender, EventArgs e)
+        private void BtnConfirm_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtPassword.TextBox.Text.Trim()))
             {
@@ -105,7 +104,7 @@ namespace TechConnect
                 string fraseToShow = FrasesMotivacionais()[indexList];
                 notifyIcon1.ShowBalloonTip(5000, "Senha alterada com sucesso!", fraseToShow, ToolTipIcon.Info);
 
-                btnCancel_Click(sender, e);
+                BtnCancel_Click(sender, e);
             }
         }
 

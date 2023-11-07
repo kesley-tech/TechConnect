@@ -115,7 +115,7 @@ namespace TechConnect
             // 
             this.timerStatusCatraca.Enabled = true;
             this.timerStatusCatraca.Interval = 500;
-            this.timerStatusCatraca.Tick += new System.EventHandler(this.timerStatusCatraca_Tick);
+            this.timerStatusCatraca.Tick += new System.EventHandler(this.TimerStatusCatraca_Tick);
             // 
             // CatracaStatusScreen
             // 

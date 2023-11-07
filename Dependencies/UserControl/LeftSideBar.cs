@@ -5,7 +5,7 @@ namespace TechConnect
 {
     public partial class LeftSideBar : UserControl
     {
-        private Core Core;
+        private readonly Core Core;
 
         private enum SCREEN
         {

@@ -1,8 +1,5 @@
-﻿using ServiceStack.Messaging;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace TechConnect
@@ -10,7 +7,7 @@ namespace TechConnect
     public partial class RegisterUserScreen : UserControl
     {
         private List<UserControl> listUcData = new List<UserControl>();
-        private NotifyIcon notifyIcon;
+        private readonly NotifyIcon notifyIcon;
 
         public RegisterUserScreen()
         {
@@ -129,9 +126,7 @@ namespace TechConnect
 
             if (error)
             {
-                int value = 0;
-
-                int.TryParse(uc.tbRegister.TextBox.Text.Trim(), out value);
+                int.TryParse(uc.tbRegister.TextBox.Text.Trim(), out int value);
 
                 if (value == 0)
                 {
@@ -219,58 +214,60 @@ namespace TechConnect
             List<UserControl> listUc = new List<UserControl>();
 
             #region FakeData
-            List<UserDTO> dataFakeClassList = new List<UserDTO>();
-            dataFakeClassList.Add(new UserDTO()
-            {
-                User = 900500,
-                Name = "STEPHANY VIERA",
-                Type = UserDTO.USER_TYPE.Administrador,
-                PhoneNumber = "19 92312-4813",
-                CEP = "13914-942",
-                HouseNumber = 114,
-                AddressMoreInfo = "-",
-                Enable = true,
-                Sexuality = UserDTO.SEXUALITY_TYPE.M
-            });
+            //List<UserDTO> dataFakeClassList = new List<UserDTO>
+            //{
+            //    new UserDTO()
+            //    {
+            //        User = 900500,
+            //        Name = "STEPHANY VIERA",
+            //        Type = UserDTO.USER_TYPE.Administrador,
+            //        PhoneNumber = "19 92312-4813",
+            //        CEP = "13914-942",
+            //        HouseNumber = 114,
+            //        AddressMoreInfo = "-",
+            //        Enable = true,
+            //        Sexuality = UserDTO.SEXUALITY_TYPE.M
+            //    },
 
-            dataFakeClassList.Add(new UserDTO
-            {
-                User = 123456,
-                Name = "João Silva",
-                Type = UserDTO.USER_TYPE.Recepção,
-                PhoneNumber = "55 98765-4321",
-                CEP = "12345-678",
-                HouseNumber = 789,
-                AddressMoreInfo = "Apto 12B",
-                Enable = false,
-                Sexuality = UserDTO.SEXUALITY_TYPE.F
-            });
+            //    new UserDTO
+            //    {
+            //        User = 123456,
+            //        Name = "João Silva",
+            //        Type = UserDTO.USER_TYPE.Recepção,
+            //        PhoneNumber = "55 98765-4321",
+            //        CEP = "12345-678",
+            //        HouseNumber = 789,
+            //        AddressMoreInfo = "Apto 12B",
+            //        Enable = false,
+            //        Sexuality = UserDTO.SEXUALITY_TYPE.F
+            //    },
 
-            dataFakeClassList.Add(new UserDTO
-            {
-                User = 789012,
-                Name = "Maria Souza",
-                Type = UserDTO.USER_TYPE.Administrador,
-                PhoneNumber = "55 99999-9999",
-                CEP = "54321-876",
-                HouseNumber = 101,
-                AddressMoreInfo = "Casa Verde",
-                Enable = true,
-                Sexuality = UserDTO.SEXUALITY_TYPE.F
-            });
+            //    new UserDTO
+            //    {
+            //        User = 789012,
+            //        Name = "Maria Souza",
+            //        Type = UserDTO.USER_TYPE.Administrador,
+            //        PhoneNumber = "55 99999-9999",
+            //        CEP = "54321-876",
+            //        HouseNumber = 101,
+            //        AddressMoreInfo = "Casa Verde",
+            //        Enable = true,
+            //        Sexuality = UserDTO.SEXUALITY_TYPE.F
+            //    },
 
-            dataFakeClassList.Add(new UserDTO
-            {
-                User = 456789,
-                Name = "Carlos Pereira",
-                Type = UserDTO.USER_TYPE.Aluno,
-                PhoneNumber = "55 98765-1234",
-                CEP = "98765-432",
-                HouseNumber = 55,
-                AddressMoreInfo = "Bloco 7",
-                Enable = true,
-                Sexuality = UserDTO.SEXUALITY_TYPE.M
-            });
+            //    new UserDTO
+            //    {
+            //        User = 456789,
+            //        Name = "Carlos Pereira",
+            //        Type = UserDTO.USER_TYPE.Aluno,
+            //        PhoneNumber = "55 98765-1234",
+            //        CEP = "98765-432",
+            //        HouseNumber = 55,
+            //        AddressMoreInfo = "Bloco 7",
+            //        Enable = true,
+            //        Sexuality = UserDTO.SEXUALITY_TYPE.M
+            //    }
+            //};
             #endregion
 
             var dataClassList = DataBaseRequest.GetAllUser();

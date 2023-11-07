@@ -6,7 +6,7 @@ namespace TechConnect
 {
     public class ConsultaCEP
     {
-        public async static Task<Endereco> GetCEPInformation(int cep)
+        public static Endereco GetCEPInformation(int cep)
         {
             var client = new RestClient("https://viacep.com.br");
             var request = new RestRequest($"/ws/{cep}/json/", Method.Get);

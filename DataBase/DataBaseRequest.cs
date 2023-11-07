@@ -11,7 +11,31 @@ namespace TechConnect
 {
     public class DataBaseRequest
     {
-        private const string connectionString = "Password=sequor;Persist Security Info=True;User ID=sequor;Initial Catalog=dbTechDeveloper;Data Source=SQO-111\\MSSQL16";
+        private const string connectionString = "Password=techdeveloper;Persist Security Info=True;User ID=sa;Initial Catalog=dbTechDeveloper;Data Source=18.230.186.78";
+
+        public static bool TestConnection()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+        }
+
+        //private const string connectionString = "Password=sequor;Persist Security Info=True;User ID=sequor;Initial Catalog=dbTechDeveloper;Data Source=SQO-111\\MSSQL16";
 
         private static void ShowNotification(string content, int milisecShowTime)
         {
@@ -133,33 +157,34 @@ namespace TechConnect
                         {
                             while (reader.Read())
                             {
-                                UserPersistence persistence = new UserPersistence();
-
-                                persistence.Id = (int)reader["Id"];
-                                persistence.Matricula = (int)reader["Matricula"];
-                                persistence.Nome = reader["Nome"] is DBNull ? null : (string)reader["Nome"];
-                                persistence.Senha = reader["Senha"] is DBNull ? null : (string)reader["Senha"];
-                                persistence.Celular = reader["Celular"] is DBNull ? null : (string)reader["Celular"];
-                                persistence.Photo = reader["Photo"] is DBNull ? null : (byte[])reader["Photo"];
-                                persistence.DataNascimento = (DateTime)reader["DataNascimento"];
-                                persistence.Email = reader["Email"] is DBNull ? null : (string)reader["Email"];
-                                persistence.Token = (int)reader["TokenValidacao"];
-                                persistence.IdTipo = (int)reader["IdTipo"];
-                                persistence.Tipo = reader["Tipo"] is DBNull ? null : (string)reader["Tipo"];
-                                persistence.IdGenero = (int)reader["IdGenero"];
-                                persistence.CodigoGenero = reader["CodigoGenero"] is DBNull ? null : (string)reader["CodigoGenero"];
-                                persistence.Genero = reader["Genero"] is DBNull ? null : (string)reader["Genero"];
-                                persistence.IdSituacao = (int)reader["IdSituacao"];
-                                persistence.Situacao = reader["Situacao"] is DBNull ? null : (string)reader["Situacao"];
-                                persistence.IdEndereco = reader["IdEndereco"] is DBNull ? null : (int?)reader["IdEndereco"];
-                                persistence.CEP = reader["CEP"] is DBNull ? null : (string)reader["CEP"];
-                                persistence.SiglaEstado = reader["SiglaEstado"] is DBNull ? null : (string)reader["SiglaEstado"];
-                                persistence.Estado = reader["Estado"] is DBNull ? null : (string)reader["Estado"];
-                                persistence.Cidade = reader["Cidade"] is DBNull ? null : (string)reader["Cidade"];
-                                persistence.Bairro = reader["Bairro"] is DBNull ? null : (string)reader["Bairro"];
-                                persistence.Rua = reader["Rua"] is DBNull ? null : (string)reader["Rua"];
-                                persistence.NumCasa = reader["NumCasa"] is DBNull ? null : (int?)reader["NumCasa"];
-                                persistence.DataRemocao = reader["DataRemocao"] is DBNull ? null : (DateTime?)reader["DataRemocao"];
+                                UserPersistence persistence = new UserPersistence
+                                {
+                                    Id = (int)reader["Id"],
+                                    Matricula = (int)reader["Matricula"],
+                                    Nome = reader["Nome"] is DBNull ? null : (string)reader["Nome"],
+                                    Senha = reader["Senha"] is DBNull ? null : (string)reader["Senha"],
+                                    Celular = reader["Celular"] is DBNull ? null : (string)reader["Celular"],
+                                    Photo = reader["Photo"] is DBNull ? null : (byte[])reader["Photo"],
+                                    DataNascimento = (DateTime)reader["DataNascimento"],
+                                    Email = reader["Email"] is DBNull ? null : (string)reader["Email"],
+                                    Token = (int)reader["TokenValidacao"],
+                                    IdTipo = (int)reader["IdTipo"],
+                                    Tipo = reader["Tipo"] is DBNull ? null : (string)reader["Tipo"],
+                                    IdGenero = (int)reader["IdGenero"],
+                                    CodigoGenero = reader["CodigoGenero"] is DBNull ? null : (string)reader["CodigoGenero"],
+                                    Genero = reader["Genero"] is DBNull ? null : (string)reader["Genero"],
+                                    IdSituacao = (int)reader["IdSituacao"],
+                                    Situacao = reader["Situacao"] is DBNull ? null : (string)reader["Situacao"],
+                                    IdEndereco = reader["IdEndereco"] is DBNull ? null : (int?)reader["IdEndereco"],
+                                    CEP = reader["CEP"] is DBNull ? null : (string)reader["CEP"],
+                                    SiglaEstado = reader["SiglaEstado"] is DBNull ? null : (string)reader["SiglaEstado"],
+                                    Estado = reader["Estado"] is DBNull ? null : (string)reader["Estado"],
+                                    Cidade = reader["Cidade"] is DBNull ? null : (string)reader["Cidade"],
+                                    Bairro = reader["Bairro"] is DBNull ? null : (string)reader["Bairro"],
+                                    Rua = reader["Rua"] is DBNull ? null : (string)reader["Rua"],
+                                    NumCasa = reader["NumCasa"] is DBNull ? null : (int?)reader["NumCasa"],
+                                    DataRemocao = reader["DataRemocao"] is DBNull ? null : (DateTime?)reader["DataRemocao"]
+                                };
 
 
                                 userList.Add(persistence);
@@ -276,7 +301,7 @@ namespace TechConnect
                     if (returnData <= 0)
                     {
                         int.TryParse(cep.Trim().Replace("-", ""), out int cepInt);
-                        var cepInformation = ConsultaCEP.GetCEPInformation(cepInt).Result;
+                        var cepInformation = ConsultaCEP.GetCEPInformation(cepInt);
 
                         if (cepInformation != null && cepInformation.Cep != null)
                         {
@@ -349,7 +374,7 @@ namespace TechConnect
                     query.AppendLine("        ,@Senha                                                           ");
                     if (string.IsNullOrEmpty(cel))
                         query.AppendLine("    ,NULL                                                             ");
-                    else    
+                    else
                         query.AppendLine("    ,@Celular                                                         ");
                     query.AppendLine("        ,@DataNascimento                                                  ");
                     if (string.IsNullOrEmpty(email))
@@ -791,9 +816,11 @@ namespace TechConnect
                                 From
                                 (
 	                                Select IdUsuario
-	                                From CatracaOcorrencia With(nolock)
+	                                From CatracaOcorrencia ocu With(nolock)
+	                                Inner Join Usuario usr On usr.id = ocu.IdUsuario and usr.DataRemocao is null
 	                                Where MONTH(DataOcorrencia) = MONTH(GETDATE()) 
-		                                 AND YEAR(DataOcorrencia) = YEAR(GETDATE())
+		                                    AND YEAR(DataOcorrencia) = YEAR(GETDATE())
+			                                AND IdStatus = 1
 	                                Group by IdUsuario
                                 ) base";
 

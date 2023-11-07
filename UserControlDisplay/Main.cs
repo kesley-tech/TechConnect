@@ -73,7 +73,7 @@ namespace TechConnect
             this.Controls.Add(SideBar);
         }
 
-        private void picShowSideBar_Click(object sender, EventArgs e)
+        private void PicShowSideBar_Click(object sender, EventArgs e)
         {
             if (SideBar.Visible)
             {

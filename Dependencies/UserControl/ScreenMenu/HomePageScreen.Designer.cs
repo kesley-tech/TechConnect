@@ -289,8 +289,8 @@ namespace TechConnect
             // timerLoadCards
             // 
             this.timerLoadCards.Enabled = true;
-            this.timerLoadCards.Interval = 10000;
-            this.timerLoadCards.Tick += new System.EventHandler(this.timerLoadCards_Tick);
+            this.timerLoadCards.Interval = 500;
+            this.timerLoadCards.Tick += new System.EventHandler(this.TimerLoadCards_Tick);
             // 
             // HomePageScreen
             // 

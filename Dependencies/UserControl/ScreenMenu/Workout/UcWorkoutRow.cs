@@ -8,8 +8,8 @@ namespace TechConnect
     {
         public List<UcWorkoutRow> SelectedRow = new List<UcWorkoutRow>();
         private bool _selectedRow;
-        private RegisterWorkoutScreen _parentScreen;
-        NotifyIcon notifyIcon;
+        private readonly RegisterWorkoutScreen _parentScreen;
+        readonly NotifyIcon notifyIcon;
 
         public UcWorkoutRow(WorkoutDTO workoutData, RegisterWorkoutScreen registerWorkoutScreen)
         {
@@ -62,7 +62,7 @@ namespace TechConnect
             }
         }
 
-        private void picEditItem_Click(object sender, System.EventArgs e)
+        private void PicEditItem_Click(object sender, System.EventArgs e)
         {
             UcRegisterWorkoutForm uc = new UcRegisterWorkoutForm()
             {

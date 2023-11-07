@@ -1,5 +1,4 @@
-﻿using Org.BouncyCastle.Bcpg.OpenPgp;
-using System;
+﻿using System;
 using System.Drawing;
 using System.IO;
 

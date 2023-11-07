@@ -6,7 +6,7 @@ namespace TechConnect
 {
     public partial class Login : UserControl
     {
-        private Core Core;
+        private readonly Core Core;
 
         public Login(Core core)
         {
@@ -74,12 +74,12 @@ namespace TechConnect
             if (e.KeyCode == Keys.Enter)
             {
                 e.Handled = e.SuppressKeyPress = true;
-                btnEnter_Click(null, null);
+                BtnEnter_Click(null, null);
             }
 
         }
 
-        private void btnEnter_Click(object sender, EventArgs e)
+        private void BtnEnter_Click(object sender, EventArgs e)
         {
             if (ValidateLogin())
                 ShowMainDisplay();
@@ -87,7 +87,7 @@ namespace TechConnect
 
         #endregion
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.tableLayoutPanel3.Visible = false;
 

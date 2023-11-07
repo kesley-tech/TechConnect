@@ -17,36 +17,36 @@ namespace TechConnect
 
             #region fakeData
 
-            var mainCard = new UserStatusMainCard("GABRIEL CAMPOS", "900003", DateTime.Now, null, true)
-            {
-                Dock = DockStyle.Fill,
-                Visible = true
-            };
-            var firstCard = new UserStatusCard("STEPHANY VIEIRA", "900500", null, true)
-            {
-                Dock = DockStyle.Fill,
-                Visible = true
-            };
-            var secondCard = new UserStatusCard("ROMEU ROCHA", "000185", null, true)
-            {
-                Dock = DockStyle.Fill,
-                Visible = true
-            };
-            var thirdCard = new UserStatusCard("GUILHERME SANTIAGO", "000075", null, true)
-            {
-                Dock = DockStyle.Fill,
-                Visible = true
-            };
-            var fourthCard = new UserStatusCard("LARISSA SOUSA", "000370", null, false)
-            {
-                Dock = DockStyle.Fill,
-                Visible = true
-            };
-            var fifthCard = new UserStatusCard("GLEICE OLIVEIRA", "000021", null, true)
-            {
-                Dock = DockStyle.Fill,
-                Visible = true
-            };
+            //var mainCard = new UserStatusMainCard("GABRIEL CAMPOS", "900003", DateTime.Now, null, true)
+            //{
+            //    Dock = DockStyle.Fill,
+            //    Visible = true
+            //};
+            //var firstCard = new UserStatusCard("STEPHANY VIEIRA", "900500", null, true)
+            //{
+            //    Dock = DockStyle.Fill,
+            //    Visible = true
+            //};
+            //var secondCard = new UserStatusCard("ROMEU ROCHA", "000185", null, true)
+            //{
+            //    Dock = DockStyle.Fill,
+            //    Visible = true
+            //};
+            //var thirdCard = new UserStatusCard("GUILHERME SANTIAGO", "000075", null, true)
+            //{
+            //    Dock = DockStyle.Fill,
+            //    Visible = true
+            //};
+            //var fourthCard = new UserStatusCard("LARISSA SOUSA", "000370", null, false)
+            //{
+            //    Dock = DockStyle.Fill,
+            //    Visible = true
+            //};
+            //var fifthCard = new UserStatusCard("GLEICE OLIVEIRA", "000021", null, true)
+            //{
+            //    Dock = DockStyle.Fill,
+            //    Visible = true
+            //};
             #endregion  
 
             for (int i = 0; i < 5; i++)
@@ -66,61 +66,64 @@ namespace TechConnect
             ucHeaderPage1.tbFilter.Visible = false;
         }
 
-        private void timerStatusCatraca_Tick(object sender, EventArgs e)
+        private void TimerStatusCatraca_Tick(object sender, EventArgs e)
         {
-            List<StatusCatracaPersistence> persistenceList = DataBaseRequest.GetStatusCatraca();
-            
-            bool notExistDifferentData = CheckChangeData(persistenceList);
-
-            if (!notExistDifferentData)
+            if (this.Visible && DataBaseRequest.TestConnection())
             {
-                switch (_actualPersistenceList.Count)
+                List<StatusCatracaPersistence> persistenceList = DataBaseRequest.GetStatusCatraca();
+
+                bool notExistDifferentData = CheckChangeData(persistenceList);
+
+                if (!notExistDifferentData)
                 {
-                    case 1:
-                        {
-                            SetMainData();
-                            break;
-                        }
-                    case 2:
-                        {
-                            SetMainData();
-                            SetCardData(1);
-                            break;
-                        }
-                    case 3:
-                        {
-                            SetMainData();
-                            SetCardData(1);
-                            SetCardData(2);
-                            break;
-                        }
-                    case 4:
-                        {
-                            SetMainData();
-                            SetCardData(1);
-                            SetCardData(2);
-                            SetCardData(3);
-                            break;
-                        }
-                    case 5:
-                        {
-                            SetMainData();
-                            SetCardData(1);
-                            SetCardData(2);
-                            SetCardData(3);
-                            SetCardData(4);
-                            break;
-                        }
-                    case 6:
-                        {
-                            SetMainData();
-                            SetCardData(1);
-                            SetCardData(2);
-                            SetCardData(3);
-                            SetCardData(4);
-                            SetCardData(5);
-                            break;
-                        }
+                    switch (_actualPersistenceList.Count)
+                    {
+                        case 1:
+                            {
+                                SetMainData();
+                                break;
+                            }
+                        case 2:
+                            {
+                                SetMainData();
+                                SetCardData(1);
+                                break;
+                            }
+                        case 3:
+                            {
+                                SetMainData();
+                                SetCardData(1);
+                                SetCardData(2);
+                                break;
+                            }
+                        case 4:
+                            {
+                                SetMainData();
+                                SetCardData(1);
+                                SetCardData(2);
+                                SetCardData(3);
+                                break;
+                            }
+                        case 5:
+                            {
+                                SetMainData();
+                                SetCardData(1);
+                                SetCardData(2);
+                                SetCardData(3);
+                                SetCardData(4);
+                                break;
+                            }
+                        case 6:
+                            {
+                                SetMainData();
+                                SetCardData(1);
+                                SetCardData(2);
+                                SetCardData(3);
+                                SetCardData(4);
+                                SetCardData(5);
+                                break;
+                            }
+                    }
                 }
             }
         }
@@ -129,14 +132,14 @@ namespace TechConnect
         {
             UserStatusMainCard pnlMain = (UserStatusMainCard)pnlLastStatus.Controls.Find("main", true).FirstOrDefault();
             StatusCatracaPersistence dataMain = _actualPersistenceList[0];
-            pnlMain.SetData(dataMain.Nome, dataMain.Matricula.ToString(), dataMain.DataOcorrencia, dataMain.Foto, Convert.ToBoolean(dataMain.IdStatus));
+            pnlMain.SetData(dataMain.Nome, dataMain.Matricula.ToString(), dataMain.DataOcorrencia, dataMain.Foto, dataMain.IdStatus == 1);
         }
 
         private void SetCardData(int numCard)
         {
             UserStatusCard card = (UserStatusCard)tableLayoutPanel3.Controls.Find($"card{numCard}", true).FirstOrDefault();
-            StatusCatracaPersistence data = _actualPersistenceList[1];
-            card.SetData(data.Nome, data.Matricula.ToString(), data.Foto, Convert.ToBoolean(data.IdStatus));
+            StatusCatracaPersistence data = _actualPersistenceList[numCard];
+            card.SetData(data.Nome, data.Matricula.ToString(), data.Foto, data.IdStatus == 1);
         }
 
         private bool CheckChangeData(List<StatusCatracaPersistence> persistenceList)
