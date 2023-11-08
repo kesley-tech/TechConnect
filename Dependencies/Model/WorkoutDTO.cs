@@ -10,7 +10,7 @@
         public enum MUSCLE_GROUP_TYPE
         {
             None
-            ,Torax
+            , Torax
             , Ombro
             , Trceps
             , Biceps

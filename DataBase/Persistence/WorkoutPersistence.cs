@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TechConnect
+﻿namespace TechConnect
 {
     public class WorkoutPersistence
     {
@@ -10,6 +8,6 @@ namespace TechConnect
         public int IdMuscleGroup { get; set; }
         public string MuscleGroup { get; set; }
         public bool FreeWorkout { get; set; }
-        
+
     }
 }

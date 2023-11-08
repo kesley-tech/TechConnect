@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using BCrypt.Net;
+﻿using System.Linq;
 
 namespace TechConnect
 {

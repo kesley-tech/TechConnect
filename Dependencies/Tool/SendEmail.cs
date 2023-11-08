@@ -1,28 +1,23 @@
-﻿using System;
-using System.Net;
-using System.Net.Mail;
-using System.Threading.Tasks;
-
-namespace TechConnect
+﻿namespace TechConnect
 {
     public class SendEmail
     {
         //public async static Task BuildSendEmail(string body, string subject, string toEmail)
         //{
 
-            //string sendGridApiKey = Environment.GetEnvironmentVariable("ngeVfQFYQlKU0ufo8x5d1A");
+        //string sendGridApiKey = Environment.GetEnvironmentVariable("ngeVfQFYQlKU0ufo8x5d1A");
 
-            //var client = new SendGridClient(sendGridApiKey);
-            //var from = new EmailAddress("techconnectionnotification@gmail.com", "Tech Connection");
-            //var to = new EmailAddress(toEmail, "Prezado");
-            //var plainTextContent = "";
-            //var htmlContent = body;
+        //var client = new SendGridClient(sendGridApiKey);
+        //var from = new EmailAddress("techconnectionnotification@gmail.com", "Tech Connection");
+        //var to = new EmailAddress(toEmail, "Prezado");
+        //var plainTextContent = "";
+        //var htmlContent = body;
 
-            //var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+        //var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
 
-            //var response = await client.SendEmailAsync(msg);
+        //var response = await client.SendEmailAsync(msg);
 
-            // Configure as credenciais do remetente
+        // Configure as credenciais do remetente
         //    string remetenteEmail = "techconnectionnotification@gmail.com";
         //    string remetenteSenha = "techconnection23";
 

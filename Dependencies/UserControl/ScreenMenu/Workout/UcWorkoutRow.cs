@@ -113,7 +113,7 @@ namespace TechConnect
                          && !string.IsNullOrEmpty(uc.tbDescription.TextBox.Text.Trim())
                          && !string.IsNullOrEmpty(uc.tbGrupoMuscular.TextBox.Text.Trim());
 
-            if(!sucess)
+            if (!sucess)
             {
                 Common.ShowNotification("Favor preencher os campos faltantes", ToolTipIcon.Warning);
             }

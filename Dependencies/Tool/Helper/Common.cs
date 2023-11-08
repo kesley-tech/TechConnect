@@ -1,11 +1,5 @@
-﻿using System;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Drawing;
 using System.Windows.Forms;
-using BCrypt.Net;
 
 namespace TechConnect
 {

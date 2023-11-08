@@ -1,6 +1,5 @@
 ﻿using RestSharp;
 using System;
-using System.Threading.Tasks;
 
 namespace TechConnect
 {
@@ -11,7 +10,7 @@ namespace TechConnect
             var client = new RestClient("https://viacep.com.br");
             var request = new RestRequest($"/ws/{cep}/json/", Method.Get);
 
-            var response =  client.Execute(request);
+            var response = client.Execute(request);
 
             if (response.IsSuccessful)
             {

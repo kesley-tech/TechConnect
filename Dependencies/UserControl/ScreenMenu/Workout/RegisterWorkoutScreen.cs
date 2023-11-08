@@ -7,7 +7,7 @@ namespace TechConnect
 {
     public partial class RegisterWorkoutScreen : UserControl
     {
-        private List<UserControl> listUcData = new List<UserControl>(); 
+        private List<UserControl> listUcData = new List<UserControl>();
         private WaitFormRender waitForm = new WaitFormRender();
 
         public RegisterWorkoutScreen()

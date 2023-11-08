@@ -94,11 +94,11 @@ namespace TechConnect
                 Thread.Sleep(1);
             }
             catch
-            {               
+            {
             }
         }
 
-#region Overrides
+        #region Overrides
 
         public override void SetCaption(string caption)
         {
@@ -122,15 +122,15 @@ namespace TechConnect
             }
             else
                 if ((WaitFormCommand)cmd == WaitFormCommand.SET_COLOR)
-                {
-                    this.BackColor = (Color)arg;
-                }
+            {
+                this.BackColor = (Color)arg;
+            }
 
             //base.ProcessCommand(cmd, arg);
         }
 
-#endregion
-        
+        #endregion
+
     }
 
     partial class InternalWaitForm
@@ -153,7 +153,7 @@ namespace TechConnect
             base.Dispose(disposing);
         }
 
-#region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -535,7 +535,7 @@ namespace TechConnect
 
         }
 
-#endregion
+        #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         public DevExpress.XtraWaitForm.ProgressPanel oProgressPanel;

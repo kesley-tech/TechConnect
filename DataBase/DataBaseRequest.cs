@@ -1,19 +1,15 @@
-﻿using DevExpress.CodeParser;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using static DevExpress.CodeParser.CodeStyle.Formatting.Rules;
 
 namespace TechConnect
 {
     public class DataBaseRequest
     {
         private WaitFormRender waitForm = new WaitFormRender();
-        
+
 
         private const string connectionString = "Password=techdeveloper;Persist Security Info=True;User ID=sa;Initial Catalog=dbTechDeveloper;Data Source=18.230.186.78";
 

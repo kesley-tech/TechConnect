@@ -1,9 +1,6 @@
-﻿using DevExpress.Data.Helpers;
-using DevExpress.XtraScheduler;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -53,7 +50,7 @@ namespace TechConnect
             #endregion  
 
             for (int i = 0; i < 5; i++)
-                this.tableLayoutPanel3.Controls.Add(new UserStatusCard() { Name = $"card{i+1}"}, 0, i);
+                this.tableLayoutPanel3.Controls.Add(new UserStatusCard() { Name = $"card{i + 1}" }, 0, i);
 
             pnlLastStatus.Controls.Add(new UserStatusMainCard() { Name = "main" });
 
