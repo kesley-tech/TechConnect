@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,18 +7,12 @@ namespace TechConnect
 {
     public partial class RegisterWorkoutScreen : UserControl
     {
-        private List<UserControl> listUcData = new List<UserControl>();
-        private NotifyIcon notifyIcon;
+        private List<UserControl> listUcData = new List<UserControl>(); 
+        private WaitFormRender waitForm = new WaitFormRender();
 
         public RegisterWorkoutScreen()
         {
             InitializeComponent();
-
-            notifyIcon = new NotifyIcon
-            {
-                Icon = SystemIcons.Information,
-                Visible = true
-            };
 
             UpdateDataHeader();
 
@@ -42,26 +37,38 @@ namespace TechConnect
                 Visible = true
             };
 
-            DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Exercícios",
-                                    Color.Black,
-                                    uc,
-                                    Flyout.CreateFlyoutCommand("OK", DialogResult.OK),
-                                    Flyout.CreateFlyoutCommand("CANCELAR", DialogResult.Cancel));
-
-            if (result == DialogResult.OK)
+            try
             {
-                if (ValidationData(uc))
+                DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Exercícios",
+                                            Color.Black,
+                                            uc,
+                                            Flyout.CreateFlyoutCommand("OK", DialogResult.OK),
+                                            Flyout.CreateFlyoutCommand("CANCELAR", DialogResult.Cancel));
+
+                if (result == DialogResult.OK)
                 {
-                    bool freeWorkout = uc.tbTreinoLivre.TextBox.Text.Trim() == "Sim";
+                    if (ValidationData(uc))
+                    {
+                        bool freeWorkout = uc.tbTreinoLivre.TextBox.Text.Trim() == "Sim";
 
-                    DataBaseRequest.InsertWorkoutData(uc.tbCode.TextBox.Text.Trim(),
-                                                      uc.tbDescription.TextBox.Text.Trim(),
-                                                      uc.tbGrupoMuscular.TextBox.Text.Trim(),
-                                                      freeWorkout);
+                        waitForm.ShowSplashScreen();
+                        waitForm.RefreshWaitForm("AGUARDE...", "REGISTRANDO INFORMAÇÕES SOBRE EXERCÍCIO", 30);
+                        DataBaseRequest.InsertWorkoutData(uc.tbCode.TextBox.Text.Trim(),
+                                                          uc.tbDescription.TextBox.Text.Trim(),
+                                                          uc.tbGrupoMuscular.TextBox.Text.Trim(),
+                                                          freeWorkout);
 
-                    RefreshData();
+                        waitForm.RefreshWaitForm("AGUARDE...", "PREPARANDO DADOS PARA APRESENTAÇÃO", 70);
+                        RefreshData();
+
+                        waitForm.HideSplashScreen();
+                    }
+
                 }
-
+            }
+            catch (Exception ex)
+            {
+                Common.ShowNotification("Erro ao inserir registro: " + ex.Message, ToolTipIcon.Error);
             }
         }
 
@@ -73,10 +80,7 @@ namespace TechConnect
 
             if (!sucess)
             {
-                ShowNotification(SystemIcons.Warning,
-                                        "Falha na Validação de Dados",
-                                        "Favor preencher os campos faltantes",
-                                        2000);
+                Common.ShowNotification("Favor preencher os campos faltantes", ToolTipIcon.Warning);
             }
 
             return sucess;
@@ -86,6 +90,9 @@ namespace TechConnect
         {
             try
             {
+                waitForm.ShowSplashScreen();
+                waitForm.RefreshWaitForm("AGUARDE...", "REMOVENDO EXERCÍCIO", 30);
+
                 var ucVisible = this.Controls[0].Controls[0].Controls[0].Controls[1].Controls;
 
                 foreach (UcWorkoutRow item in ucVisible)
@@ -101,10 +108,14 @@ namespace TechConnect
                     }
                 }
 
+                waitForm.RefreshWaitForm("AGUARDE...", "PREPARANDO DADOS PARA APRESENTAÇÃO", 70);
                 RefreshData();
+
+                waitForm.HideSplashScreen();
             }
-            catch
+            catch (Exception ex)
             {
+                Common.ShowNotification("Erro ao remover registro: " + ex.Message, ToolTipIcon.Error);
             }
 
         }
@@ -222,15 +233,5 @@ namespace TechConnect
 
             return listUc;
         }
-
-        private void ShowNotification(Icon icon, string title, string content, int milisecShowTime)
-        {
-            notifyIcon.BalloonTipTitle = title;
-            notifyIcon.BalloonTipText = content;
-            notifyIcon.ShowBalloonTip(milisecShowTime);
-            notifyIcon.Icon = icon;
-        }
-
-
     }
 }

@@ -36,7 +36,6 @@ namespace TechConnect
             this.txtToken = new TechConnect.CustomTextBox();
             this.txtEmail = new TechConnect.CustomTextBox();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,8 +91,6 @@ namespace TechConnect
             this.txtPassword.TabIndex = 6;
             this.txtPassword.UnderlinedStyle = true;
             this.txtPassword.Visible = false;
-            this.txtPassword.Leave += TxtPassword_Leave;
-            this.txtPassword.TextBox.TextChanged += TxtPassword_TextChanged;
             // 
             // txtToken
             // 
@@ -147,10 +144,6 @@ namespace TechConnect
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Visible = true;
-            // 
             // ucChangePassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -173,6 +166,5 @@ namespace TechConnect
         private CustomTextBox txtPassword;
         private CustomTextBox txtToken;
         private CustomTextBox txtEmail;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }

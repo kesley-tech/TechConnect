@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,22 +7,16 @@ namespace TechConnect
 {
     public partial class UcWorkoutRow : UserControl
     {
+        private WaitFormRender waitForm = new WaitFormRender();
         public List<UcWorkoutRow> SelectedRow = new List<UcWorkoutRow>();
         private bool _selectedRow;
         private readonly RegisterWorkoutScreen _parentScreen;
-        readonly NotifyIcon notifyIcon;
 
         public UcWorkoutRow(WorkoutDTO workoutData, RegisterWorkoutScreen registerWorkoutScreen)
         {
             InitializeComponent();
 
             this._parentScreen = registerWorkoutScreen;
-
-            notifyIcon = new NotifyIcon
-            {
-                Icon = SystemIcons.Information,
-                Visible = true
-            };
 
             SetData(workoutData);
         }
@@ -70,33 +65,45 @@ namespace TechConnect
                 Visible = true
             };
 
-            uc.tbCode.placeHolderText = lblCode.Text;
-            uc.tbDescription.placeHolderText = lblDescription.Text;
-            uc.tbGrupoMuscular.placeHolderText = lblMuscleGroup.Text;
-            uc.tbTreinoLivre.placeHolderText = "Sim";
-
-            uc.tbCode.Enabled = false;
-
-            DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Usuário",
-                                    Color.Black,
-                                    uc,
-                                    Flyout.CreateFlyoutCommand("OK", DialogResult.OK),
-                                    Flyout.CreateFlyoutCommand("CANCELAR", DialogResult.Cancel));
-
-            if (result == DialogResult.OK)
+            try
             {
-                if (ValidationData(uc))
+                uc.tbCode.placeHolderText = lblCode.Text;
+                uc.tbDescription.placeHolderText = lblDescription.Text;
+                uc.tbGrupoMuscular.placeHolderText = lblMuscleGroup.Text;
+                uc.tbTreinoLivre.placeHolderText = "Sim";
+
+                uc.tbCode.Enabled = false;
+
+                DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Usuário",
+                                        Color.Black,
+                                        uc,
+                                        Flyout.CreateFlyoutCommand("OK", DialogResult.OK),
+                                        Flyout.CreateFlyoutCommand("CANCELAR", DialogResult.Cancel));
+
+                if (result == DialogResult.OK)
                 {
-                    bool freeWorkout = uc.tbTreinoLivre.TextBox.Text.Trim() == "Sim";
+                    if (ValidationData(uc))
+                    {
+                        bool freeWorkout = uc.tbTreinoLivre.TextBox.Text.Trim() == "Sim";
 
-                    DataBaseRequest.UpdateWorkoutData(uc.tbCode.TextBox.Text.Trim(),
-                                                      uc.tbDescription.TextBox.Text.Trim(),
-                                                      uc.tbGrupoMuscular.TextBox.Text.Trim(),
-                                                      freeWorkout);
+                        waitForm.ShowSplashScreen();
+                        waitForm.RefreshWaitForm("AGUARDE...", "ATUALIZANDO DADOS DE EXERCÍCIO", 30);
+                        DataBaseRequest.UpdateWorkoutData(uc.tbCode.TextBox.Text.Trim(),
+                                                          uc.tbDescription.TextBox.Text.Trim(),
+                                                          uc.tbGrupoMuscular.TextBox.Text.Trim(),
+                                                          freeWorkout);
 
-                    _parentScreen.RefreshData();
+                        waitForm.RefreshWaitForm("AGUARDE...", "PREPARANDO DADOS PARA APRESENTAÇÃO", 70);
+                        _parentScreen.RefreshData();
+
+                        waitForm.HideSplashScreen();
+                    }
+
                 }
-
+            }
+            catch (Exception ex)
+            {
+                Common.ShowNotification("Erro ao editar registro: " + ex.Message, ToolTipIcon.Error);
             }
         }
 
@@ -108,21 +115,10 @@ namespace TechConnect
 
             if(!sucess)
             {
-                ShowNotification(SystemIcons.Warning,
-                                        "Falha na Validação de Dados",
-                                        "Favor preencher os campos faltantes",
-                                        2000);
+                Common.ShowNotification("Favor preencher os campos faltantes", ToolTipIcon.Warning);
             }
 
             return sucess;
-        }
-
-        private void ShowNotification(Icon icon, string title, string content, int milisecShowTime)
-        {
-            notifyIcon.BalloonTipTitle = title;
-            notifyIcon.BalloonTipText = content;
-            notifyIcon.ShowBalloonTip(milisecShowTime);
-            notifyIcon.Icon = icon;
         }
     }
 }

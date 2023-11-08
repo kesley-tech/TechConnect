@@ -57,9 +57,9 @@ namespace TechConnect
             this.tblMain.Location = new System.Drawing.Point(0, 0);
             this.tblMain.Name = "tblMain";
             this.tblMain.RowCount = 2;
-            this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 77.01711F));
-            this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.98289F));
-            this.tblMain.Size = new System.Drawing.Size(823, 581);
+            this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65.39379F));
+            this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.6062F));
+            this.tblMain.Size = new System.Drawing.Size(823, 419);
             this.tblMain.TabIndex = 0;
             // 
             // picProfiePhoto
@@ -69,7 +69,7 @@ namespace TechConnect
             this.picProfiePhoto.Location = new System.Drawing.Point(30, 0);
             this.picProfiePhoto.Margin = new System.Windows.Forms.Padding(30, 0, 30, 100);
             this.picProfiePhoto.Name = "picProfiePhoto";
-            this.picProfiePhoto.Size = new System.Drawing.Size(763, 347);
+            this.picProfiePhoto.Size = new System.Drawing.Size(763, 173);
             this.picProfiePhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picProfiePhoto.TabIndex = 1;
             this.picProfiePhoto.TabStop = false;
@@ -82,12 +82,12 @@ namespace TechConnect
             this.tblLower.Controls.Add(this.picPadlock, 0, 0);
             this.tblLower.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tblLower.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tblLower.Location = new System.Drawing.Point(150, 447);
+            this.tblLower.Location = new System.Drawing.Point(150, 273);
             this.tblLower.Margin = new System.Windows.Forms.Padding(150, 0, 150, 0);
             this.tblLower.Name = "tblLower";
             this.tblLower.RowCount = 1;
             this.tblLower.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblLower.Size = new System.Drawing.Size(523, 134);
+            this.tblLower.Size = new System.Drawing.Size(523, 146);
             this.tblLower.TabIndex = 0;
             // 
             // picPadlock
@@ -97,7 +97,7 @@ namespace TechConnect
             this.picPadlock.Location = new System.Drawing.Point(400, 30);
             this.picPadlock.Margin = new System.Windows.Forms.Padding(30);
             this.picPadlock.Name = "picPadlock";
-            this.picPadlock.Size = new System.Drawing.Size(93, 74);
+            this.picPadlock.Size = new System.Drawing.Size(93, 86);
             this.picPadlock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picPadlock.TabIndex = 3;
             this.picPadlock.TabStop = false;
@@ -119,7 +119,7 @@ namespace TechConnect
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(370, 134);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(370, 146);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblCode
@@ -131,7 +131,7 @@ namespace TechConnect
             this.lblCode.Margin = new System.Windows.Forms.Padding(0);
             this.lblCode.Name = "lblCode";
             this.lblCode.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.lblCode.Size = new System.Drawing.Size(370, 44);
+            this.lblCode.Size = new System.Drawing.Size(370, 48);
             this.lblCode.TabIndex = 1;
             this.lblCode.Text = "Administrador Tech";
             this.lblCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -141,11 +141,11 @@ namespace TechConnect
             this.lblDescription.AutoSize = true;
             this.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.lblDescription.Location = new System.Drawing.Point(0, 44);
+            this.lblDescription.Location = new System.Drawing.Point(0, 48);
             this.lblDescription.Margin = new System.Windows.Forms.Padding(0);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.lblDescription.Size = new System.Drawing.Size(370, 44);
+            this.lblDescription.Size = new System.Drawing.Size(370, 48);
             this.lblDescription.TabIndex = 2;
             this.lblDescription.Text = "Tecnologia";
             this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -155,11 +155,11 @@ namespace TechConnect
             this.lblLastDateAccess.AutoSize = true;
             this.lblLastDateAccess.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLastDateAccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.lblLastDateAccess.Location = new System.Drawing.Point(0, 88);
+            this.lblLastDateAccess.Location = new System.Drawing.Point(0, 96);
             this.lblLastDateAccess.Margin = new System.Windows.Forms.Padding(0);
             this.lblLastDateAccess.Name = "lblLastDateAccess";
             this.lblLastDateAccess.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.lblLastDateAccess.Size = new System.Drawing.Size(370, 46);
+            this.lblLastDateAccess.Size = new System.Drawing.Size(370, 50);
             this.lblLastDateAccess.TabIndex = 2;
             this.lblLastDateAccess.Text = "01/01/1900 - 00:00";
             this.lblLastDateAccess.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -170,7 +170,7 @@ namespace TechConnect
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tblMain);
             this.Name = "UserStatusMainCard";
-            this.Size = new System.Drawing.Size(823, 581);
+            this.Size = new System.Drawing.Size(823, 419);
             this.tblMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picProfiePhoto)).EndInit();
             this.tblLower.ResumeLayout(false);

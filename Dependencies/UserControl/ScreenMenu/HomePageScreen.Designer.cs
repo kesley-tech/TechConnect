@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Threading.Tasks;
+
 namespace TechConnect
 {
     partial class HomePageScreen
@@ -289,8 +292,8 @@ namespace TechConnect
             // timerLoadCards
             // 
             this.timerLoadCards.Enabled = true;
-            this.timerLoadCards.Interval = 500;
-            this.timerLoadCards.Tick += new System.EventHandler(this.TimerLoadCards_Tick);
+            this.timerLoadCards.Interval = 5000;
+            this.timerLoadCards.Tick += TimerLoadCards_Tick;
             // 
             // HomePageScreen
             // 

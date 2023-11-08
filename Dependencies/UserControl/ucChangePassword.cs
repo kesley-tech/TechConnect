@@ -9,6 +9,7 @@ namespace TechConnect
 {
     public partial class ucChangePassword : UserControl
     {
+        private WaitFormRender waitForm = new WaitFormRender();
         private readonly TableLayoutPanel _lastTlp;
         private UserDTO _userValidate;
 
@@ -40,7 +41,7 @@ namespace TechConnect
 
                 if (thisUser != null)
                 {
-                    notifyIcon1.ShowBalloonTip(5000, "Email e token validado!", "Insira sua nova senha", ToolTipIcon.Info);
+                    Common.ShowNotification("Email e token validado!\nInsira sua nova senha", ToolTipIcon.Info);
                     _userValidate = thisUser;
                     txtPassword.Visible = true;
                 }
@@ -97,12 +98,15 @@ namespace TechConnect
         {
             if (!string.IsNullOrEmpty(txtPassword.TextBox.Text.Trim()))
             {
+                waitForm.ShowSplashScreen();
+                waitForm.RefreshWaitForm("AGUARDE...", "ALTERANDO SENHA", 10);
                 DataBaseRequest.UpdatePassword(_userValidate.User.ToString(), txtPassword.TextBox.Text.Trim());
+                waitForm.HideSplashScreen();
 
                 Random random = new Random();
                 int indexList = random.Next(FrasesMotivacionais().Count);
                 string fraseToShow = FrasesMotivacionais()[indexList];
-                notifyIcon1.ShowBalloonTip(5000, "Senha alterada com sucesso!", fraseToShow, ToolTipIcon.Info);
+                Common.ShowNotification("Senha alterada com sucesso!\n" + fraseToShow, ToolTipIcon.Info);
 
                 BtnCancel_Click(sender, e);
             }

@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TechConnect
 {
     public partial class Login : UserControl
     {
+        private WaitFormRender waitForm = new WaitFormRender();
         private readonly Core Core;
 
         public Login(Core core)
@@ -17,12 +18,17 @@ namespace TechConnect
 
         private bool ValidateLogin()
         {
+
+            waitForm.ShowSplashScreen();
+            waitForm.RefreshWaitForm("AGUARDE...", "VALIDANDO USUÁRIO", 50);
             if (EncryptionHelper.Decrypt(txtUsuario.TextBox.Text.Trim(), txtSenha.TextBox.Text.Trim()))
             {
+                waitForm.HideSplashScreen();
                 lblHidden.Visible = false;
                 return true;
             }
 
+            waitForm.HideSplashScreen();
             lblHidden.Visible = true;
             ResetText();
             return false;
@@ -83,6 +89,8 @@ namespace TechConnect
         {
             if (ValidateLogin())
                 ShowMainDisplay();
+            else
+                Common.ShowNotification("Usuário ou senha incorreto", ToolTipIcon.Info);
         }
 
         #endregion
@@ -99,5 +107,7 @@ namespace TechConnect
 
             this.tblMain.Controls.Add(uc, 1, 0);
         }
+
+        
     }
 }

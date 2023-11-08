@@ -1,27 +1,39 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TechConnect
 {
     public partial class HomePageScreen : UserControl
     {
+        Task taskExec;
+
         public HomePageScreen()
         {
             InitializeComponent();
 
-            LoadCardsValue();
+            _ = LoadCardsValue();
 
             BuildChartAccessByHour();
         }
 
-        private void LoadCardsValue()
+        private async Task LoadCardsValue()
         {
-            if (this.Visible && DataBaseRequest.TestConnection())
+            try
             {
-                QtdCurrentAccess.Text = DataBaseRequest.GetCurrentAccess();
-                QtdTrainingToLost.Text = DataBaseRequest.GetTrainingToLost();
-                PercentMonthFrequence.Text = string.Concat(DataBaseRequest.GetMonthFrequencePercent(), "%");
+                if (this.Visible && DataBaseRequest.TestConnection())
+                {
+                    this.Invoke((MethodInvoker)async delegate
+                    {
+                        QtdCurrentAccess.Text = await DataBaseRequest.GetCurrentAccess();
+                        QtdTrainingToLost.Text = await DataBaseRequest.GetTrainingToLost();
+                        PercentMonthFrequence.Text = string.Concat(await DataBaseRequest.GetMonthFrequencePercent(), "%");
+                    });
+                }
+            }
+            catch
+            {
             }
         }
 
@@ -59,7 +71,10 @@ namespace TechConnect
 
         private void TimerLoadCards_Tick(object sender, EventArgs e)
         {
-            LoadCardsValue();
+            if (taskExec is null)
+                taskExec = Task.Run(() => LoadCardsValue());
+            else if (taskExec.IsCompleted)
+                taskExec = Task.Run(() => LoadCardsValue());
         }
     }
 }

@@ -9,9 +9,9 @@ namespace TechConnect
 {
     public partial class UcUserRow : UserControl
     {
+        private WaitFormRender waitForm = new WaitFormRender();
         private bool _selectedRow;
         private RegisterUserScreen _parentScreen;
-        private NotifyIcon notifyIcon;
         public List<UcUserRow> SelectedRow = new List<UcUserRow>();
 
         public UcUserRow(UserDTO data, RegisterUserScreen registerUserScreen)
@@ -19,12 +19,6 @@ namespace TechConnect
             InitializeComponent();
 
             this._parentScreen = registerUserScreen;
-
-            notifyIcon = new NotifyIcon
-            {
-                Icon = SystemIcons.Information,
-                Visible = true
-            };
 
             SetData(data);
         }
@@ -71,47 +65,60 @@ namespace TechConnect
                 Visible = true
             };
 
-            uc.tbGenero.placeHolderText = lblSexo.Text;
-            uc.tbName.placeHolderText = lblDescription.Text;
-            uc.tbRegister.placeHolderText = lblCode.Text;
-            uc.tbTipo.placeHolderText = lblType.Text;
-            uc.tbCEP.placeHolderText = lblCEP.Text;
-            uc.tbCel.placeHolderText = lblPhoneNumber.Text;
-
-            uc.tbPassword.Visible = false;
-            uc.label2.Visible = false;
-            uc.tbRegister.Enabled = false;
-
-            DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Usuário",
-                                    Color.Black,
-                                    uc,
-                                    Flyout.CreateFlyoutCommand("OK", DialogResult.OK),
-                                    Flyout.CreateFlyoutCommand("CANCELAR", DialogResult.Cancel));
-
-            if (result == DialogResult.OK)
+            try
             {
-                if (ValidationData(uc))
+                uc.tbGenero.placeHolderText = lblSexo.Text;
+                uc.tbName.placeHolderText = lblDescription.Text;
+                uc.tbRegister.placeHolderText = lblCode.Text;
+                uc.tbTipo.placeHolderText = lblType.Text;
+                uc.tbCEP.placeHolderText = lblCEP.Text;
+                uc.tbCel.placeHolderText = lblPhoneNumber.Text;
+
+                uc.tbPassword.Visible = false;
+                uc.label2.Visible = false;
+                uc.tbRegister.Enabled = false;
+
+                DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Usuário",
+                                        Color.Black,
+                                        uc,
+                                        Flyout.CreateFlyoutCommand("OK", DialogResult.OK),
+                                        Flyout.CreateFlyoutCommand("CANCELAR", DialogResult.Cancel));
+
+                if (result == DialogResult.OK)
                 {
-                    int? idEndereco = DataBaseRequest.GetEnderecoByCEP(uc.tbCEP.TextBox.Text);
-                    idEndereco = idEndereco > 0 ? idEndereco : null;
-                    int.TryParse(uc.tbToken.TextBox.Text.Trim(), out int tokenValidation);
-                    string numeroFormatado = uc.tbCel.TextBox.Text.Trim();
-                    if (!string.IsNullOrEmpty(uc.tbCel.TextBox.Text.Trim()) && !uc.tbCel.TextBox.Text.Trim().Contains("("))
-                        numeroFormatado = string.Format("({0}) {1}-{2}", uc.tbCel.TextBox.Text.Trim().Substring(0, 2), uc.tbCel.TextBox.Text.Trim().Substring(2, 5), uc.tbCel.TextBox.Text.Trim().Substring(7, 4));
+                    if (ValidationData(uc))
+                    {
+                        waitForm.ShowSplashScreen();
+                        waitForm.RefreshWaitForm("AGUARDE...", "BUSCANDO INFORMAÇÕES DO CEP INFORMADO", 20);
+                        int? idEndereco = DataBaseRequest.GetEnderecoByCEP(uc.tbCEP.TextBox.Text);
+                        idEndereco = idEndereco > 0 ? idEndereco : null;
+                        int.TryParse(uc.tbToken.TextBox.Text.Trim(), out int tokenValidation);
+                        string numeroFormatado = uc.tbCel.TextBox.Text.Trim();
+                        if (!string.IsNullOrEmpty(uc.tbCel.TextBox.Text.Trim()) && !uc.tbCel.TextBox.Text.Trim().Contains("("))
+                            numeroFormatado = string.Format("({0}) {1}-{2}", uc.tbCel.TextBox.Text.Trim().Substring(0, 2), uc.tbCel.TextBox.Text.Trim().Substring(2, 5), uc.tbCel.TextBox.Text.Trim().Substring(7, 4));
 
-                    DataBaseRequest.UpdateUserData(numeroFormatado,
-                                                    idEndereco,
-                                                    uc.dateTimePicker1.Text,
-                                                    uc.tbEmail.TextBox.Text.Trim(),
-                                                    uc.tbGenero.TextBox.Text.Trim(),
-                                                    uc.tbName.TextBox.Text.Trim(),
-                                                    uc.tbRegister.TextBox.Text.Trim(),
-                                                    uc.tbTipo.TextBox.Text.Trim(),
-                                                    tokenValidation);
+                        waitForm.RefreshWaitForm("AGUARDE...", "ATUALIZANDO DADOS DE USUÁRIO", 50);
+                        DataBaseRequest.UpdateUserData(numeroFormatado,
+                                                        idEndereco,
+                                                        uc.dateTimePicker1.Text,
+                                                        uc.tbEmail.TextBox.Text.Trim(),
+                                                        uc.tbGenero.TextBox.Text.Trim(),
+                                                        uc.tbName.TextBox.Text.Trim(),
+                                                        uc.tbRegister.TextBox.Text.Trim(),
+                                                        uc.tbTipo.TextBox.Text.Trim(),
+                                                        tokenValidation);
 
-                    _parentScreen.RefreshData();
+                        waitForm.RefreshWaitForm("SÓ MAIS UM POUCO...", "PREPARANDO DADOS PARA APRESENTAÇÃO", 70);
+                        _parentScreen.RefreshData();
+
+                        waitForm.HideSplashScreen();
+                    }
+
                 }
-
+            }
+            catch (Exception ex)
+            {
+                Common.ShowNotification("Erro ao editar registro: " + ex.Message, ToolTipIcon.Error);
             }
         }
 
@@ -125,16 +132,11 @@ namespace TechConnect
 
             if (error)
             {
-                int value = 0;
-
-                int.TryParse(uc.tbRegister.TextBox.Text.Trim(), out value);
+                int.TryParse(uc.tbRegister.TextBox.Text.Trim(), out int value);
 
                 if (value == 0)
                 {
-                    ShowNotification(SystemIcons.Warning,
-                                        "Falha na Validação de Dados",
-                                        "Usuário não pode conter letras ou caracter especial",
-                                        2000);
+                    Common.ShowNotification("Usuário não pode conter letras ou caracter especial", ToolTipIcon.Warning);
 
                     error = false;
                 }
@@ -144,10 +146,7 @@ namespace TechConnect
 
                     if (value == 0 && !uc.tbCEP.TextBox.Text.Trim().Contains("-"))
                     {
-                        ShowNotification(SystemIcons.Warning,
-                                            "Falha na Validação de Dados",
-                                            "CEP não pode conter letras",
-                                            2000);
+                        Common.ShowNotification("CEP não pode conter letras", ToolTipIcon.Warning);
 
                         error = false;
                     }
@@ -156,10 +155,7 @@ namespace TechConnect
                 {
                     if (uc.tbCel.TextBox.Text.Trim().Length != 11)
                     {
-                        ShowNotification(SystemIcons.Warning,
-                                            "Falha na Validação de Dados",
-                                            "Favor preencher corretamente o número de celular ex: 19989398239",
-                                            2000);
+                        Common.ShowNotification("Favor preencher corretamente o número de celular ex: 19989398239", ToolTipIcon.Warning);
 
                         error = false;
                     }
@@ -167,21 +163,10 @@ namespace TechConnect
             }
             else
             {
-                ShowNotification(SystemIcons.Warning,
-                                        "Falha na Validação de Dados",
-                                        "Favor preencher os campos faltantes",
-                                        2000);
+                Common.ShowNotification("Favor preencher os campos faltantes", ToolTipIcon.Warning);
             }
 
             return error;
-        }
-
-        private void ShowNotification(Icon icon, string title, string content, int milisecShowTime)
-        {
-            notifyIcon.BalloonTipTitle = title;
-            notifyIcon.BalloonTipText = content;
-            notifyIcon.ShowBalloonTip(milisecShowTime);
-            notifyIcon.Icon = icon;
         }
     }
 }

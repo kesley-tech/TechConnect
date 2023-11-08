@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,20 +7,14 @@ namespace TechConnect
 {
     public partial class RegisterUserScreen : UserControl
     {
+        private WaitFormRender waitForm = new WaitFormRender();
         private List<UserControl> listUcData = new List<UserControl>();
-        private readonly NotifyIcon notifyIcon;
 
         public RegisterUserScreen()
         {
             InitializeComponent();
 
             UpdateDataHeader();
-
-            notifyIcon = new NotifyIcon
-            {
-                Icon = SystemIcons.Information,
-                Visible = true
-            };
 
             RefreshData();
         }
@@ -37,6 +32,9 @@ namespace TechConnect
         {
             try
             {
+                waitForm.ShowSplashScreen();
+                waitForm.RefreshWaitForm("AGUARDE...", "REMOVENDO USUÁRIO", 30);
+
                 var ucVisible = this.Controls[0].Controls[1].Controls[0].Controls[1].Controls;
 
                 foreach (UcUserRow item in ucVisible)
@@ -52,20 +50,16 @@ namespace TechConnect
                     }
                 }
 
+                waitForm.RefreshWaitForm("AGUARDE...", "PREPARANDO DADOS PARA APRESENTAÇÃO", 70);
                 RefreshData();
+
+                waitForm.HideSplashScreen();
             }
-            catch
+            catch (Exception ex)
             {
+                Common.ShowNotification("Erro ao remover registro: " + ex.Message, ToolTipIcon.Error);
             }
 
-        }
-
-        private void ShowNotification(Icon icon, string title, string content, int milisecShowTime)
-        {
-            notifyIcon.BalloonTipTitle = title;
-            notifyIcon.BalloonTipText = content;
-            notifyIcon.ShowBalloonTip(milisecShowTime);
-            notifyIcon.Icon = icon;
         }
 
         private void BtnInsert_Click(object sender, System.EventArgs e)
@@ -88,6 +82,8 @@ namespace TechConnect
                 {
                     if (ValidationData(uc))
                     {
+                        waitForm.ShowSplashScreen();
+                        waitForm.RefreshWaitForm("AGUARDE...", "BUSCANDO INFORMAÇÕES DO CEP INFORMADO", 20);
                         int? idEndereco = DataBaseRequest.GetEnderecoByCEP(uc.tbCEP.TextBox.Text);
                         idEndereco = idEndereco > 0 ? idEndereco : null;
                         int.TryParse(uc.tbToken.TextBox.Text.Trim(), out int tokenValidation);
@@ -95,6 +91,7 @@ namespace TechConnect
 
                         string passwordEncrypted = EncryptionHelper.Encrypt(uc.tbPassword.TextBox.Text.Trim());
 
+                        waitForm.RefreshWaitForm("AGUARDE...", "REGISTRANDO INFORMAÇÕES SOBRE USUÁRIO", 50);
                         DataBaseRequest.InsertUserData(uc.tbCel.TextBox.Text.Trim(),
                                                         idEndereco,
                                                         uc.dateTimePicker1.Text,
@@ -106,13 +103,17 @@ namespace TechConnect
                                                         uc.tbTipo.TextBox.Text.Trim(),
                                                         tokenValidation);
 
+                        waitForm.RefreshWaitForm("AGUARDE...", "PREPARANDO DADOS PARA APRESENTAÇÃO", 70);
                         RefreshData();
+
+                        waitForm.HideSplashScreen();
                     }
 
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Common.ShowNotification("Erro ao inserir registro: " + ex.Message, ToolTipIcon.Error);
             }
         }
 
@@ -130,10 +131,7 @@ namespace TechConnect
 
                 if (value == 0)
                 {
-                    ShowNotification(SystemIcons.Warning,
-                                        "Falha na Validação de Dados",
-                                        "Usuário não pode conter letras ou caracter especial",
-                                        2000);
+                    Common.ShowNotification("Usuário não pode conter letras ou caracter especial", ToolTipIcon.Warning);
 
                     error = false;
                 }
@@ -143,10 +141,7 @@ namespace TechConnect
 
                     if (value == 0)
                     {
-                        ShowNotification(SystemIcons.Warning,
-                                            "Falha na Validação de Dados",
-                                            "CEP não pode conter letras ou caracter especial",
-                                            2000);
+                        Common.ShowNotification("CEP não pode conter letras ou caracter especial", ToolTipIcon.Warning);
 
                         error = false;
                     }
@@ -155,10 +150,7 @@ namespace TechConnect
                 {
                     if (uc.tbCel.TextBox.Text.Trim().Length != 11)
                     {
-                        ShowNotification(SystemIcons.Warning,
-                                            "Falha na Validação de Dados",
-                                            "Favor preencher corretamente o número de celular ex: 19989398239",
-                                            2000);
+                        Common.ShowNotification("Favor preencher corretamente o número de celular ex: 19989398239", ToolTipIcon.Warning);
 
                         error = false;
                     }
@@ -166,10 +158,7 @@ namespace TechConnect
             }
             else
             {
-                ShowNotification(SystemIcons.Warning,
-                                        "Falha na Validação de Dados",
-                                        "Favor preencher os campos faltantes",
-                                        2000);
+                Common.ShowNotification("Favor preencher os campos faltantes", ToolTipIcon.Warning);
             }
 
 

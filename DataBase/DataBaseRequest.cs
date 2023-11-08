@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DevExpress.CodeParser.CodeStyle.Formatting.Rules;
 
@@ -11,6 +12,9 @@ namespace TechConnect
 {
     public class DataBaseRequest
     {
+        private WaitFormRender waitForm = new WaitFormRender();
+        
+
         private const string connectionString = "Password=techdeveloper;Persist Security Info=True;User ID=sa;Initial Catalog=dbTechDeveloper;Data Source=18.230.186.78";
 
         public static bool TestConnection()
@@ -39,17 +43,9 @@ namespace TechConnect
 
         private static void ShowNotification(string content, int milisecShowTime)
         {
-            NotifyIcon notifyIcon = new NotifyIcon()
-            {
-                Icon = SystemIcons.Error,
-                Visible = true
-            };
-
-            notifyIcon.BalloonTipTitle = "Falha na Manipulação de Dados";
-            notifyIcon.BalloonTipText = content;
-            notifyIcon.ShowBalloonTip(milisecShowTime);
-
-            notifyIcon.Dispose();
+            //notifyIcon.BalloonTipTitle = "Falha na Manipulação de Dados";
+            //notifyIcon.BalloonTipText = content;
+            //notifyIcon.ShowBalloonTip(milisecShowTime);
         }
 
         #region User
@@ -295,7 +291,7 @@ namespace TechConnect
                         if (cep.Length > 3 && !cep.Contains("-"))
                             cep = builder.Insert(cep.Length - 3, "-").ToString();
                         command.Parameters.AddWithValue("@cep", cep.Trim());
-                        returnData = Convert.ToInt32(command.ExecuteScalar());
+                        returnData = Convert.ToInt32(command.ExecuteScalarAsync());
                     }
 
                     if (returnData <= 0)
@@ -725,7 +721,7 @@ namespace TechConnect
             }
         }
         #endregion
-        public static string GetCurrentAccess()
+        public static async Task<string> GetCurrentAccess()
         {
             int returnData = 0;
 
@@ -740,7 +736,7 @@ namespace TechConnect
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.CommandText = query;
-                        returnData = Convert.ToInt32(command.ExecuteScalar());
+                        returnData = Convert.ToInt32(await command.ExecuteScalarAsync());
                     }
 
                 }
@@ -756,7 +752,7 @@ namespace TechConnect
 
             return returnData.ToString();
         }
-        public static string GetTrainingToLost()
+        public static async Task<string> GetTrainingToLost()
         {
             int returnData = 0;
 
@@ -773,7 +769,7 @@ namespace TechConnect
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.CommandText = query;
-                        returnData = Convert.ToInt32(command.ExecuteScalar());
+                        returnData = Convert.ToInt32(await command.ExecuteScalarAsync());
                     }
 
                 }
@@ -789,7 +785,7 @@ namespace TechConnect
 
             return returnData.ToString();
         }
-        public static string GetMonthFrequencePercent()
+        public static async Task<string> GetMonthFrequencePercent()
         {
             double returnData = 0;
             int qtdUsuarioCadastrado = 0;
@@ -808,7 +804,7 @@ namespace TechConnect
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.CommandText = query;
-                        qtdUsuarioCadastrado = Convert.ToInt32(command.ExecuteScalar());
+                        qtdUsuarioCadastrado = Convert.ToInt32(await command.ExecuteScalarAsync());
                     }
 
                     query = @"Select
@@ -827,7 +823,7 @@ namespace TechConnect
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.CommandText = query;
-                        qtdUsuarioCatraca = Convert.ToInt32(command.ExecuteScalar());
+                        qtdUsuarioCatraca = Convert.ToInt32(await command.ExecuteScalarAsync());
                     }
 
                     if (qtdUsuarioCadastrado > 0)
@@ -848,7 +844,7 @@ namespace TechConnect
             return Math.Round(returnData, 1).ToString();
         }
 
-        public static List<StatusCatracaPersistence> GetStatusCatraca()
+        public static async Task<List<StatusCatracaPersistence>> GetStatusCatraca()
         {
             List<StatusCatracaPersistence> list = new List<StatusCatracaPersistence>();
 
@@ -881,7 +877,7 @@ namespace TechConnect
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             while (reader.Read())
                             {

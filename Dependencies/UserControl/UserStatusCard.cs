@@ -21,12 +21,15 @@ namespace TechConnect
 
         public void SetData(string name, string register, byte[] photo, bool statusTicktGate)
         {
-            lblCode.Text = name;
-            lblDescription.Text = register;
-            picPadlock.Image = statusTicktGate ? Image64.Base64ToImage(Image64.PadlockTrue) : Image64.Base64ToImage(Image64.PadlockFalse);
-            
-            if (photo != null)
-                picProfiePhoto.Image = Image64.ByteArrayToImage(photo);
+            this.Invoke((MethodInvoker)delegate
+            {
+                this.lblCode.Text = name;
+                this.lblDescription.Text = register;
+                this.picPadlock.Image = statusTicktGate ? Image64.Base64ToImage(Image64.PadlockTrue) : Image64.Base64ToImage(Image64.PadlockFalse);
+
+                if (photo != null)
+                    this.picProfiePhoto.Image = Image64.ByteArrayToImage(photo);
+            });
         }
 
         protected override void OnPaint(PaintEventArgs e)

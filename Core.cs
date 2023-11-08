@@ -7,14 +7,13 @@ namespace TechConnect
     public partial class Core : Form
     {
         public Login LoginDisplay;
-        public NotifyIcon notifyIcon;
         public Main MainDisplay;
 
         public Core()
         {
             InitializeComponent();
 
-            int navigationBarHeight = SystemInformation.CaptionHeight; // Obtém a altura da barra de navegação
+            //int navigationBarHeight = SystemInformation.CaptionHeight; // Obtém a altura da barra de navegação
             //this.MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height - navigationBarHeight);
 
             InitializeUCDependencies();
@@ -47,12 +46,7 @@ namespace TechConnect
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Core));
-            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
-            // 
-            // notifyIcon
-            // 
-            resources.ApplyResources(this.notifyIcon, "notifyIcon");
             // 
             // Core
             // 

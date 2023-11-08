@@ -3,6 +3,8 @@ using DevExpress.XtraScheduler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TechConnect
@@ -10,6 +12,7 @@ namespace TechConnect
     public partial class CatracaStatusScreen : UserControl
     {
         private List<StatusCatracaPersistence> _actualPersistenceList = new List<StatusCatracaPersistence>();
+        private Task taskExec;
 
         public CatracaStatusScreen()
         {
@@ -68,9 +71,17 @@ namespace TechConnect
 
         private void TimerStatusCatraca_Tick(object sender, EventArgs e)
         {
+            if (taskExec is null)
+                taskExec = Task.Run(() => BuscaPorNovosStatus());
+            else if (taskExec.IsCompleted)
+                taskExec = Task.Run(() => BuscaPorNovosStatus());
+        }
+
+        private async Task BuscaPorNovosStatus()
+        {
             if (this.Visible && DataBaseRequest.TestConnection())
             {
-                List<StatusCatracaPersistence> persistenceList = DataBaseRequest.GetStatusCatraca();
+                List<StatusCatracaPersistence> persistenceList = await DataBaseRequest.GetStatusCatraca();
 
                 bool notExistDifferentData = CheckChangeData(persistenceList);
 
