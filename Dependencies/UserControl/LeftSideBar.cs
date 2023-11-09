@@ -194,12 +194,18 @@ namespace TechConnect
         {
             HideActualScreen();
 
+            RegisterWorkoutScreen control = (RegisterWorkoutScreen)Core.MainDisplay.pnlMain.Controls[nameof(SCREEN.RegisterWorkoutScreen)];
+            control.RefreshData();
+
             ShowNewScreen(nameof(SCREEN.RegisterWorkoutScreen));
         }
 
         private void RegisterUser_EventClick(object sender)
         {
             HideActualScreen();
+
+            RegisterUserScreen control = (RegisterUserScreen)Core.MainDisplay.pnlMain.Controls[nameof(SCREEN.RegisterUserScreen)];
+            control.RefreshData();
 
             ShowNewScreen(nameof(SCREEN.RegisterUserScreen));
         }

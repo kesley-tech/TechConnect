@@ -395,9 +395,12 @@ namespace TechConnect
                         updateCommand.Parameters.Add(new SqlParameter("@Tipo", tipo));
                         updateCommand.Parameters.Add(new SqlParameter("@Genero", genero));
                         updateCommand.Parameters.Add(new SqlParameter("@Token", token));
-                        updateCommand.Parameters.Add(new SqlParameter("@Celular", cel));
-                        updateCommand.Parameters.Add(new SqlParameter("@Email", email));
-                        updateCommand.Parameters.Add(new SqlParameter("@Endereco", idCep));
+                        if (!string.IsNullOrEmpty(cel))
+                            updateCommand.Parameters.Add(new SqlParameter("@Celular", cel));
+                        if (!string.IsNullOrEmpty(cel))
+                            updateCommand.Parameters.Add(new SqlParameter("@Email", email));
+                        if (idCep != null)
+                            updateCommand.Parameters.Add(new SqlParameter("@Endereco", idCep));
 
                         updateCommand.ExecuteNonQuery();
                     }

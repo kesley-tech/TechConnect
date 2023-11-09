@@ -19,7 +19,6 @@ namespace TechConnect
 
         private bool ValidateLogin()
         {
-
             waitForm.ShowSplashScreen();
             waitForm.RefreshWaitForm("AGUARDE...", "VALIDANDO USUÁRIO", 50);
             
