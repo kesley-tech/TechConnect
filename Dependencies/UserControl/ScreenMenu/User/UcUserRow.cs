@@ -138,7 +138,8 @@ namespace TechConnect
 
                     error = false;
                 }
-                else if (!string.IsNullOrEmpty(uc.tbCEP.TextBox.Text.Trim()))
+
+                if (!string.IsNullOrEmpty(uc.tbCEP.TextBox.Text.Trim()))
                 {
                     int.TryParse(uc.tbCEP.TextBox.Text.Trim(), out value);
 
@@ -149,7 +150,7 @@ namespace TechConnect
                         error = false;
                     }
                 }
-                else if (!string.IsNullOrEmpty(uc.tbCel.TextBox.Text.Trim()))
+                if (!string.IsNullOrEmpty(uc.tbCel.TextBox.Text.Trim()))
                 {
                     if (uc.tbCel.TextBox.Text.Trim().Length != 11)
                     {

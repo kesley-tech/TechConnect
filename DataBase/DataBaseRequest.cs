@@ -287,7 +287,7 @@ namespace TechConnect
                         if (cep.Length > 3 && !cep.Contains("-"))
                             cep = builder.Insert(cep.Length - 3, "-").ToString();
                         command.Parameters.AddWithValue("@cep", cep.Trim());
-                        returnData = Convert.ToInt32(command.ExecuteScalarAsync());
+                        returnData = Convert.ToInt32(command.ExecuteScalar());
                     }
 
                     if (returnData <= 0)
@@ -391,10 +391,13 @@ namespace TechConnect
                         updateCommand.Parameters.Add(new SqlParameter("@Matricula", matricula));
                         updateCommand.Parameters.Add(new SqlParameter("@Nome", nome));
                         updateCommand.Parameters.Add(new SqlParameter("@Senha", senha));
-                        updateCommand.Parameters.Add(new SqlParameter("@DataNascimento", dataNascimento));
+                        updateCommand.Parameters.Add(new SqlParameter("@DataNascimento", Convert.ToDateTime(dataNascimento)));
                         updateCommand.Parameters.Add(new SqlParameter("@Tipo", tipo));
                         updateCommand.Parameters.Add(new SqlParameter("@Genero", genero));
                         updateCommand.Parameters.Add(new SqlParameter("@Token", token));
+                        updateCommand.Parameters.Add(new SqlParameter("@Celular", cel));
+                        updateCommand.Parameters.Add(new SqlParameter("@Email", email));
+                        updateCommand.Parameters.Add(new SqlParameter("@Endereco", idCep));
 
                         updateCommand.ExecuteNonQuery();
                     }

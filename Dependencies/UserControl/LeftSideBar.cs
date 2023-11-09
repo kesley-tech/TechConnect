@@ -1,5 +1,8 @@
-﻿using System.Drawing;
+﻿using DevExpress.DashboardWpf.Internal;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using static TechConnect.UserDTO;
 
 namespace TechConnect
 {
@@ -7,7 +10,7 @@ namespace TechConnect
     {
         private readonly Core Core;
 
-        private enum SCREEN
+        public enum SCREEN
         {
             HomePageScreen,
             RegisterWorkoutScreen,
@@ -24,6 +27,77 @@ namespace TechConnect
             this.Core = core;
 
             AccordeonMenu();
+        }
+
+        public void OcultarTelasPerfis(USER_TYPE loginType)
+        {
+            ItemMenu control = new ItemMenu();
+            switch (loginType)
+            {
+                case USER_TYPE.Recepção:
+                    {
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("Treinos", true).FirstOrDefault();
+                        if (control != null) control.Visible = false;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("MontarTreino", true).FirstOrDefault();
+                        if (control != null) control.Visible = false;
+
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("Usuários", true).FirstOrDefault();
+                        if (control != null) control.Visible = true;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("StatusCatraca", true).FirstOrDefault();
+                        if (control != null) control.Visible = true;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("Cadastros", true).FirstOrDefault();
+                        if (control != null) control.Visible = true;
+
+                        break;
+                    }
+                case USER_TYPE.Instrutor:
+                    {
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("Usuários", true).FirstOrDefault();
+                        if (control != null) control.Visible = false;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("StatusCatraca", true).FirstOrDefault();
+                        if (control != null) control.Visible = false;
+
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("Treinos", true).FirstOrDefault();
+                        if (control != null) control.Visible = true;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("MontarTreino", true).FirstOrDefault();
+                        if (control != null) control.Visible = true;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("Cadastros", true).FirstOrDefault();
+                        if (control != null) control.Visible = true;
+
+                        break;
+                    }
+                case USER_TYPE.Aluno:
+                    {
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("Usuários", true).FirstOrDefault();
+                        if (control != null) control.Visible = false;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("Treinos", true).FirstOrDefault();
+                        if (control != null) control.Visible = false;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("StatusCatraca", true).FirstOrDefault();
+                        if (control != null) control.Visible = false;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("MontarTreino", true).FirstOrDefault();
+                        if (control != null) control.Visible = false;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("Cadastros", true).FirstOrDefault();
+                        if (control != null) control.Visible = false;
+
+                        break;
+                    }
+                case USER_TYPE.Administrador:
+                    {
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("Usuários", true).FirstOrDefault();
+                        if (control != null) control.Visible = true;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("Treinos", true).FirstOrDefault();
+                        if (control != null) control.Visible = true;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("StatusCatraca", true).FirstOrDefault();
+                        if (control != null) control.Visible = true;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("MontarTreino", true).FirstOrDefault();
+                        if (control != null) control.Visible = true;
+                        control = (ItemMenu)this.pnlSelection.Controls.Find("Cadastros", true).FirstOrDefault();
+                        if (control != null) control.Visible = true;
+
+                        break;
+                    }
+            }
+
         }
 
         private void AccordeonMenu()
@@ -44,7 +118,7 @@ namespace TechConnect
 
             FlowLayoutPanel flwSubRegisterList = CreateSubRegisterList(flwMainMenuBody);
 
-            ItemMenu imRegisterList = new ItemMenu() { LabelText = "Cadastros", PictureImage = Image64.Base64ToImage(Image64.MenuRegister) };
+            ItemMenu imRegisterList = new ItemMenu() { Name = "Cadastros", LabelText = "Cadastros", PictureImage = Image64.Base64ToImage(Image64.MenuRegister) };
             imRegisterList.EventClick += (object sender) => { flwSubRegisterList.Visible = !flwSubRegisterList.Visible; };
             imRegisterList.Width = widthTotal;
 
@@ -52,11 +126,11 @@ namespace TechConnect
             imHomePage.EventClick += ImHomePage_EventClick;
             imHomePage.Width = widthTotal;
 
-            ItemMenu imStatusCatraca = new ItemMenu() { LabelText = "Status Catraca", PictureImage = Image64.Base64ToImage(Image64.MenuStatusCatraca) };
+            ItemMenu imStatusCatraca = new ItemMenu() {Name = "StatusCatraca", LabelText = "Status Catraca", PictureImage = Image64.Base64ToImage(Image64.MenuStatusCatraca) };
             imStatusCatraca.EventClick += ImStatusCatraca_EventClick;
             imStatusCatraca.Width = widthTotal;
 
-            ItemMenu imBuildWorkout = new ItemMenu() { LabelText = "Montar Treino", PictureImage = Image64.Base64ToImage(Image64.MenuBuildWorkout) };
+            ItemMenu imBuildWorkout = new ItemMenu() { Name = "MontarTreino", LabelText = "Montar Treino", PictureImage = Image64.Base64ToImage(Image64.MenuBuildWorkout) };
             imBuildWorkout.EventClick += ImBuildWorkout_EventClick;
             imBuildWorkout.Width = widthTotal;
 
@@ -175,7 +249,7 @@ namespace TechConnect
 
         private ItemMenu CreateSubItem(string text)
         {
-            ItemMenu item = new ItemMenu() { LabelText = text, PictureImage = null };
+            ItemMenu item = new ItemMenu() { Name = text, LabelText = text, PictureImage = null };
             item.lblText.Padding = new Padding(30, 0, 0, 0);
             item.Height = (int)(item.Height * 0.70);
             return item;

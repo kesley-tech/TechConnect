@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace TechConnect
 {
     public partial class Login : UserControl
     {
-        private WaitFormRender waitForm = new WaitFormRender();
+        private readonly WaitFormRender waitForm = new WaitFormRender();
         private readonly Core Core;
+        private UserDTO objectUser;
 
         public Login(Core core)
         {
@@ -20,7 +22,10 @@ namespace TechConnect
 
             waitForm.ShowSplashScreen();
             waitForm.RefreshWaitForm("AGUARDE...", "VALIDANDO USUÁRIO", 50);
-            if (EncryptionHelper.Decrypt(txtUsuario.TextBox.Text.Trim(), txtSenha.TextBox.Text.Trim()))
+            
+            objectUser = DataBaseRequest.GetUser(txtUsuario.TextBox.Text.Trim()).FirstOrDefault();
+
+            if (EncryptionHelper.Decrypt(objectUser, txtSenha.TextBox.Text.Trim()))
             {
                 waitForm.HideSplashScreen();
                 lblHidden.Visible = false;
@@ -87,7 +92,11 @@ namespace TechConnect
         private void BtnEnter_Click(object sender, EventArgs e)
         {
             if (ValidateLogin())
+            {
+                Core.MainDisplay.SideBar.OcultarTelasPerfis(objectUser.Type);
+
                 ShowMainDisplay();
+            }
             else
                 Common.ShowNotification("Usuário ou senha incorreto", ToolTipIcon.Info);
         }

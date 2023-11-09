@@ -85,14 +85,14 @@ namespace TechConnect
                         waitForm.ShowSplashScreen();
                         waitForm.RefreshWaitForm("AGUARDE...", "BUSCANDO INFORMAÇÕES DO CEP INFORMADO", 20);
                         int? idEndereco = DataBaseRequest.GetEnderecoByCEP(uc.tbCEP.TextBox.Text);
-                        idEndereco = idEndereco > 0 ? idEndereco : null;
+                        idEndereco = idEndereco != null && idEndereco > 0 ? idEndereco : null;
                         int.TryParse(uc.tbToken.TextBox.Text.Trim(), out int tokenValidation);
                         string numeroFormatado = string.Format("({0}) {1}-{2}", uc.tbCel.TextBox.Text.Trim().Substring(0, 2), uc.tbCel.TextBox.Text.Trim().Substring(2, 5), uc.tbCel.TextBox.Text.Trim().Substring(7, 4));
 
                         string passwordEncrypted = EncryptionHelper.Encrypt(uc.tbPassword.TextBox.Text.Trim());
 
                         waitForm.RefreshWaitForm("AGUARDE...", "REGISTRANDO INFORMAÇÕES SOBRE USUÁRIO", 50);
-                        DataBaseRequest.InsertUserData(uc.tbCel.TextBox.Text.Trim(),
+                        DataBaseRequest.InsertUserData(numeroFormatado,
                                                         idEndereco,
                                                         uc.dateTimePicker1.Text,
                                                         uc.tbEmail.TextBox.Text.Trim(),
@@ -135,7 +135,7 @@ namespace TechConnect
 
                     error = false;
                 }
-                else if (!string.IsNullOrEmpty(uc.tbCEP.TextBox.Text.Trim()))
+                if (!string.IsNullOrEmpty(uc.tbCEP.TextBox.Text.Trim()))
                 {
                     int.TryParse(uc.tbCEP.TextBox.Text.Trim(), out value);
 
@@ -146,7 +146,7 @@ namespace TechConnect
                         error = false;
                     }
                 }
-                else if (!string.IsNullOrEmpty(uc.tbCel.TextBox.Text.Trim()))
+                if (!string.IsNullOrEmpty(uc.tbCel.TextBox.Text.Trim()))
                 {
                     if (uc.tbCel.TextBox.Text.Trim().Length != 11)
                     {

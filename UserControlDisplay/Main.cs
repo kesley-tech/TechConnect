@@ -5,7 +5,7 @@ namespace TechConnect
 {
     public partial class Main : UserControl
     {
-        private LeftSideBar SideBar;
+        public LeftSideBar SideBar;
         public Control ActualScreen;
 
         public Main(Core core)

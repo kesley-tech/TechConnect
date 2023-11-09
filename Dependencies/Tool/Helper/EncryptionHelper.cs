@@ -10,9 +10,8 @@ namespace TechConnect
             return BCrypt.Net.BCrypt.HashPassword(password, salt);
         }
 
-        public static bool Decrypt(string user, string password)
+        public static bool Decrypt(UserDTO objectUser, string password)
         {
-            UserDTO objectUser = DataBaseRequest.GetUser(user).FirstOrDefault();
             if (objectUser != null)
             {
                 string senhaCriptografada = objectUser.Password; //buscar no banco
