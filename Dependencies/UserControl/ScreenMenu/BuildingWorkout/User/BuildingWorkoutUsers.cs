@@ -48,7 +48,7 @@ namespace TechConnect
                 ucListPaginatedHorizontal.SetList(listUcData);
         }
 
-        private void RefreshData()
+        public void RefreshData()
         {
             List<UserControl> listUc = CreateListWorkout();
             listUcData = listUc;
@@ -58,45 +58,54 @@ namespace TechConnect
 
         private List<UserControl> CreateListWorkout()
         {
-            List<BuildingWorkoutUserDTO> dataClassList = new List<BuildingWorkoutUserDTO>();
             List<UserControl> listUc = new List<UserControl>();
 
             #region FakeData
-            dataClassList.Add(new BuildingWorkoutUserDTO()
-            {
-                Code = "900500",
-                Description = "STEPHANY VIERA",
-                QuantityVencimento = -1,
-                Status = BuildingWorkoutUserDTO.STATUS_VENCIMENTO_USER.Vencido
-            });
+            //dataClassList.Add(new BuildingWorkoutUserDTO()
+            //{
+            //    Code = "900500",
+            //    Description = "STEPHANY VIERA",
+            //    QuantityVencimento = -1,
+            //    Status = BuildingWorkoutUserDTO.STATUS_VENCIMENTO_USER.Vencido
+            //});
 
-            dataClassList.Add(new BuildingWorkoutUserDTO
-            {
-                Code = "123456",
-                Description = "João Silva",
-                QuantityVencimento = 43,
-                Status = BuildingWorkoutUserDTO.STATUS_VENCIMENTO_USER.Ok
-            });
+            //dataClassList.Add(new BuildingWorkoutUserDTO
+            //{
+            //    Code = "123456",
+            //    Description = "João Silva",
+            //    QuantityVencimento = 43,
+            //    Status = BuildingWorkoutUserDTO.STATUS_VENCIMENTO_USER.Ok
+            //});
 
-            dataClassList.Add(new BuildingWorkoutUserDTO
-            {
-                Code = "789012",
-                Description = "Maria Souza",
-                QuantityVencimento = 7,
-                Status = BuildingWorkoutUserDTO.STATUS_VENCIMENTO_USER.ProximoVencimento
-            });
+            //dataClassList.Add(new BuildingWorkoutUserDTO
+            //{
+            //    Code = "789012",
+            //    Description = "Maria Souza",
+            //    QuantityVencimento = 7,
+            //    Status = BuildingWorkoutUserDTO.STATUS_VENCIMENTO_USER.ProximoVencimento
+            //});
 
-            dataClassList.Add(new BuildingWorkoutUserDTO
-            {
-                Code = "456789",
-                Description = "Carlos Pereira",
-                QuantityVencimento = 10,
-                Status = BuildingWorkoutUserDTO.STATUS_VENCIMENTO_USER.Ok
-            });
+            //dataClassList.Add(new BuildingWorkoutUserDTO
+            //{
+            //    Code = "456789",
+            //    Description = "Carlos Pereira",
+            //    QuantityVencimento = 10,
+            //    Status = BuildingWorkoutUserDTO.STATUS_VENCIMENTO_USER.Ok
+            //});
             #endregion
+
+            List<BuildingWorkoutUserDTO> dataClassList = DataBaseRequest.GetAllAlunos();
 
             foreach (BuildingWorkoutUserDTO data in dataClassList)
             {
+                int.TryParse(data.QuantityVencimento, out int vencimento);
+                if (vencimento <= 0)
+                    data.Status = BuildingWorkoutUserDTO.STATUS_VENCIMENTO_USER.Vencido;
+                else if (vencimento <= 7)
+                    data.Status = BuildingWorkoutUserDTO.STATUS_VENCIMENTO_USER.ProximoVencimento;
+                else
+                    data.Status = BuildingWorkoutUserDTO.STATUS_VENCIMENTO_USER.Ok;
+
                 UcBuildingWorkoutUsersRow item = new UcBuildingWorkoutUsersRow(data) { Dock = DockStyle.Fill, Margin = new Padding(0) };
 
                 listUc.Add(item);

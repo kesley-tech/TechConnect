@@ -33,9 +33,6 @@ namespace TechConnect
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tblMain = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlDashTrainingToLost = new System.Windows.Forms.Panel();
@@ -51,15 +48,15 @@ namespace TechConnect
             this.QtdCurrentAccess = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.pnlShowDashboard = new System.Windows.Forms.Panel();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.timerLoadCards = new System.Windows.Forms.Timer(this.components);
+            this.picMessage = new System.Windows.Forms.PictureBox();
             this.tblMain.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.pnlDashTrainingToLost.SuspendLayout();
             this.pnlDashMonthFrequence.SuspendLayout();
             this.pnlDashCurrentAccess.SuspendLayout();
             this.pnlShowDashboard.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMessage)).BeginInit();
             this.SuspendLayout();
             // 
             // tblMain
@@ -262,7 +259,7 @@ namespace TechConnect
             // 
             // pnlShowDashboard
             // 
-            this.pnlShowDashboard.Controls.Add(this.chart1);
+            this.pnlShowDashboard.Controls.Add(this.picMessage);
             this.pnlShowDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlShowDashboard.Location = new System.Drawing.Point(20, 220);
             this.pnlShowDashboard.Margin = new System.Windows.Forms.Padding(0);
@@ -270,30 +267,21 @@ namespace TechConnect
             this.pnlShowDashboard.Size = new System.Drawing.Size(1075, 434);
             this.pnlShowDashboard.TabIndex = 1;
             // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(0, 0);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.IsXValueIndexed = true;
-            series1.Legend = "Legend1";
-            series1.Name = "Acesso por hora";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(1075, 434);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
-            // 
             // timerLoadCards
             // 
             this.timerLoadCards.Enabled = true;
             this.timerLoadCards.Interval = 5000;
-            this.timerLoadCards.Tick += TimerLoadCards_Tick;
+            // 
+            // picMessage
+            // 
+            this.picMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picMessage.Image = global::TechConnect.Properties.Resources.mensagemNoel;
+            this.picMessage.Location = new System.Drawing.Point(0, 0);
+            this.picMessage.Name = "picMessage";
+            this.picMessage.Size = new System.Drawing.Size(1075, 434);
+            this.picMessage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picMessage.TabIndex = 0;
+            this.picMessage.TabStop = false;
             // 
             // HomePageScreen
             // 
@@ -311,7 +299,7 @@ namespace TechConnect
             this.pnlDashCurrentAccess.ResumeLayout(false);
             this.pnlDashCurrentAccess.PerformLayout();
             this.pnlShowDashboard.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMessage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -333,7 +321,7 @@ namespace TechConnect
         private System.Windows.Forms.Label QtdCurrentAccess;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Panel pnlShowDashboard;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Timer timerLoadCards;
+        private System.Windows.Forms.PictureBox picMessage;
     }
 }

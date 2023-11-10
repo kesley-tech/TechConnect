@@ -768,5 +768,8 @@
   <ItemGroup>
     <Folder Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mensagemNoel.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

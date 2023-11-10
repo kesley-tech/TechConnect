@@ -72,6 +72,9 @@ namespace TechConnect
                     Visible = true
                 };
 
+                uc.tbRegister.Visible = false;
+                uc.lblName.Visible = false;
+
                 DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Usuário",
                                         Color.Black,
                                         uc,
@@ -124,30 +127,10 @@ namespace TechConnect
             bool error = !string.IsNullOrEmpty(uc.dateTimePicker1.Text)
                             && !string.IsNullOrEmpty(uc.tbGenero.TextBox.Text.Trim())
                             && !string.IsNullOrEmpty(uc.tbName.TextBox.Text.Trim())
-                            && !string.IsNullOrEmpty(uc.tbRegister.TextBox.Text.Trim())
                             && !string.IsNullOrEmpty(uc.tbTipo.TextBox.Text.Trim());
 
             if (error)
             {
-                int.TryParse(uc.tbRegister.TextBox.Text.Trim(), out int value);
-
-                if (value == 0)
-                {
-                    Common.ShowNotification("Usuário não pode conter letras ou caracter especial", ToolTipIcon.Warning);
-
-                    error = false;
-                }
-                if (!string.IsNullOrEmpty(uc.tbCEP.TextBox.Text.Trim()))
-                {
-                    int.TryParse(uc.tbCEP.TextBox.Text.Trim(), out value);
-
-                    if (value == 0)
-                    {
-                        Common.ShowNotification("CEP não pode conter letras ou caracter especial", ToolTipIcon.Warning);
-
-                        error = false;
-                    }
-                }
                 if (!string.IsNullOrEmpty(uc.tbCel.TextBox.Text.Trim()))
                 {
                     if (uc.tbCel.TextBox.Text.Trim().Length != 11)

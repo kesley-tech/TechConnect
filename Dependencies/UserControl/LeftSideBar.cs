@@ -166,6 +166,9 @@ namespace TechConnect
         {
             HideActualScreen();
 
+            BuildingWorkoutUsers control = (BuildingWorkoutUsers)Core.MainDisplay.pnlMain.Controls[nameof(SCREEN.BuildingWorkoutUsers)];
+            control.RefreshData();
+
             ShowNewScreen(nameof(SCREEN.BuildingWorkoutUsers));
         }
 

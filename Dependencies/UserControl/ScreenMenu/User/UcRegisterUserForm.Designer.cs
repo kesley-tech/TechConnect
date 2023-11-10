@@ -394,7 +394,7 @@ namespace TechConnect
         #endregion
 
         public CustomTextBox tbRegister;
-        private System.Windows.Forms.Label lblName;
+        public System.Windows.Forms.Label lblName;
         public CustomTextBox tbName;
         private System.Windows.Forms.Label label1;
         public CustomTextBox tbPassword;
@@ -406,7 +406,7 @@ namespace TechConnect
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         public CustomTextBox tbToken;
-        private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Label label4;
         public CustomTextBox tbCEP;
         private System.Windows.Forms.Label label9;
         public CustomTextBox tbCel;

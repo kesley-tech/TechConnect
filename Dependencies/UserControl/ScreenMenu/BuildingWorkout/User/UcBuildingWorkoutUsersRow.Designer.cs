@@ -43,10 +43,10 @@ namespace TechConnect
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 267F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 132F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 267F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
             this.tableLayoutPanel1.Controls.Add(this.lblCode, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblDescription, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblQtdVencimento, 2, 0);
@@ -57,7 +57,7 @@ namespace TechConnect
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(542, 79);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(723, 97);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblCode
@@ -69,7 +69,7 @@ namespace TechConnect
             this.lblCode.Location = new System.Drawing.Point(0, 0);
             this.lblCode.Margin = new System.Windows.Forms.Padding(0);
             this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(200, 79);
+            this.lblCode.Size = new System.Drawing.Size(267, 97);
             this.lblCode.TabIndex = 0;
             this.lblCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -79,10 +79,10 @@ namespace TechConnect
             this.lblDescription.BackColor = System.Drawing.Color.Transparent;
             this.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.Location = new System.Drawing.Point(300, 0);
-            this.lblDescription.Margin = new System.Windows.Forms.Padding(100, 0, 0, 0);
+            this.lblDescription.Location = new System.Drawing.Point(400, 0);
+            this.lblDescription.Margin = new System.Windows.Forms.Padding(133, 0, 0, 0);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(1, 79);
+            this.lblDescription.Size = new System.Drawing.Size(1, 97);
             this.lblDescription.TabIndex = 1;
             this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -92,21 +92,21 @@ namespace TechConnect
             this.lblQtdVencimento.BackColor = System.Drawing.Color.Transparent;
             this.lblQtdVencimento.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblQtdVencimento.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQtdVencimento.Location = new System.Drawing.Point(210, 0);
+            this.lblQtdVencimento.Location = new System.Drawing.Point(280, 0);
             this.lblQtdVencimento.Margin = new System.Windows.Forms.Padding(0);
             this.lblQtdVencimento.Name = "lblQtdVencimento";
-            this.lblQtdVencimento.Size = new System.Drawing.Size(200, 79);
+            this.lblQtdVencimento.Size = new System.Drawing.Size(267, 97);
             this.lblQtdVencimento.TabIndex = 2;
             this.lblQtdVencimento.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // picEditItem
             // 
-            this.picEditItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picEditItem.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picEditItem.Image = ((System.Drawing.Image)(resources.GetObject("picEditItem.Image")));
-            this.picEditItem.Location = new System.Drawing.Point(440, 32);
-            this.picEditItem.Margin = new System.Windows.Forms.Padding(30, 32, 30, 32);
+            this.picEditItem.Location = new System.Drawing.Point(577, 30);
+            this.picEditItem.Margin = new System.Windows.Forms.Padding(30);
             this.picEditItem.Name = "picEditItem";
-            this.picEditItem.Size = new System.Drawing.Size(72, 15);
+            this.picEditItem.Size = new System.Drawing.Size(116, 37);
             this.picEditItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picEditItem.TabIndex = 5;
             this.picEditItem.TabStop = false;
@@ -114,13 +114,13 @@ namespace TechConnect
             // 
             // UcBuildingWorkoutUsersRow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UcBuildingWorkoutUsersRow";
-            this.Size = new System.Drawing.Size(542, 79);
+            this.Size = new System.Drawing.Size(723, 97);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picEditItem)).EndInit();

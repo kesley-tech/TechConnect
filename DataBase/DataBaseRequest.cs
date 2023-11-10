@@ -361,7 +361,7 @@ namespace TechConnect
                     query.AppendLine("        ,[DataRemocao]                                                    ");
                     query.AppendLine("        ,[TokenValidacao])                                                ");
                     query.AppendLine("  VALUES                                                                  ");
-                    query.AppendLine("        (@Matricula                                                       ");
+                    query.AppendLine("        ((SELECT MAX(Matricula)+1 FROM USUARIO)                           ");
                     query.AppendLine("        ,@Nome                                                            ");
                     query.AppendLine("        ,@Senha                                                           ");
                     if (string.IsNullOrEmpty(cel))
@@ -388,7 +388,6 @@ namespace TechConnect
 
                     using (SqlCommand updateCommand = new SqlCommand(query.ToString(), connection))
                     {
-                        updateCommand.Parameters.Add(new SqlParameter("@Matricula", matricula));
                         updateCommand.Parameters.Add(new SqlParameter("@Nome", nome));
                         updateCommand.Parameters.Add(new SqlParameter("@Senha", senha));
                         updateCommand.Parameters.Add(new SqlParameter("@DataNascimento", Convert.ToDateTime(dataNascimento)));
@@ -445,7 +444,7 @@ namespace TechConnect
                 }
             }
         }
-        public static void UpdateUserData(string cel, int? idCep, string dataNascimento, string email, string genero, string nome, string matricula, string tipo, int? token)
+        public static void UpdateUserData(string cel, int? idCep, string dataNascimento, string email, string genero, string nome, string matricula, string tipo)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -475,7 +474,6 @@ namespace TechConnect
                     query.AppendLine("   ,[IdSituacao] = 1                                                              ");
                     query.AppendLine("   ,[Photo] = NULL                                                                ");
                     query.AppendLine("   ,[DataRemocao] = NULL                                                          ");
-                    query.AppendLine("   ,[TokenValidacao] = @Token                                                     ");
                     query.AppendLine("WHERE                                                                             ");
                     query.AppendLine("    [Matricula] = @Matricula                                                      ");
 
@@ -488,7 +486,6 @@ namespace TechConnect
                         updateCommand.Parameters.Add(new SqlParameter("@DataNascimento", Convert.ToDateTime(dataNascimento)));
                         updateCommand.Parameters.Add(new SqlParameter("@Tipo", tipo));
                         updateCommand.Parameters.Add(new SqlParameter("@Genero", genero));
-                        updateCommand.Parameters.Add(new SqlParameter("@Token", token));
 
                         updateCommand.ExecuteNonQuery();
                     }
@@ -910,6 +907,63 @@ namespace TechConnect
             }
 
             return list;
+        }
+
+        ////////////////////////////////
+        ///
+
+        public static List<BuildingWorkoutUserDTO> GetAllAlunos()
+        {
+            List<BuildingWorkoutUserDTO> result = new List<BuildingWorkoutUserDTO>();
+
+            string query = @"SELECT 
+	                            usr.Matricula,
+	                            usr.Nome,
+	                            CASE
+		                            WHEN treino.DataVencimento IS NULL
+		                            THEN '-'
+		                            ELSE CAST(DATEDIFF(DAY, GETDATE(), treino.DataVencimento) AS VARCHAR(20))
+	                            END DiasParaVencer 
+                            FROM Usuario usr WITH(NOLOCK)
+                            LEFT JOIN ExercicioTreinoMontado treino WITH(NOLOCK) ON usr.Id = treino.IdUsuarioAluno
+                            WHERE
+	                            IdTipo = 4";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                BuildingWorkoutUserDTO persistence = new BuildingWorkoutUserDTO()
+                                {
+                                    Code = Convert.ToString((int)reader["Matricula"]),
+                                    Description = (string)reader["Nome"],
+                                    QuantityVencimento = (string)reader["DiasParaVencer"]
+                                };
+
+                                result.Add(persistence);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowNotification(ex.Message, 2000);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return result;
         }
     }
 }

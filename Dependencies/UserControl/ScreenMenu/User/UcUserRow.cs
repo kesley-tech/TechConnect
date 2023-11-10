@@ -72,9 +72,12 @@ namespace TechConnect
                 uc.tbCEP.placeHolderText = lblCEP.Text;
                 uc.tbCel.placeHolderText = lblPhoneNumber.Text;
 
+                uc.label4.Visible = false;
+                uc.tbToken.Visible = false;
                 uc.tbPassword.Visible = false;
                 uc.label2.Visible = false;
                 uc.tbRegister.Enabled = false;
+                
 
                 DialogResult result = Flyout.ShowFlyoutDialog("Cadastro de Usuário",
                                         Color.Black,
@@ -90,7 +93,6 @@ namespace TechConnect
                         waitForm.RefreshWaitForm("AGUARDE...", "BUSCANDO INFORMAÇÕES DO CEP INFORMADO", 20);
                         int? idEndereco = DataBaseRequest.GetEnderecoByCEP(uc.tbCEP.TextBox.Text);
                         idEndereco = idEndereco > 0 ? idEndereco : null;
-                        int.TryParse(uc.tbToken.TextBox.Text.Trim(), out int tokenValidation);
                         string numeroFormatado = "";
                         if (!string.IsNullOrEmpty(uc.tbCel.TextBox.Text.Trim()) && !uc.tbCel.TextBox.Text.Trim().Contains("("))
                             numeroFormatado = string.Format("({0}) {1}-{2}", uc.tbCel.TextBox.Text.Trim().Substring(0, 2), uc.tbCel.TextBox.Text.Trim().Substring(2, 5), uc.tbCel.TextBox.Text.Trim().Substring(7, 4));
@@ -103,8 +105,7 @@ namespace TechConnect
                                                         uc.tbGenero.TextBox.Text.Trim(),
                                                         uc.tbName.TextBox.Text.Trim(),
                                                         uc.tbRegister.TextBox.Text.Trim(),
-                                                        uc.tbTipo.TextBox.Text.Trim(),
-                                                        tokenValidation);
+                                                        uc.tbTipo.TextBox.Text.Trim());
 
                         waitForm.RefreshWaitForm("SÓ MAIS UM POUCO...", "PREPARANDO DADOS PARA APRESENTAÇÃO", 70);
                         _parentScreen.RefreshData();
