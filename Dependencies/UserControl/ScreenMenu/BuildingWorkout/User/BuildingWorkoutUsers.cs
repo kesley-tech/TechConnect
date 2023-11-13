@@ -6,9 +6,15 @@ namespace TechConnect
     public partial class BuildingWorkoutUsers : UserControl
     {
         private List<UserControl> listUcData = new List<UserControl>();
+        public Main _Main;
+        public Login _UserLogin;
 
-        public BuildingWorkoutUsers()
+        public BuildingWorkoutUsers(Main main)
         {
+            if (main._core.LoginDisplay != null)
+                _UserLogin = main._core.LoginDisplay;
+            _Main = main;
+
             InitializeComponent();
 
             UpdateDataHeader();
@@ -106,7 +112,7 @@ namespace TechConnect
                 else
                     data.Status = BuildingWorkoutUserDTO.STATUS_VENCIMENTO_USER.Ok;
 
-                UcBuildingWorkoutUsersRow item = new UcBuildingWorkoutUsersRow(data) { Dock = DockStyle.Fill, Margin = new Padding(0) };
+                UcBuildingWorkoutUsersRow item = new UcBuildingWorkoutUsersRow(data, _UserLogin, this) { Dock = DockStyle.Fill, Margin = new Padding(0) };
 
                 listUc.Add(item);
             }

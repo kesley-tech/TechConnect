@@ -8,7 +8,7 @@ namespace TechConnect
     {
         private readonly WaitFormRender waitForm = new WaitFormRender();
         private readonly Core Core;
-        private UserDTO objectUser;
+        public UserDTO objectUser;
 
         public Login(Core core)
         {

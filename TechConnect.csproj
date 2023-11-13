@@ -465,6 +465,7 @@
       <DependentUpon>dbTechDeveloperDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Dependencies\Chart\ChartGenerator.cs" />
+    <Compile Include="Dependencies\Model\BuildingWorkoutUser2DTO.cs" />
     <Compile Include="Dependencies\Tool\ConsultaCEP.cs" />
     <Compile Include="Dependencies\Tool\Helper\Common.cs" />
     <Compile Include="Dependencies\Tool\Helper\InternalWaitForm.cs">
@@ -517,6 +518,30 @@
     </Compile>
     <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\User\UcBuildingWorkoutUsersRow.Designer.cs">
       <DependentUpon>UcBuildingWorkoutUsersRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\BuildingWorkoutUsers2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\BuildingWorkoutUsers2.Designer.cs">
+      <DependentUpon>BuildingWorkoutUsers2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\UcBuildingWorkoutUsersHeader2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\UcBuildingWorkoutUsersHeader2.Designer.cs">
+      <DependentUpon>UcBuildingWorkoutUsersHeader2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\UcBuildingWorkoutUsersRow2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\UcBuildingWorkoutUsersRow2.Designer.cs">
+      <DependentUpon>UcBuildingWorkoutUsersRow2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\UcWorkoutUserForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\UcWorkoutUserForm.Designer.cs">
+      <DependentUpon>UcWorkoutUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Dependencies\UserControl\ScreenMenu\Calendar\UcDayCalendar.cs">
       <SubType>UserControl</SubType>
@@ -669,6 +694,18 @@
     <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\User\UcBuildingWorkoutUsersRow.resx">
       <DependentUpon>UcBuildingWorkoutUsersRow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\BuildingWorkoutUsers2.resx">
+      <DependentUpon>BuildingWorkoutUsers2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\UcBuildingWorkoutUsersHeader2.resx">
+      <DependentUpon>UcBuildingWorkoutUsersHeader2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\UcBuildingWorkoutUsersRow2.resx">
+      <DependentUpon>UcBuildingWorkoutUsersRow2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\UcWorkoutUserForm.resx">
+      <DependentUpon>UcWorkoutUserForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dependencies\UserControl\ScreenMenu\Calendar\UcDayCalendar.resx">
       <DependentUpon>UcDayCalendar.cs</DependentUpon>
     </EmbeddedResource>
@@ -765,9 +802,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dependencies\UserControl\ScreenMenu\BuildingWorkout\Workout\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\mensagemNoel.jpg" />
   </ItemGroup>

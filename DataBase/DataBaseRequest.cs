@@ -39,9 +39,7 @@ namespace TechConnect
 
         private static void ShowNotification(string content, int milisecShowTime)
         {
-            //notifyIcon.BalloonTipTitle = "Falha na Manipulação de Dados";
-            //notifyIcon.BalloonTipText = content;
-            //notifyIcon.ShowBalloonTip(milisecShowTime);
+            Common.ShowNotification("Falha na Manipulação de Dados: " + content, System.Windows.Forms.ToolTipIcon.Error);
         }
 
         #region User
@@ -341,6 +339,9 @@ namespace TechConnect
         }
         public static void InsertUserData(string cel, int? idCep, string dataNascimento, string email, string genero, string nome, string senha, string matricula, string tipo, int? token)
         {
+            if (UpdateUserData(cel, idCep, dataNascimento, email, genero, nome, matricula, tipo) > 0)
+                return;
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -414,7 +415,6 @@ namespace TechConnect
                 }
             }
         }
-
         public static void UpdatePassword(string email, string senha)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -444,7 +444,7 @@ namespace TechConnect
                 }
             }
         }
-        public static void UpdateUserData(string cel, int? idCep, string dataNascimento, string email, string genero, string nome, string matricula, string tipo)
+        public static int UpdateUserData(string cel, int? idCep, string dataNascimento, string email, string genero, string nome, string matricula, string tipo)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -487,7 +487,7 @@ namespace TechConnect
                         updateCommand.Parameters.Add(new SqlParameter("@Tipo", tipo));
                         updateCommand.Parameters.Add(new SqlParameter("@Genero", genero));
 
-                        updateCommand.ExecuteNonQuery();
+                        return updateCommand.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
@@ -499,6 +499,8 @@ namespace TechConnect
                     connection.Close();
                 }
             }
+
+            return 0;
         }
 
         public static void RemoveUserData(string matricula)
@@ -609,6 +611,9 @@ namespace TechConnect
 
         public static void InsertWorkoutData(string code, string description, string muscleGroup, bool freeWorkout)
         {
+            if (UpdateWorkoutData(code, description, muscleGroup, freeWorkout) > 0)
+                return;
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -648,7 +653,7 @@ namespace TechConnect
             }
         }
 
-        public static void UpdateWorkoutData(string code, string description, string muscleGroup, bool freeWorkout)
+        public static int UpdateWorkoutData(string code, string description, string muscleGroup, bool freeWorkout)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -661,6 +666,7 @@ namespace TechConnect
                     query.AppendLine("SET                             ");
                     query.AppendLine("    [Descricao] = @Descricao    ");
                     query.AppendLine("   ,[IdGrupoMuscular] = (Select top 1 Id From ExercicioGrupoMuscular Where Descricao = @GrupoMuscular) ");
+                    query.AppendLine("    ,[DataRemocao] = NULL       ");
                     query.AppendLine("   ,[TreinoLivre] = @Livre      ");
                     query.AppendLine("WHERE                           ");
                     query.AppendLine("    [Codigo] = @Codigo          ");
@@ -674,7 +680,7 @@ namespace TechConnect
                         updateCommand.Parameters.Add(new SqlParameter("@GrupoMuscular", muscleGroup));
                         updateCommand.Parameters.Add(new SqlParameter("@Livre", freeWorkout));
 
-                        updateCommand.ExecuteNonQuery();
+                        return updateCommand.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
@@ -686,6 +692,8 @@ namespace TechConnect
                     connection.Close();
                 }
             }
+
+            return 0;
         }
 
         public static void RemoveWorkoutData(string code)
@@ -964,6 +972,193 @@ namespace TechConnect
             }
 
             return result;
+        }
+
+        public static List<BuildingWorkoutUser2DTO> GetWorkoutByUser(int user)
+        {
+            List<BuildingWorkoutUser2DTO> result = new List<BuildingWorkoutUser2DTO>();
+
+            string query = @"SELECT 
+	                            grup.Descricao as GrupoMuscular,
+	                            exer.Descricao as Exercicio,
+	                            CONCAT(treino.QuantidadeSerie,'x ', treino.QuantidadeRepeticao) Repeticao,
+	                            CONCAT(treino.SegundosDescanso, 'seg') Descanso
+                            FROM [dbo].[ExercicioTreinoMontado] treino
+                            INNER JOIN [Usuario] usr ON treino.IdUsuarioAluno = usr.Id AND usr.DataRemocao IS NULL
+                            INNER JOIN [Exercicio] exer ON treino.IdExercicio = exer.Id AND exer.DataRemocao IS NULL
+                            INNER JOIN [ExercicioGrupoMuscular] grup ON exer.IdGrupoMuscular = grup.Id
+                            WHERE usr.Matricula = @Matricula AND treino.DataRemocao IS NULL";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.Add(new SqlParameter("@Matricula", user));
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                BuildingWorkoutUser2DTO persistence = new BuildingWorkoutUser2DTO()
+                                {
+                                    GrupoMuscular = (string)reader["GrupoMuscular"],
+                                    Exercicio = (string)reader["Exercicio"],
+                                    Descanso = (string)reader["Descanso"],
+                                    Repeticao = (string)reader["Repeticao"]
+                                };
+
+                                result.Add(persistence);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowNotification(ex.Message, 2000);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return result;
+        }
+
+        public static void InsertWorkoutUserData(int professor, int user, string exercicio, int descanso, int repeticao, int serie)
+        {
+            if (UpdateWorkoutUserData(professor, user, exercicio, descanso, repeticao, serie) > 0)
+                return;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+
+                    query.AppendLine("INSERT INTO [dbo].[ExercicioTreinoMontado]                            ");
+                    query.AppendLine("      ([IdUsuarioTreinador]                                           ");
+                    query.AppendLine("      ,[IdUsuarioAluno]                                               ");
+                    query.AppendLine("      ,[IdExercicio]                                                  ");
+                    query.AppendLine("      ,[SegundosDescanso]                                             ");
+                    query.AppendLine("      ,[QuantidadeSerie]                                              ");
+                    query.AppendLine("      ,[QuantidadeRepeticao]                                          ");
+                    query.AppendLine("      ,[DataOcorrencia]                                               ");
+                    query.AppendLine("      ,[DataVencimento])                                              ");
+                    query.AppendLine("VALUES                                                                ");
+                    query.AppendLine("      ((SELECT TOP 1 Id FROM Usuario WHERE Matricula = @Professor)    ");
+                    query.AppendLine("      ,(SELECT TOP 1 Id FROM Usuario WHERE Matricula = @Matricula)    ");
+                    query.AppendLine("      ,(SELECT TOP 1 Id FROM Exercicio WHERE Descricao = @Exercicio)  ");
+                    query.AppendLine("      ,@Descanso                                                      ");
+                    query.AppendLine("      ,@Serie                                                         ");
+                    query.AppendLine("      ,@Repeticao                                                     ");
+                    query.AppendLine("      ,GETDATE()                                                      ");
+                    query.AppendLine("      ,DATEADD(DAY, 30, GETDATE()))                                    ");
+                                                                                                            
+                    connection.Open();
+
+                    using (SqlCommand updateCommand = new SqlCommand(query.ToString(), connection))
+                    {
+                        updateCommand.Parameters.Add(new SqlParameter("@Professor", professor));
+                        updateCommand.Parameters.Add(new SqlParameter("@Matricula", user));
+                        updateCommand.Parameters.Add(new SqlParameter("@Exercicio", exercicio));
+                        updateCommand.Parameters.Add(new SqlParameter("@Descanso", descanso));
+                        updateCommand.Parameters.Add(new SqlParameter("@Repeticao", repeticao));
+                        updateCommand.Parameters.Add(new SqlParameter("@Serie", serie));
+
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowNotification(ex.Message, 2000);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+        public static int UpdateWorkoutUserData(int professor, int user, string exercicio, int descanso, int repeticao, int serie)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+
+                    query.AppendLine("UPDATE [dbo].[ExercicioTreinoMontado]                                                   ");
+                    query.AppendLine("SET [IdUsuarioTreinador] = (SELECT TOP 1 Id FROM Usuario WHERE Matricula = @Professor)  ");
+                    query.AppendLine("    ,[SegundosDescanso] = @Descanso                                                     ");
+                    query.AppendLine("    ,[QuantidadeSerie] = @Serie                                                         ");
+                    query.AppendLine("    ,[QuantidadeRepeticao] = @Repeticao                                                 ");
+                    query.AppendLine("    ,[DataRemocao] = NULL                                                               ");
+                    query.AppendLine("    ,[DataOcorrencia] = GETDATE()                                                       ");
+                    query.AppendLine("    ,[DataVencimento] = DATEADD(DAY, 30, GETDATE())                                     ");
+                    query.AppendLine("WHERE [IdUsuarioAluno] = (SELECT TOP 1 Id FROM Usuario WHERE Matricula = @Matricula)    ");
+                    query.AppendLine("      AND [IdExercicio] = (SELECT TOP 1 Id FROM Exercicio WHERE Descricao = @Exercicio) ");
+
+                    connection.Open();
+
+                    using (SqlCommand updateCommand = new SqlCommand(query.ToString(), connection))
+                    {
+                        updateCommand.Parameters.Add(new SqlParameter("@Professor", professor));
+                        updateCommand.Parameters.Add(new SqlParameter("@Matricula", user));
+                        updateCommand.Parameters.Add(new SqlParameter("@Exercicio", exercicio));
+                        updateCommand.Parameters.Add(new SqlParameter("@Descanso", descanso));
+                        updateCommand.Parameters.Add(new SqlParameter("@Repeticao", repeticao));
+                        updateCommand.Parameters.Add(new SqlParameter("@Serie", serie));
+
+                        return updateCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowNotification(ex.Message, 2000);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return 0;
+        }
+        public static void RemoveWorkoutUserData(int user, string exercicio)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+
+                    query.AppendLine("UPDATE [dbo].[ExercicioTreinoMontado]                                                   ");
+                    query.AppendLine("SET   [DataRemocao] = GETDATE()                                                         ");
+                    query.AppendLine("WHERE [IdUsuarioAluno] = (SELECT TOP 1 Id FROM Usuario WHERE Matricula = @Matricula)    ");
+                    query.AppendLine("      AND [IdExercicio] = (SELECT TOP 1 Id FROM Exercicio WHERE Descricao = @Exercicio) ");
+
+                    connection.Open();
+
+                    using (SqlCommand updateCommand = new SqlCommand(query.ToString(), connection))
+                    {
+                        updateCommand.Parameters.Add(new SqlParameter("@Matricula", user));
+                        updateCommand.Parameters.Add(new SqlParameter("@Exercicio", exercicio));
+
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowNotification(ex.Message, 2000);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
         }
     }
 }

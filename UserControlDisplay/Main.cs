@@ -7,9 +7,11 @@ namespace TechConnect
     {
         public LeftSideBar SideBar;
         public Control ActualScreen;
+        public Core _core;
 
         public Main(Core core)
         {
+            _core = core;
             InitializeComponent();
 
             CreateScreenToPanelMain();
@@ -44,10 +46,11 @@ namespace TechConnect
                 Dock = DockStyle.Fill,
                 Visible = false
             };
-            BuildingWorkoutUsers buildingWorkoutUsers = new BuildingWorkoutUsers()
+            BuildingWorkoutUsers buildingWorkoutUsers = new BuildingWorkoutUsers(this)
             {
                 Dock = DockStyle.Fill,
-                Visible = false
+                Visible = false,
+                Name = "buildingWorkoutUsers"
             };
             ActualScreen = homePage;
 

@@ -102,6 +102,7 @@ namespace TechConnect
             // picEditItem
             // 
             this.picEditItem.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.picEditItem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picEditItem.Image = ((System.Drawing.Image)(resources.GetObject("picEditItem.Image")));
             this.picEditItem.Location = new System.Drawing.Point(577, 30);
             this.picEditItem.Margin = new System.Windows.Forms.Padding(30);

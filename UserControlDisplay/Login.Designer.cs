@@ -210,7 +210,7 @@ namespace TechConnect
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblSenha;
-        private CustomTextBox txtUsuario;
+        public CustomTextBox txtUsuario;
         private CustomTextBox txtSenha;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button btnEnter;
