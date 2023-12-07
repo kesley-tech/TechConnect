@@ -63,7 +63,7 @@ namespace TechConnect
             this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfirm.AutoSize = true;
             this.btnConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(40)))), ((int)(((byte)(115)))));
-            this.btnConfirm.Enabled = false;
+            this.btnConfirm.Enabled = true;
             this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.btnConfirm.ForeColor = System.Drawing.Color.White;
@@ -91,6 +91,8 @@ namespace TechConnect
             this.txtPassword.TabIndex = 6;
             this.txtPassword.UnderlinedStyle = true;
             this.txtPassword.Visible = false;
+            this.txtPassword.TextBox.TextChanged += TxtPassword_TextChanged;
+            this.txtPassword.Leave += TxtPassword_Leave;
             // 
             // txtToken
             // 

@@ -15,6 +15,7 @@ namespace TechConnect
 
             _ = LoadCardsValue();
 
+            timerLoadCards.Start();
             //BuildChartAccessByHour();
         }
 

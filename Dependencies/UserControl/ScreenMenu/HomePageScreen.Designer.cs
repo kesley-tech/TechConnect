@@ -271,6 +271,7 @@ namespace TechConnect
             // 
             this.timerLoadCards.Enabled = true;
             this.timerLoadCards.Interval = 5000;
+            this.timerLoadCards.Tick += TimerLoadCards_Tick;
             // 
             // picMessage
             // 

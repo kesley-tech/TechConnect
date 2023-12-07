@@ -32,8 +32,12 @@ namespace TechConnect
             {
                 if (CheckEmailValid())
                 {
+                    waitForm.ShowSplashScreen();
+                    waitForm.RefreshWaitForm("AGUARDE...", "VALIDANDO TOKEN E EMAIL", 50);
                     int.TryParse(txtToken.TextBox.Text.Trim(), out int tokenInt);
                     var userList = DataBaseRequest.GetAllUser();
+                    waitForm.HideSplashScreen();
+
                     thisUser = userList.Where(x => x.Email == txtEmail.TextBox.Text.Trim()
                                                     && x.Token == tokenInt)
                                            .FirstOrDefault();
